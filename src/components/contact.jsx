@@ -16,6 +16,7 @@ export default function Contact() {
             name="name"
             placeholder="Name"
             className="p-2 bg-transparent border-2 rounded-md focus:outline-none"
+            required
           />
 
           <input
@@ -23,6 +24,7 @@ export default function Contact() {
             name="email"
             placeholder="Email"
             className="my-2 p-2 bg-transparent border-2 rounded-md focus:outline-none"
+            required
           />
 
           <textarea
@@ -30,6 +32,7 @@ export default function Contact() {
             placeholder="Message"
             rows="10"
             className="p-2 mb-4 bg-transparent border-2 rounded-md focus:outline-none"
+            required
           />
 
           <button
