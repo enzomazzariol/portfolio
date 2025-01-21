@@ -1,5 +1,5 @@
 import TimelineItem from './timelimeItem.jsx'
-import {timelineData} from "../data/timeline.js";
+import {timelineData} from "../../public/data/timeline.js";
 import Title from './title.jsx';
 
 export default function Timeline() {

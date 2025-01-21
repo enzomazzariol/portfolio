@@ -1,4 +1,4 @@
-import {portfolioData} from "../data/portfolio.js";
+import {portfolioData} from "../../public/data/portfolio.js";
 import PortfolioItem from './portfolioItem.jsx'
 
 export default function Portfolio() {

@@ -39,7 +39,7 @@ function App() {
       <button
         type="button"
         onClick={handleThemeSwitch}
-        className="fixed p-2 z-10 right-20 top-4 bg-neutral-500/20 hover:bg-neutral-400 duration-300 text-lg rounded-md
+        className="fixed p-2 z-10 right-5 md:right-36 top-4 bg-red-600/50 hover:bg-red-500 duration-300 text-lg rounded-md
         dark:bg-orange-500/40 dark:hover:bg-orange-400"
       >
         {theme === "dark" ? <SunIcon /> : <MoonIcon />}
