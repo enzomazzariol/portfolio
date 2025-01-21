@@ -7,7 +7,7 @@ export default function Contact() {
         <form
           action="https://getform.io/f/bnlldombs"
           method="POST"
-          netlify
+          data-netlify="true"
           className="flex flex-col w-full md:w-7/12"
         >
           <Title>Contact</Title>
@@ -16,6 +16,7 @@ export default function Contact() {
             name="name"
             placeholder="Name"
             className="p-2 bg-transparent border-2 rounded-md focus:outline-none"
+            
           />
 
           <input
@@ -33,7 +34,7 @@ export default function Contact() {
           />
 
           <button
-            type="button"
+            type="submit"
             className="text-center inline-block px-8 py-3 w-max text-base 
             font-medium rounded-md text-white bg-gradient-to-r from-yellow-500 to-pink-800 drop-shadow-md"
           >
