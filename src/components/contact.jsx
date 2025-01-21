@@ -34,7 +34,7 @@ export default function Contact() {
           <button
             type="button"
             className="text-center inline-block px-8 py-3 w-max text-base 
-            font-medium rounded-md text-white bg-gradient-to-r from-sky-700 to-gray-900 drop-shadow-md"
+            font-medium rounded-md text-white bg-gradient-to-r from-yellow-500 to-pink-800 drop-shadow-md"
           >
             Work with me
             

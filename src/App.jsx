@@ -37,20 +37,25 @@ function App() {
   return (
     <>
       <button
-        type='button'
+        type="button"
         onClick={handleThemeSwitch}
-        className='fixed p-2 z-10 right-20 top-4 bg-neutral-500/20 hover:bg-neutral-400 duration-300 text-lg rounded-md
-        dark:bg-orange-500/40 dark:hover:bg-orange-400'
+        className="fixed p-2 z-10 right-20 top-4 bg-neutral-500/20 hover:bg-neutral-400 duration-300 text-lg rounded-md
+        dark:bg-orange-500/40 dark:hover:bg-orange-400"
       >
-        {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+        {theme === "dark" ? <SunIcon /> : <MoonIcon />}
       </button>
 
-      <div className="bg-white text-stone-900 min-h-screen font-space max-w-5xl w-11/12 mx-auto">
-        <Intro />
-        <Portfolio />
-        <Timeline />
-        <Contact />
-        <Footer />
+      <div
+        className="bg-white text-stone-900 min-h-screen font-space
+      dark:bg-stone-900 dark:text-stone-300"
+      >
+        <div className='max-w-5xl w-11/12 mx-auto'>
+          <Intro />
+          <Portfolio />
+          <Timeline />
+          <Contact />
+          <Footer />
+        </div>
       </div>
     </>
   );
