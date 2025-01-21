@@ -5,7 +5,7 @@ export default function Contact() {
     <div className="flex flex-col mb-10 mx-auto">
       <div className="flex justify-center items-center">
         <form
-          action="hhttps://getform.io/f/bnlldombs"
+          action="https://getform.io/f/bnlldombs"
           method="POST"
           netlify
           className="flex flex-col w-full md:w-7/12"
