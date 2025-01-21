@@ -7,6 +7,7 @@ export default function Contact() {
         <form
           action="hhttps://getform.io/f/bnlldombs"
           method="POST"
+          netlify
           className="flex flex-col w-full md:w-7/12"
         >
           <Title>Contact</Title>
@@ -37,7 +38,6 @@ export default function Contact() {
             font-medium rounded-md text-white bg-gradient-to-r from-yellow-500 to-pink-800 drop-shadow-md"
           >
             Work with me
-            
           </button>
         </form>
       </div>
