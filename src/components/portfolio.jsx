@@ -8,6 +8,7 @@ export default function Portfolio() {
         {portfolioData.map(project => (
           <PortfolioItem
             title={project.title}
+            description={project.description}
             imgUrl={project.imgUrl}
             stack={project.stack}
             link={project.link}

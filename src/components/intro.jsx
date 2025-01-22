@@ -10,15 +10,17 @@ export default function Intro() {
          Programador Multiplataforma
        </p>
        <p className="text-sm max-w-xl mb-6 font-bold">
-         💻 Estudiante de Desarrollo de Aplicaciones Multiplataforma con enfoque
-         en aprender y aplicar tecnologías modernas. Me especializo en
-         desarrollo web y multiplataforma, construyendo una base sólida para
-         crecer profesionalmente.
+         💻 Soy estudiante de Desarrollo de Aplicaciones Multiplataforma. 
+         Me gusta diseñar y
+         desarrollar soluciones que sean funcionales y útiles para los usuarios.
+         Siempre estoy buscando maneras de mejorar, aprender nuevas tecnologías
+         y adaptarme rápido a cualquier proyecto.
        </p>
        <p className="text-sm max-w-xl mb-6 font-bold">
-         🚀 Abierto a nuevas oportunidades donde pueda adquirir experiencia
-         práctica y contribuir con soluciones innovadoras a proyectos
-         desafiantes.
+         🚀 Busco una oportunidad donde pueda aplicar lo que sé, aprender más y
+         aportar ideas que ayuden al equipo a alcanzar sus objetivos. Estoy
+         listo para comprometerme, trabajar duro y marcar la diferencia en cada
+         tarea.
        </p>
      </div>
    );

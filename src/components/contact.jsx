@@ -10,11 +10,11 @@ export default function Contact() {
           data-netlify="true"
           className="flex flex-col w-full md:w-7/12"
         >
-          <Title>Contact</Title>
+          <Title>Contacto</Title>
           <input
             type="text"
             name="name"
-            placeholder="Name"
+            placeholder="Nombre"
             className="p-2 bg-transparent border-2 rounded-md focus:outline-none"
             required
           />
@@ -29,7 +29,7 @@ export default function Contact() {
 
           <textarea
             name="message"
-            placeholder="Message"
+            placeholder="Mensaje"
             rows="10"
             className="p-2 mb-4 bg-transparent border-2 rounded-md focus:outline-none"
             required

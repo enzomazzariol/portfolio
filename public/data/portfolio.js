@@ -17,4 +17,10 @@ export const portfolioData = [
         stack: ['HTML', 'CSS', 'JavaScript'],
         link: 'https://age-calculator-enzo.netlify.app/'
     },
+    {
+        title: "Boston String Academy",
+        imgUrl: '/assets/bsa-preview.jpg',
+        stack: ['HTML', 'CSS', 'WordPress'],
+        link: 'https://bostonstringacademy.org/'
+    },
 ]

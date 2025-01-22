@@ -13,6 +13,12 @@ export const timelineData = [
     },
     {
         year: '2024',
+        title: 'Becario en Guarapo Media',
+        duration: 'actualmente',
+        details: 'Apoyo en el desarrollo de proyectos web, colaborando en tareas de diseño, programación y resolución de problemas técnicos. Adquirí experiencia trabajando con tecnologías modernas y en equipo.'
+    },
+    {
+        year: '2024',
         title: 'Proyectos prácticos y formación online',
         duration: 'Aprendizaje continuo',
         details: 'Realizo desafíos en Frontend Mentor y completé certificados de freeCodeCamp en JavaScript y diseño web responsivo.'
