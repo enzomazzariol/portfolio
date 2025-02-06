@@ -12,10 +12,10 @@ export const portfolioData = [
         link: 'https://productlist-withcard.netlify.app/'
     },
     {
-        title: "Age Calculator",
-        imgUrl: '/assets/age-calculator.jpg',
-        stack: ['HTML', 'CSS', 'JavaScript'],
-        link: 'https://age-calculator-enzo.netlify.app/'
+        title: "Todo App",
+        imgUrl: '/assets/todo.png',
+        stack: ['JavaScript', 'React', 'TailwindCSS', 'Vite'],
+        link: 'https://todo-app-enzo.vercel.app/'
     },
     {
         title: "Boston String Academy",
