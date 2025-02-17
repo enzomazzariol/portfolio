@@ -1,4 +1,4 @@
 [[redirects]]
-from = "/*"
+from = "https://enzomazzariol.netlify.app/*"
 to = "https://enzomazzariol.is-a.dev/:splat"
 status = 301
