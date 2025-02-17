@@ -1,5 +1,11 @@
 export const portfolioData = [
     {
+        title: "Boston String Academy",
+        imgUrl: '/assets/bsa-preview.jpg',
+        stack: ['HTML', 'CSS', 'WordPress'],
+        link: 'https://bostonstringacademy.org/'
+    },
+    {
         title: "Fylo Landing Page",
         imgUrl: '/assets/fylo-landing-page.jpg',
         stack: ['HTML', 'CCS', 'JavaScript'],
@@ -16,11 +22,5 @@ export const portfolioData = [
         imgUrl: '/assets/todo.png',
         stack: ['JavaScript', 'React', 'TailwindCSS', 'Vite'],
         link: 'https://todo-app-enzo.vercel.app/'
-    },
-    {
-        title: "Boston String Academy",
-        imgUrl: '/assets/bsa-preview.jpg',
-        stack: ['HTML', 'CSS', 'WordPress'],
-        link: 'https://bostonstringacademy.org/'
     },
 ]
