@@ -2,4 +2,3 @@
 from = "/*"
 to = "https://enzomazzariol.is-a.dev/:splat"
 status = 301
-force = true
