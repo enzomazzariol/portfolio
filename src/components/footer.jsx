@@ -1,4 +1,4 @@
-import {GithubIcon, LinkedinIcon} from './icons.jsx'
+import { GithubIcon, LinkedinIcon } from './icons.jsx';
 
 export default function Footer() {
   return (
@@ -10,6 +10,7 @@ export default function Footer() {
           className="inline-block"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Github link"
         >
           <GithubIcon />
         </a>
@@ -18,6 +19,7 @@ export default function Footer() {
           className="inline-block"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Linkedin link"
         >
           <LinkedinIcon />
         </a>

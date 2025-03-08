@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react'
+import Contact from './components/contact.jsx'
+import Footer from './components/footer.jsx'
+import { MoonIcon, SunIcon } from './components/icons.jsx'
 import Intro from './components/intro.jsx'
 import Portfolio from './components/portfolio.jsx'
 import Timeline from './components/timeline.jsx'
-import Contact from './components/contact.jsx'
-import Footer from './components/footer.jsx'
-import { useEffect, useState } from 'react'
-import { MoonIcon, SunIcon } from './components/icons.jsx'
 
 function App() {
 
@@ -41,6 +41,8 @@ function App() {
         onClick={handleThemeSwitch}
         className="fixed p-2 z-10 right-5 md:right-36 top-4 bg-red-600/50 hover:bg-red-500 duration-300 text-lg rounded-md
         dark:bg-orange-500/40 dark:hover:bg-orange-400"
+        aria-label='Toggle theme button'
+        name='theme-switch-button'
       >
         {theme === "dark" ? <SunIcon /> : <MoonIcon />}
       </button>
