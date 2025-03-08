@@ -39,8 +39,8 @@ function App() {
       <button
         type="button"
         onClick={handleThemeSwitch}
-        className="fixed p-2 z-10 right-5 md:right-36 top-4 bg-red-600/50 hover:bg-red-500 duration-300 text-lg rounded-md
-        dark:bg-orange-500/40 dark:hover:bg-orange-400"
+        className="fixed p-2 z-10 right-5 md:right-36 top-4 bg-red-500/30 hover:bg-red-600 duration-300 text-lg rounded-md
+        dark:bg-orange-500/40 dark:hover:bg-orange-600"
         aria-label='Toggle theme button'
         name='theme-switch-button'
       >

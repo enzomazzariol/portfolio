@@ -1,8 +1,9 @@
-
+import ButtonContact from "./buttonContact";
+import { EmailIcon, LinkedinButtonIcon } from "./icons";
 
 export default function Intro() {
    return (
-     <div className="flex flex-col items-center justify-center text-center pt-20 pb-6">
+     <div className="flex flex-col items-center justify-center text-center pt-20 pb-16">
        <h1 className="text-4xl font-bold md:text-6xl mb-1 md:mb-3 dark:text-white">
          Enzo Mazzariol
        </h1>
@@ -19,6 +20,21 @@ export default function Intro() {
          problemas reales. Busco siempre mejorar el proceso de desarrollo,
          priorizando la calidad del código y la experiencia del usuario.
        </p>
+       <div className="flex gap-x-3 justify-center items-center mt-2">
+         <ButtonContact 
+           href="mailto:someone@example.com" 
+           icon={EmailIcon}
+          >
+           Contáctame
+         </ButtonContact>
+
+         <ButtonContact
+           href="https://www.linkedin.com/in/enzo-mazzariol/"
+           icon={LinkedinButtonIcon}
+         >
+           Linkedin
+         </ButtonContact>
+       </div>
      </div>
    );
 }
