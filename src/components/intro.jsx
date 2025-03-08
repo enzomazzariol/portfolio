@@ -7,20 +7,17 @@ export default function Intro() {
          Enzo Mazzariol
        </h1>
        <p className="text-base md:text-xl mb-3 font-medium">
-         Programador Multiplataforma
+         Desarrollador Full Stack
        </p>
        <p className="text-sm max-w-xl mb-6 font-bold">
-         💻 Soy estudiante de Desarrollo de Aplicaciones Multiplataforma. 
-         Me gusta diseñar y
-         desarrollar soluciones que sean funcionales y útiles para los usuarios.
-         Siempre estoy buscando maneras de mejorar, aprender nuevas tecnologías
-         y adaptarme rápido a cualquier proyecto.
+         💻 Soy desarrollador Full Stack con experiencia en el desarrollo web y
+         mobile. Los desafíos me motivan y disfruto aprender de ellos cada día
+         para mejorar mis habilidades.
        </p>
        <p className="text-sm max-w-xl mb-6 font-bold">
-         🚀 Busco una oportunidad donde pueda aplicar lo que sé, aprender más y
-         aportar ideas que ayuden al equipo a alcanzar sus objetivos. Estoy
-         listo para comprometerme, trabajar duro y marcar la diferencia en cada
-         tarea.
+         🚀 Ofrezco soluciones prácticas y personalizadas que resuelvan
+         problemas reales. Busco siempre mejorar el proceso de desarrollo,
+         priorizando la calidad del código y la experiencia del usuario.
        </p>
      </div>
    );
