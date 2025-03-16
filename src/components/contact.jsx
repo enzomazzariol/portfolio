@@ -1,4 +1,4 @@
-import Title from './title.jsx';
+import Subtitle from './subtitle.jsx';
 
 export default function Contact() {
   return (
@@ -10,7 +10,7 @@ export default function Contact() {
           data-netlify="true"
           className="flex flex-col w-full md:w-7/12"
         >
-          <Title>Contacto</Title>
+          <Subtitle>Contacto</Subtitle>
           <input
             type="text"
             name="name"
