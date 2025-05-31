@@ -22,7 +22,7 @@ export default function Intro() {
        </p>
        <div className="flex gap-x-3 justify-center items-center mt-2">
          <ButtonContact 
-           href="mailto:someone@example.com" 
+           href="mailto:mazzariolenzo@gmail.com" 
            icon={EmailIcon}
           >
            Contáctame
