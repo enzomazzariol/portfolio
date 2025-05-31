@@ -1,5 +1,6 @@
-import {portfolioData} from "../../public/data/portfolio.js";
-import PortfolioItem from './portfolioItem.jsx'
+/* eslint-disable react/jsx-key */
+import { portfolioData } from "../../public/data/portfolio.js";
+import PortfolioItem from './portfolioItem.jsx';
 
 export default function Portfolio() {
   return (

@@ -6,6 +6,19 @@ export const portfolioData = [
     link: "https://bostonstringacademy.org/",
   },
   {
+    title: "Moodflix",
+    imgUrl: "/assets/moodflix-portfolio-1.webp",
+    stack: [
+      "Java",
+      "Spring Boot",
+      "React Native",
+      "TailwindCSS",
+      "Expo",
+      "MySQL",
+    ],
+    link: "https://youtube.com/shorts/73CfD0-5Ilw?feature=share",
+  },
+  {
     title: "Fylo Landing Page",
     imgUrl: "/assets/fylo-landing-page.webp",
     stack: ["HTML", "CCS", "JavaScript"],
