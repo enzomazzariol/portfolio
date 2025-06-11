@@ -17,23 +17,27 @@ export const portfolioData = [
       "MySQL",
     ],
     link: "https://youtube.com/shorts/73CfD0-5Ilw?feature=share",
+    github: "https://github.com/enzomazzariol/moodflix",
   },
   {
     title: "Fylo Landing Page",
     imgUrl: "/assets/fylo-landing-page.webp",
     stack: ["HTML", "CCS", "JavaScript"],
     link: "https://fylo-landingpage-enzo.netlify.app/",
+    github: "https://github.com/enzomazzariol/fylo-landing-page",
   },
   {
     title: "Product List with Card",
     imgUrl: "/assets/productList.webp",
-    stack: ["React", "Vite", "CSS"],
+    stack: ["React", "Vite", "JavaScript", "CSS"],
     link: "https://productlist-withcard.netlify.app/",
+    github: "https://github.com/enzomazzariol/product-list-with-cart",
   },
   {
     title: "Todo App",
     imgUrl: "/assets/todo.webp",
     stack: ["JavaScript", "React", "TailwindCSS", "Vite"],
     link: "https://todo-app-enzo.vercel.app/",
+    github: "https://github.com/enzomazzariol/todo-app",
   },
 ];
