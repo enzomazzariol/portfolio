@@ -1,5 +1,5 @@
 import ButtonContact from "./buttonContact";
-import { EmailIcon, LinkedinButtonIcon } from "./icons";
+import { EmailIcon, GithubButtonIcon, LinkedinButtonIcon } from "./icons";
 
 export default function Intro() {
    return (
@@ -21,10 +21,7 @@ export default function Intro() {
          priorizando la calidad del código y la experiencia del usuario.
        </p>
        <div className="flex gap-x-3 justify-center items-center mt-2">
-         <ButtonContact 
-           href="mailto:mazzariolenzo@gmail.com" 
-           icon={EmailIcon}
-          >
+         <ButtonContact href="mailto:mazzariolenzo@gmail.com" icon={EmailIcon}>
            Contáctame
          </ButtonContact>
 
@@ -33,6 +30,13 @@ export default function Intro() {
            icon={LinkedinButtonIcon}
          >
            Linkedin
+         </ButtonContact>
+
+         <ButtonContact
+           href="https://github.com/enzomazzariol"
+           icon={GithubButtonIcon}
+         >
+           Github
          </ButtonContact>
        </div>
      </div>
