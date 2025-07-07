@@ -20,7 +20,7 @@ export default function Intro() {
          problemas reales. Busco siempre mejorar el proceso de desarrollo,
          priorizando la calidad del código y la experiencia del usuario.
        </p>
-       <div className="flex gap-x-3 justify-center items-center mt-2">
+       <div className="flex gap-x-3 justify-center items-center mt-2 flex-wrap gap-y-3">
          <ButtonContact href="mailto:mazzariolenzo@gmail.com" icon={EmailIcon}>
            Contáctame
          </ButtonContact>
