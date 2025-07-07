@@ -1,11 +1,5 @@
 export const portfolioData = [
   {
-    title: "Boston String Academy",
-    imgUrl: "/assets/bsa-preview.webp",
-    stack: ["HTML", "CSS", "WordPress"],
-    link: "https://bostonstringacademy.org/",
-  },
-  {
     title: "Moodflix",
     imgUrl: "/assets/moodflix-portfolio-1.webp",
     stack: [
@@ -20,24 +14,30 @@ export const portfolioData = [
     github: "https://github.com/enzomazzariol/moodflix",
   },
   {
-    title: "Fylo Landing Page",
-    imgUrl: "/assets/fylo-landing-page.webp",
+    title: "E-commerce product page",
+    imgUrl: "/assets/preview-ecommerce-product-page.webp",
     stack: ["HTML", "CCS", "JavaScript"],
-    link: "https://fylo-landingpage-enzo.netlify.app/",
-    github: "https://github.com/enzomazzariol/fylo-landing-page",
+    link: "https://enzo-e-commerce-product-page.netlify.app/",
+    github: "https://github.com/enzomazzariol/ecommerce-product-page",
   },
   {
-    title: "Product List with Card",
-    imgUrl: "/assets/productList.webp",
+    title: "Product List with Cart",
+    imgUrl: "/assets/preview-product-list.webp",
     stack: ["React", "Vite", "JavaScript", "CSS"],
     link: "https://productlist-withcard.netlify.app/",
     github: "https://github.com/enzomazzariol/product-list-with-cart",
   },
   {
     title: "Todo App",
-    imgUrl: "/assets/todo.webp",
+    imgUrl: "/assets/preview-todo-app.webp",
     stack: ["JavaScript", "React", "TailwindCSS", "Vite"],
     link: "https://todo-app-enzo.vercel.app/",
     github: "https://github.com/enzomazzariol/todo-app",
+  },
+  {
+    title: "Boston String Academy",
+    imgUrl: "/assets/bsa-preview.webp",
+    stack: ["HTML", "CSS", "WordPress"],
+    link: "https://bostonstringacademy.org/",
   },
 ];
