@@ -1,5 +1,11 @@
 export const portfolioData = [
   {
+    title: "Hola Atelier Learning",
+    imgUrl: "/assets/atelier-preview.webp",
+    stack: ["Wordpress", "Elementor", "CSS"],
+    link: "https://holatelierlearning.com/home/",
+  },
+  {
     title: "Moodflix",
     imgUrl: "/assets/moodflix-portfolio-1.webp",
     stack: [
@@ -26,13 +32,6 @@ export const portfolioData = [
     stack: ["React", "Vite", "JavaScript", "CSS"],
     link: "https://productlist-withcard.netlify.app/",
     github: "https://github.com/enzomazzariol/product-list-with-cart",
-  },
-  {
-    title: "Todo App",
-    imgUrl: "/assets/preview-todo-app.webp",
-    stack: ["JavaScript", "React", "TailwindCSS", "Vite"],
-    link: "https://todo-app-enzo.vercel.app/",
-    github: "https://github.com/enzomazzariol/todo-app",
   },
   {
     title: "Boston String Academy",
