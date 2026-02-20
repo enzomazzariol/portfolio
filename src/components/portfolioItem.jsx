@@ -11,7 +11,7 @@ export default function PortfolioItem({title, imgUrl, stack, link, github}) {
     >
       <img
         src={imgUrl}
-        alt="portfolio"
+        alt={`Captura del proyecto ${title}`}
         className="w-full h-36 md:h-48 cursor-pointer object-cover"
       />
       <div className="w-full p-4">

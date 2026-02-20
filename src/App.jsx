@@ -51,13 +51,21 @@ function App() {
         className="bg-white text-stone-900 min-h-screen font-space
       dark:bg-stone-900 dark:text-stone-300"
       >
-        <div className='max-w-5xl w-11/12 mx-auto'>
-          <Intro />
-          <Portfolio />
-          <Timeline />
-          <Contact />
+        <main className='max-w-5xl w-11/12 mx-auto'>
+          <section aria-label="Presentación">
+            <Intro />
+          </section>
+          <section aria-label="Proyectos">
+            <Portfolio />
+          </section>
+          <section aria-label="Trayectoria">
+            <Timeline />
+          </section>
+          <section aria-label="Contacto">
+            <Contact />
+          </section>
           <Footer />
-        </div>
+        </main>
       </div>
     </>
   );
