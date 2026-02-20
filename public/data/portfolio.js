@@ -1,5 +1,11 @@
 export const portfolioData = [
   {
+    title: "New Vision Sports",
+    imgUrl: "/assets/nvs-preview.webp",
+    stack: ["React", "Vite", "TailwindCSS", "JavaScript"],
+    link: "https://playwithnewvision.com/",
+  },
+  {
     title: "Hola Atelier Learning",
     imgUrl: "/assets/atelier-preview.webp",
     stack: ["Wordpress", "Elementor", "CSS"],
@@ -25,13 +31,6 @@ export const portfolioData = [
     stack: ["HTML", "CCS", "JavaScript"],
     link: "https://enzo-e-commerce-product-page.netlify.app/",
     github: "https://github.com/enzomazzariol/ecommerce-product-page",
-  },
-  {
-    title: "Product List with Cart",
-    imgUrl: "/assets/preview-product-list.webp",
-    stack: ["React", "Vite", "JavaScript", "CSS"],
-    link: "https://productlist-withcard.netlify.app/",
-    github: "https://github.com/enzomazzariol/product-list-with-cart",
   },
   {
     title: "Boston String Academy",

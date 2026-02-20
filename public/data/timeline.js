@@ -1,6 +1,20 @@
 export const timelineData = [
   {
     year: "2025",
+    title: "Ingeniería Audiovisual Computacional en la UPF",
+    duration: "Desde octubre 2025",
+    details:
+      "En el otoño de 2025 empecé a estudiar el grado en Ingeniería Audiovisual Computacional en la Universitat Pompeu Fabra, ampliando mi formación en el ámbito del audio, la imagen y la computación. Actualmente estoy cursando el primer año de la carrera.",
+  },
+  {
+    year: "2025/2026",
+    title: "Becario en Guarapo Media",
+    duration: "actualmente",
+    details:
+      "Apoyo en el desarrollo de proyectos web, colaborando en tareas de diseño, programación y resolución de problemas técnicos. He estado trabajando en proyectos como playwithnewvision.com, holatelierlearning.com y todounminuto.com, adquiriendo experiencia con tecnologías modernas y trabajo en equipo.",
+  },
+  {
+    year: "2025",
     title: "Prácticas como desarrollador en Regalexia.com",
     duration: "4 meses",
     details:
@@ -12,20 +26,6 @@ export const timelineData = [
     duration: "2 años",
     details:
       "Grado superior finalizado en DAM, donde he adquirido competencias sólidas en desarrollo web y mobile con Java, JavaScript, React, Node.js, Tailwind CSS, entre otras tecnologías. Formación orientada a proyectos reales y buenas prácticas de programación.",
-  },
-  {
-    year: "2025",
-    title: "Proyecto final: Moodflix",
-    duration: "6 meses",
-    details:
-      'Diseño y desarrollo de "Moodflix", una app multiplataforma para descubrir películas según el estado de ánimo. Utiliza la API de TMDB, backend con Spring Boot, frontend con React y Tailwind CSS, y versión móvil con React Native (Expo). Incluye funcionalidades sociales, reseñas y recomendaciones personalizadas.',
-  },
-  {
-    year: "2024",
-    title: "Becario en Guarapo Media",
-    duration: "actualmente",
-    details:
-      "Apoyo en el desarrollo de proyectos web, colaborando en tareas de diseño, programación y resolución de problemas técnicos. Adquirí experiencia trabajando con tecnologías modernas y en equipo.",
   },
   {
     year: "2024",
