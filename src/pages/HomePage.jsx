@@ -206,24 +206,6 @@ export default function HomePage() {
           </div>
         </main>
 
-        {/* ── Stack ── */}
-        <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-          <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Stack</p>
-          <div ref={stackRef} className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-3">
-            {stackItems.map(({ name, Icon, color }) => (
-              <div
-                key={name}
-                className="stack-icon flex flex-col items-center gap-2.5 p-4 border border-white/5 hover:border-white/15 transition-colors duration-200 cursor-default group"
-              >
-                <Icon size={26} style={{ color }} className="transition-transform duration-200 group-hover:scale-110" />
-                <span className="text-[9px] font-mono text-white/25 group-hover:text-white/50 transition-colors text-center leading-tight">
-                  {name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* ── Selected Works ── */}
         <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
           <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Selected Works</p>
@@ -365,6 +347,24 @@ export default function HomePage() {
                 <span className="text-5xl font-bold text-white/10 leading-none">{n}</span>
                 <h3 className="text-sm font-semibold text-white/80">{title}</h3>
                 <p className="text-sm text-white/35 leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Stack ── */}
+        <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
+          <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Stack</p>
+          <div ref={stackRef} className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-3">
+            {stackItems.map(({ name, Icon, color }) => (
+              <div
+                key={name}
+                className="stack-icon flex flex-col items-center gap-2.5 p-4 border border-white/5 hover:border-white/15 transition-colors duration-200 cursor-default group"
+              >
+                <Icon size={26} style={{ color }} className="transition-transform duration-200 group-hover:scale-110" />
+                <span className="text-[9px] font-mono text-white/25 group-hover:text-white/50 transition-colors text-center leading-tight">
+                  {name}
+                </span>
               </div>
             ))}
           </div>
