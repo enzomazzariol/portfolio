@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 
@@ -41,7 +41,7 @@ function LeftPanel({ project, panelRef }) {
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-sm font-mono text-white/70 hover:text-white transition-colors group"
+          className="flex items-center gap-2 text-sm font-mono text-white/70 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
         >
           <span className="w-4 h-px bg-white/30 group-hover:w-6 group-hover:bg-white transition-all duration-300" />
           Ver proyecto ↗
@@ -51,7 +51,7 @@ function LeftPanel({ project, panelRef }) {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm font-mono text-white/40 hover:text-white/70 transition-colors group"
+            className="flex items-center gap-2 text-sm font-mono text-white/40 hover:text-white/70 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
           >
             <span className="w-4 h-px bg-white/20 group-hover:w-6 group-hover:bg-white/40 transition-all duration-300" />
             GitHub ↗

@@ -121,13 +121,13 @@ export default function HomePage() {
             <div className="hero-anim flex gap-4 text-sm font-mono">
               <Link
                 to="/proyectos"
-                className="border border-white/20 text-white/70 hover:text-white hover:border-white/50 transition-all px-5 py-2.5 rounded-full"
+                className="border border-white/20 text-white/70 hover:text-white hover:border-white/50 transition-all px-5 py-2.5 min-h-[44px] flex items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
               >
                 Ver proyectos →
               </Link>
               <Link
                 to="/contacto"
-                className="bg-white text-black hover:bg-white/90 transition-all px-5 py-2.5 rounded-full"
+                className="bg-white text-black hover:bg-white/90 transition-all px-5 py-2.5 min-h-[44px] flex items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
               >
                 Hablemos
               </Link>
@@ -138,9 +138,9 @@ export default function HomePage() {
         {/* Bottom status row */}
         <div className="flex items-center justify-between mt-16 border-t border-white/5 pt-6">
           <div className="flex gap-6 text-white/30 text-xs font-mono">
-            <a href="https://github.com/enzomazzariol" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">GitHub ↗</a>
-            <a href="https://www.linkedin.com/in/enzo-mazzariol/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">LinkedIn ↗</a>
-            <a href="mailto:mazzariolenzo@gmail.com" className="hover:text-white/70 transition-colors">Email ↗</a>
+            <a href="https://github.com/enzomazzariol" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/enzo-mazzariol/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">LinkedIn ↗</a>
+            <a href="mailto:mazzariolenzo@gmail.com" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Email ↗</a>
           </div>
           <div className="flex items-center gap-2 text-xs text-white/30 font-mono">
             <span className="relative flex h-1.5 w-1.5">
@@ -180,7 +180,7 @@ export default function HomePage() {
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="work-item group flex items-center gap-6 border-b border-white/5 py-6 hover:bg-white/[0.02] transition-colors duration-200 -mx-4 px-4"
+              className="work-item group flex items-center gap-6 border-b border-white/5 py-6 hover:bg-white/[0.02] transition-colors duration-200 -mx-4 px-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
               <span className="text-4xl font-bold text-white/10 font-mono w-14 shrink-0 leading-none">
                 {String(i + 1).padStart(2, '0')}
@@ -207,7 +207,7 @@ export default function HomePage() {
         <div className="mt-10 flex justify-end">
           <Link
             to="/proyectos"
-            className="text-sm font-mono text-white/40 hover:text-white/80 transition-colors duration-200"
+            className="text-sm font-mono text-white/40 hover:text-white/80 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
           >
             Ver todos →
           </Link>
@@ -218,7 +218,7 @@ export default function HomePage() {
       <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
         <div className="flex items-end justify-between mb-10">
           <p className="text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase">Servicios</p>
-          <Link to="/contacto" className="text-[10px] font-mono text-white/30 hover:text-white/70 transition-colors duration-200">
+          <Link to="/contacto" className="text-[10px] font-mono text-white/30 hover:text-white/70 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
             Hablemos →
           </Link>
         </div>
@@ -227,7 +227,7 @@ export default function HomePage() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-px bg-white/[0.06]">
 
           {/* SEO — featured, 3 cols, tall */}
-          <Link to="/contacto" className="group col-span-2 md:col-span-3 row-span-2 bg-[#080808] p-8 md:p-10 flex flex-col justify-between min-h-[280px] hover:bg-white/[0.03] transition-colors duration-300">
+          <Link to="/contacto" className="group col-span-2 md:col-span-3 row-span-2 bg-[#080808] p-8 md:p-10 flex flex-col justify-between min-h-[280px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">01</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -240,7 +240,7 @@ export default function HomePage() {
           </Link>
 
           {/* WordPress — 3 cols */}
-          <Link to="/contacto" className="group col-span-2 md:col-span-3 bg-[#080808] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.03] transition-colors duration-300">
+          <Link to="/contacto" className="group col-span-2 md:col-span-3 bg-[#080808] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">02</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -252,7 +252,7 @@ export default function HomePage() {
           </Link>
 
           {/* Landing page — 3 cols */}
-          <Link to="/contacto" className="group col-span-2 md:col-span-3 bg-[#080808] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.03] transition-colors duration-300">
+          <Link to="/contacto" className="group col-span-2 md:col-span-3 bg-[#080808] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">03</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -264,7 +264,7 @@ export default function HomePage() {
           </Link>
 
           {/* Web corporativa — 2 cols */}
-          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300">
+          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">04</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -276,7 +276,7 @@ export default function HomePage() {
           </Link>
 
           {/* Tienda Online — 2 cols */}
-          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300">
+          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">05</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -288,7 +288,7 @@ export default function HomePage() {
           </Link>
 
           {/* Mantenimiento — 2 cols */}
-          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300">
+          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">06</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>

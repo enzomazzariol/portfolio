@@ -246,7 +246,7 @@ export default function AboutPage() {
         </h2>
         <Link
           to="/contacto"
-          className="inline-block bg-white text-black font-mono text-sm px-8 py-3 hover:bg-white/90 transition-colors"
+          className="inline-flex items-center bg-white text-black font-mono text-sm px-8 py-3 min-h-[44px] hover:bg-white/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
         >
           Hablemos →
         </Link>

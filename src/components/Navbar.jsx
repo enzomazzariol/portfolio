@@ -25,7 +25,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
         <Link
           to="/"
-          className="text-white font-mono text-sm tracking-wider hover:opacity-70 transition-opacity"
+          className="text-white font-mono text-sm tracking-wider hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
         >
           enzo.
         </Link>
@@ -34,7 +34,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8 text-sm font-mono">
           <Link
             to="/about"
-            className={`transition-colors hover:text-white ${
+            className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
               location.pathname === '/about' ? 'text-white' : 'text-white/50'
             }`}
           >
@@ -42,7 +42,7 @@ export default function Navbar() {
           </Link>
           <Link
             to="/proyectos"
-            className={`transition-colors hover:text-white ${
+            className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
               location.pathname === '/proyectos' ? 'text-white' : 'text-white/50'
             }`}
           >
@@ -50,7 +50,7 @@ export default function Navbar() {
           </Link>
           <Link
             to="/contacto"
-            className={`transition-colors hover:text-white ${
+            className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
               location.pathname === '/contacto' ? 'text-white' : 'text-white/50'
             }`}
           >
@@ -60,7 +60,7 @@ export default function Navbar() {
             href="#"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors"
+            className="text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
           >
             Resume ↗
           </a>
@@ -68,7 +68,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden text-white/70 hover:text-white transition-colors"
+          className="md:hidden text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -86,11 +86,11 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[#080808]/95 backdrop-blur-sm border-b border-white/5 px-6 pb-6 flex flex-col gap-5 font-mono text-sm">
-          <Link to="/about" className="text-white/70 hover:text-white transition-colors">About</Link>
-          <Link to="/proyectos" className="text-white/70 hover:text-white transition-colors">Projects</Link>
-          <Link to="/contacto" className="text-white/70 hover:text-white transition-colors">Contact</Link>
-          <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">Resume ↗</a>
+        <div className="md:hidden bg-[#080808]/95 backdrop-blur-sm border-b border-white/5 px-6 pb-4 flex flex-col font-mono text-sm">
+          <Link to="/about" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">About</Link>
+          <Link to="/proyectos" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Projects</Link>
+          <Link to="/contacto" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Contact</Link>
+          <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Resume ↗</a>
         </div>
       )}
     </nav>

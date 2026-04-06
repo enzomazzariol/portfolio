@@ -4,15 +4,11 @@
 
 @layer base {
   html {
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'General Sans', sans-serif;
   }
 
   h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h2 {
     font-family: 'Melodrama', sans-serif;
   }
 }

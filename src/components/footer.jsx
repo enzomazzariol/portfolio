@@ -14,7 +14,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/enzo-mazzariol/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
               LinkedIn ↗
             </a>
@@ -22,13 +22,13 @@ export default function Footer() {
               href="https://github.com/enzomazzariol"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
               GitHub ↗
             </a>
             <a
               href="mailto:mazzariolenzo@gmail.com"
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
               Email ↗
             </a>
@@ -44,7 +44,7 @@ export default function Footer() {
               href="#"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
               Resume ↗
             </a>
@@ -57,10 +57,10 @@ export default function Footer() {
             Links
           </p>
           <div className="flex flex-col gap-3 text-sm font-mono text-white/60">
-            <Link to="/proyectos" className="hover:text-white transition-colors">
+            <Link to="/proyectos" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
               Projects
             </Link>
-            <Link to="/contacto" className="hover:text-white transition-colors">
+            <Link to="/contacto" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
               Contact
             </Link>
           </div>
