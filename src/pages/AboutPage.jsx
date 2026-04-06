@@ -28,6 +28,7 @@ export default function AboutPage() {
   const dot1Ref = useRef(null)
   const dot2Ref = useRef(null)
   const dot3Ref = useRef(null)
+  const dot4Ref = useRef(null)
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -60,6 +61,7 @@ export default function AboutPage() {
       if (dot1Ref.current) gsap.to(dot1Ref.current, { rotation: 360, duration: 8, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
       if (dot2Ref.current) gsap.to(dot2Ref.current, { rotation: 360, duration: 14, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
       if (dot3Ref.current) gsap.to(dot3Ref.current, { rotation: -360, duration: 6, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
+      if (dot4Ref.current) gsap.to(dot4Ref.current, { rotation: -360, duration: 10, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
 
       // 4. Bio paragraphs
       gsap.fromTo('.bio-para',
@@ -181,7 +183,11 @@ export default function AboutPage() {
 
           {/* SVG orbital */}
           <div className="flex-shrink-0 flex justify-center md:justify-start w-full md:w-auto">
-            <svg width="260" height="260" viewBox="0 0 300 300" fill="none" aria-hidden="true">
+            <svg width="260" height="260" viewBox="0 0 300 300" fill="none" aria-hidden="true" className="pointer-events-none">
+              {/* Outer faint blue-dark ring */}
+              <circle cx="150" cy="150" r="145"
+                stroke="rgba(26,26,62,0.6)" strokeWidth="1" />
+              {/* Main animated ring */}
               <circle cx="150" cy="150" r="120" ref={circleRef}
                 stroke="rgba(255,255,255,0.12)" strokeWidth="1"
                 strokeDasharray="754" strokeDashoffset="754" />
@@ -189,11 +195,17 @@ export default function AboutPage() {
                 stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
               <circle cx="150" cy="150" r="30"
                 stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+              {/* Constellation lines */}
+              <line x1="270" y1="150" x2="90" y2="254" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" />
+              <line x1="90" y1="254" x2="220" y2="150" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" />
+              {/* Center point */}
               <circle cx="150" cy="150" r="3" fill="rgba(255,255,255,0.5)" />
               {/* Orbiting dots */}
-              <circle ref={dot1Ref} cx="270" cy="150" r="5" fill="rgba(255,255,255,0.7)" />
+              <circle ref={dot1Ref} cx="270" cy="150" r="5" fill="rgba(100,120,200,0.8)" />
               <circle ref={dot2Ref} cx="90" cy="254" r="3.5" fill="rgba(255,255,255,0.35)" />
               <circle ref={dot3Ref} cx="220" cy="150" r="4" fill="rgba(255,255,255,0.5)" />
+              {/* 4th orbiting dot — vinotinto accent */}
+              <circle ref={dot4Ref} cx="150" cy="5" r="2.5" fill="rgba(107,26,42,0.8)" />
             </svg>
           </div>
 
