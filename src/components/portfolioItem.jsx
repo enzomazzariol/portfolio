@@ -1,57 +1,40 @@
 /* eslint-disable react/prop-types */
-import { GithubButtonIcon, PreviewButtonIcon } from "./icons";
 
-export default function PortfolioItem({title, imgUrl, stack, link, github}) {
+export default function PortfolioItem({ project, large }) {
+  const { title, imgUrl, stack, link } = project
+
   return (
     <a
-      className="border-2 border-stone-900 rounded-md overflow-hidden dark:border-white"
       href={link}
       target="_blank"
       rel="noopener noreferrer"
+      className="group block"
     >
-      <img
-        src={imgUrl}
-        alt={`Captura del proyecto ${title}`}
-        className="w-full h-36 md:h-48 cursor-pointer object-cover"
-      />
-      <div className="w-full p-4">
-        <h3 className="text-lg md:text-xl mb-2 md:mb-3 font-light dark:text-white">
-          {title}
-        </h3>
-        <p className="flex flex-wrap gap-2 flex-row items-center justify-start text-xs md:text-md">
-          {stack.map((item) => (
-            <span
-              key={item}
-              className="inline-block px-2 py-1 font-light border-2 border-stone-900 rounded-md dark:border-white dark:text-white/90"
-            >
-              {item}
-            </span>
-          ))}
-        </p>
-        <div className="flex gap-2">
-          {github && (
-            <a
-              className="flex justify-start mt-3 gap-2 items-center border-stone-700 border-2 rounded-md p-1 px-3 w-fit"
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <GithubButtonIcon />
-              <p className="text-sm font-light">Código</p>
-            </a>
-          )}
-
-          <a
-            className="flex justify-start mt-3 gap-2 items-center border-stone-700 border-2 rounded-md p-1 px-3 w-fit"
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <PreviewButtonIcon />
-            <p className="text-sm font-light">Preview</p>
-          </a>
+      {/* Image */}
+      <div className={`overflow-hidden relative ${large ? 'aspect-[4/3]' : 'aspect-[3/2]'}`}>
+        <img
+          src={imgUrl}
+          alt={`Captura del proyecto ${title}`}
+          width={800}
+          height={large ? 600 : 534}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+          <span className="text-white text-xs font-mono tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white/50 px-4 py-2">
+            View project ↗
+          </span>
         </div>
       </div>
+
+      {/* Meta */}
+      <div className="mt-3 flex items-start justify-between gap-4">
+        <p className="text-white/80 text-sm font-mono">{title}</p>
+        <p className="text-white/30 text-xs font-mono text-right shrink-0">
+          {stack.join(' | ')}
+        </p>
+      </div>
     </a>
-  );
+  )
 }
