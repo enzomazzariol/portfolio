@@ -5,6 +5,7 @@ export const portfolioData = [
     imgUrl: "/assets/nvs-preview.webp",
     stack: ["React", "Vite", "TailwindCSS", "JavaScript"],
     link: "https://playwithnewvision.com/",
+    description: "Desarrollo completo del sitio web para una academia de deportes. Single-page React con secciones de entrenamiento, galería y diseño responsive mobile-first.",
   },
   {
     title: "Hola Atelier Learning",
@@ -12,6 +13,7 @@ export const portfolioData = [
     imgUrl: "/assets/atelier-preview.webp",
     stack: ["WordPress", "Elementor", "CSS"],
     link: "https://holatelierlearning.com/home/",
+    description: "Plataforma educativa desarrollada en WordPress con Elementor. Landing pages de cursos, diseño personalizado y sistema de inscripciones integrado.",
   },
   {
     title: "Moodflix",
@@ -20,6 +22,7 @@ export const portfolioData = [
     stack: ["Java", "Spring Boot", "React Native", "Expo", "MySQL"],
     link: "https://youtube.com/shorts/73CfD0-5Ilw?feature=share",
     github: "https://github.com/enzomazzariol/moodflix",
+    description: "App móvil con React Native/Expo y backend Java + Spring Boot. Recomienda películas según el estado de ánimo del usuario con MySQL como base de datos.",
   },
   {
     title: "E-commerce product page",
@@ -28,6 +31,7 @@ export const portfolioData = [
     stack: ["HTML", "CSS", "JavaScript"],
     link: "https://enzo-e-commerce-product-page.netlify.app/",
     github: "https://github.com/enzomazzariol/ecommerce-product-page",
+    description: "Página de producto e-commerce implementada como challenge de Frontend Mentor. Vanilla JS, CSS puro y diseño pixel-perfect adaptado al brief.",
   },
   {
     title: "Boston String Academy",
@@ -35,5 +39,6 @@ export const portfolioData = [
     imgUrl: "/assets/bsa-preview.webp",
     stack: ["HTML", "CSS", "WordPress"],
     link: "https://bostonstringacademy.org/",
+    description: "Sitio web para academia de música de Boston. WordPress con tema personalizado, sistema de clases online y diseño elegante orientado a la comunidad musical.",
   },
 ];

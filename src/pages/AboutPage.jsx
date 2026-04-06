@@ -1,0 +1,260 @@
+import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SiReact, SiExpo, SiOpenjdk, SiTailwindcss } from 'react-icons/si'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const images = [
+  '/assets/nvs-preview.webp',
+  '/assets/atelier-preview.webp',
+  '/assets/moodflix-portfolio-1.webp',
+  '/assets/preview-ecommerce-product-page.webp',
+  '/assets/bsa-preview.webp',
+]
+
+const services = [
+  { label: 'Desarrollo Web',  Icon: SiReact,       color: '#61DAFB', side: 'right' },
+  { label: 'Apps Móviles',    Icon: SiExpo,        color: '#888',    side: 'left' },
+  { label: 'Backend & APIs',  Icon: SiOpenjdk,     color: '#f89820', side: 'right' },
+  { label: 'UI + Frontend',   Icon: SiTailwindcss, color: '#06B6D4', side: 'left' },
+]
+
+export default function AboutPage() {
+  const pageRef = useRef(null)
+  const stripTrackRef = useRef(null)
+  const circleRef = useRef(null)
+  const dot1Ref = useRef(null)
+  const dot2Ref = useRef(null)
+  const dot3Ref = useRef(null)
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const ctx = gsap.context(() => {
+      // 1. Hero title entrance
+      gsap.fromTo(
+        '.about-hero-anim',
+        { clipPath: 'inset(100% 0% 0% 0%)', y: 40, opacity: 0 },
+        { clipPath: 'inset(0% 0% 0% 0%)', y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.12 }
+      )
+
+      // 2. Infinite marquee
+      if (stripTrackRef.current) {
+        gsap.to(stripTrackRef.current, {
+          xPercent: -50,
+          ease: 'none',
+          duration: 25,
+          repeat: -1,
+        })
+      }
+
+      // 3. SVG orbital animation
+      if (circleRef.current) {
+        gsap.fromTo(circleRef.current,
+          { strokeDashoffset: 754 },
+          { strokeDashoffset: 0, duration: 2.5, ease: 'power2.out', delay: 0.3 }
+        )
+      }
+      if (dot1Ref.current) gsap.to(dot1Ref.current, { rotation: 360, duration: 8, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
+      if (dot2Ref.current) gsap.to(dot2Ref.current, { rotation: 360, duration: 14, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
+      if (dot3Ref.current) gsap.to(dot3Ref.current, { rotation: -360, duration: 6, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
+
+      // 4. Bio paragraphs
+      gsap.fromTo('.bio-para',
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.15,
+          scrollTrigger: { trigger: '.bio-section', start: 'top 75%', toggleActions: 'play none none none' } }
+      )
+
+      // 5. Stats
+      gsap.fromTo('.stat-item',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1,
+          scrollTrigger: { trigger: '.stats-row', start: 'top 80%', toggleActions: 'play none none none' } }
+      )
+
+      // 6. Service rows
+      gsap.utils.toArray('.service-text').forEach((el, i) => {
+        const fromLeft = i % 2 === 0
+        gsap.fromTo(el,
+          { opacity: 0, x: fromLeft ? -60 : 60 },
+          { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' } }
+        )
+      })
+      gsap.utils.toArray('.service-pill').forEach((el, i) => {
+        const fromLeft = i % 2 !== 0
+        gsap.fromTo(el,
+          { opacity: 0, x: fromLeft ? -60 : 60 },
+          { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' } }
+        )
+      })
+
+      // 7. CTA
+      gsap.fromTo('.cta-section',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+          scrollTrigger: { trigger: '.cta-section', start: 'top 85%', toggleActions: 'play none none none' } }
+      )
+
+    }, pageRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  const allImages = [...images, ...images] // duplicate for loop
+
+  return (
+    <div ref={pageRef} className="min-h-screen pt-14">
+
+      {/* ── HERO ── */}
+      <section className="px-6 md:px-10 pt-16 pb-8 max-w-6xl mx-auto">
+        <h1 className="about-hero-anim text-[clamp(4rem,14vw,12rem)] font-bold leading-[0.85] tracking-tighter text-white">
+          About
+        </h1>
+        <p className="about-hero-anim text-[10px] font-mono tracking-[0.25em] uppercase text-white/30 mt-4">
+          Full Stack Developer · Barcelona · 2025
+        </p>
+      </section>
+
+      {/* ── PHOTO STRIP (marquee) ── */}
+      <section className="relative overflow-hidden my-8">
+        {/* Edge fades */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #080808, transparent)' }} />
+        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #080808, transparent)' }} />
+
+        <div ref={stripTrackRef} className="flex gap-3 w-max">
+          {allImages.map((src, i) => (
+            <div key={i} className="h-[200px] w-[300px] flex-shrink-0 overflow-hidden">
+              <img
+                src={src}
+                alt=""
+                aria-hidden="true"
+                className="w-full h-full object-cover grayscale opacity-60 hover:opacity-80 hover:grayscale-0 transition-all duration-500"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── TAGLINE ── */}
+      <section className="px-6 md:px-10 py-12 max-w-6xl mx-auto border-b border-white/5">
+        <p className="text-[clamp(1.4rem,3.5vw,2.8rem)] font-bold leading-tight text-white max-w-4xl">
+          Construyo experiencias web rápidas,<br className="hidden md:block" /> limpias y bien pensadas.
+        </p>
+      </section>
+
+      {/* ── STATS ROW ── */}
+      <section className="stats-row px-6 md:px-10 py-12 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          { label: 'Experiencia', value: '3 años programando' },
+          { label: 'Ubicación', value: 'Barcelona, España' },
+          { label: 'Freelance', value: null },
+        ].map(({ label, value }) => (
+          <div key={label} className="stat-item">
+            <div className="flex items-center gap-3 mb-3">
+              <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25">{label}</p>
+              <div className="flex-1 border-t border-white/[0.08]" />
+            </div>
+            {value ? (
+              <p className="text-sm font-mono text-white/70">{value}</p>
+            ) : (
+              <p className="text-sm font-mono text-white/70 flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                </span>
+                Disponible
+              </p>
+            )}
+          </div>
+        ))}
+      </section>
+
+      {/* ── BIO + SVG ── */}
+      <section className="bio-section px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
+        <div className="flex flex-col md:flex-row gap-16 items-start">
+
+          {/* SVG orbital */}
+          <div className="flex-shrink-0 flex justify-center md:justify-start w-full md:w-auto">
+            <svg width="260" height="260" viewBox="0 0 300 300" fill="none" aria-hidden="true">
+              <circle cx="150" cy="150" r="120" ref={circleRef}
+                stroke="rgba(255,255,255,0.12)" strokeWidth="1"
+                strokeDasharray="754" strokeDashoffset="754" />
+              <circle cx="150" cy="150" r="70"
+                stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+              <circle cx="150" cy="150" r="30"
+                stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+              <circle cx="150" cy="150" r="3" fill="rgba(255,255,255,0.5)" />
+              {/* Orbiting dots */}
+              <circle ref={dot1Ref} cx="270" cy="150" r="5" fill="rgba(255,255,255,0.7)" />
+              <circle ref={dot2Ref} cx="90" cy="254" r="3.5" fill="rgba(255,255,255,0.35)" />
+              <circle ref={dot3Ref} cx="220" cy="150" r="4" fill="rgba(255,255,255,0.5)" />
+            </svg>
+          </div>
+
+          {/* Bio text */}
+          <div className="flex flex-col gap-6 max-w-lg">
+            <p className="bio-para text-sm font-mono text-white/50 leading-relaxed">
+              Empecé a programar en 2023 y desde entonces no he parado.
+              Me formé en Desarrollo de Aplicaciones Multiplataforma y ahora
+              estudio Ingeniería Audiovisual Computacional en la UPF.
+            </p>
+            <p className="bio-para text-sm font-mono text-white/50 leading-relaxed">
+              Trabajo como becario en Guarapo Media, donde colaboro en
+              proyectos como New Vision Sports y Hola Atelier. También hice
+              prácticas en Regalexia.com mejorando SEO y frontend.
+            </p>
+            <p className="bio-para text-sm font-mono text-white/50 leading-relaxed">
+              Me interesa el cruce entre el código y el diseño: construir
+              interfaces que funcionen bien y se vean todavía mejor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICES (editorial style) ── */}
+      <section className="px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
+        <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25 mb-10">Servicios</p>
+
+        <div className="flex flex-col">
+          {services.map(({ label, Icon, color, side }, i) => (
+            <div
+              key={label}
+              className={`flex items-center gap-6 py-5 border-b border-white/5 ${
+                side === 'left' ? 'flex-row-reverse' : 'flex-row'
+              }`}
+            >
+              <p className="service-text text-[clamp(2rem,5.5vw,4.5rem)] font-bold text-white leading-none flex-1">
+                {label}
+              </p>
+              <div className="service-pill flex-shrink-0 border border-white/10 rounded-[1.5rem] px-6 py-4 flex items-center gap-3 bg-white/[0.03]">
+                <Icon size={28} style={{ color }} />
+                <span className="text-xs font-mono text-white/40">{label.split(' ')[0]}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="cta-section px-6 md:px-10 py-24 max-w-6xl mx-auto text-center">
+        <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25 mb-6">Trabajo juntos</p>
+        <h2 className="text-[clamp(2rem,6vw,5rem)] font-bold text-white mb-10 leading-tight">
+          ¿Tienes un proyecto<br className="hidden md:block" /> en mente?
+        </h2>
+        <Link
+          to="/contacto"
+          className="inline-block bg-white text-black font-mono text-sm px-8 py-3 hover:bg-white/90 transition-colors"
+        >
+          Hablemos →
+        </Link>
+      </section>
+
+    </div>
+  )
+}

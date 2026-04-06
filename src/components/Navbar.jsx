@@ -33,6 +33,14 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8 text-sm font-mono">
           <Link
+            to="/about"
+            className={`transition-colors hover:text-white ${
+              location.pathname === '/about' ? 'text-white' : 'text-white/50'
+            }`}
+          >
+            About
+          </Link>
+          <Link
             to="/proyectos"
             className={`transition-colors hover:text-white ${
               location.pathname === '/proyectos' ? 'text-white' : 'text-white/50'
@@ -79,6 +87,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-[#080808]/95 backdrop-blur-sm border-b border-white/5 px-6 pb-6 flex flex-col gap-5 font-mono text-sm">
+          <Link to="/about" className="text-white/70 hover:text-white transition-colors">About</Link>
           <Link to="/proyectos" className="text-white/70 hover:text-white transition-colors">Projects</Link>
           <Link to="/contacto" className="text-white/70 hover:text-white transition-colors">Contact</Link>
           <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">Resume ↗</a>
