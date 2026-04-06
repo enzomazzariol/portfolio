@@ -57,7 +57,7 @@ export default function Navbar() {
             Contact
           </Link>
           <a
-            href="#"
+            href="/assets/EnzoCV-summer.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
@@ -90,7 +90,6 @@ export default function Navbar() {
           <Link to="/about" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">About</Link>
           <Link to="/proyectos" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Projects</Link>
           <Link to="/contacto" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Contact</Link>
-          <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Resume ↗</a>
         </div>
       )}
     </nav>

@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SplitText } from 'gsap/SplitText'
 import { useGSAP } from '@gsap/react'
 import {
   SiReact, SiNodedotjs, SiOpenjdk, SiSpringboot,
@@ -9,7 +10,7 @@ import {
 } from 'react-icons/si'
 import { portfolioData } from '../../public/data/portfolio.js'
 
-gsap.registerPlugin(ScrollTrigger, useGSAP)
+gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP)
 
 const stackItems = [
   { name: 'React',       Icon: SiReact,       color: '#61DAFB' },
@@ -30,7 +31,8 @@ const processSteps = [
 ]
 
 export default function HomePage() {
-  const heroRef = useRef(null)
+  const heroRef  = useRef(null)
+  const nameRef  = useRef(null)
   const stackRef = useRef(null)
   const worksRef = useRef(null)
   const stepsRef = useRef(null)
@@ -38,87 +40,105 @@ export default function HomePage() {
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    // Hero entrance
-    gsap.fromTo(
-      '.hero-anim',
-      { clipPath: 'inset(100% 0% 0% 0%)', opacity: 0 },
-      {
-        clipPath: 'inset(0% 0% 0% 0%)',
-        opacity: 1,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.12,
-      }
-    )
+    // ── Hero name — matrix rain (random) ──
+    const nameSplit = SplitText.create(nameRef.current, { type: 'chars' })
+    gsap.from(nameSplit.chars, {
+      y: -100,
+      opacity: 0,
+      stagger: { each: 0.05, from: 'random' },
+      duration: 0.5,
+      ease: 'power2.out',
+    })
 
-    // Stack section
-    gsap.fromTo(
-      '.stack-icon',
-      { autoAlpha: 0, y: 20 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        stagger: 0.05,
+    // ── Subtitle — matrix rain L→R ──
+    const subtitleSplit = SplitText.create('.hero-subtitle', { type: 'chars' })
+    gsap.from(subtitleSplit.chars, {
+      y: -50,
+      opacity: 0,
+      stagger: { each: 0.04, from: 'start' },
+      duration: 0.35,
+      ease: 'power2.out',
+      delay: 0.45,
+    })
+
+    // ── Description, buttons, status row — fade up ──
+    gsap.from(['.hero-desc', '.hero-btns', '.hero-status'], {
+      autoAlpha: 0,
+      y: 10,
+      duration: 0.7,
+      stagger: 0.12,
+      ease: 'power2.out',
+      delay: 0.75,
+    })
+
+    // ── Section labels — matrix rain on scroll ──
+    heroRef.current.querySelectorAll('.section-label').forEach((el) => {
+      const split = SplitText.create(el, { type: 'chars' })
+      gsap.from(split.chars, {
+        y: -80,
+        opacity: 0,
+        stagger: { each: 0.06, from: 'random' },
+        duration: 0.45,
+        ease: 'power2.out',
         scrollTrigger: {
-          trigger: stackRef.current,
-          start: 'top 82%',
+          trigger: el,
+          start: 'top 90%',
           toggleActions: 'play none none none',
         },
-      }
-    )
+      })
+    })
 
-    // Selected Works
-    gsap.fromTo(
-      '.work-item',
+    // ── Stack ──
+    gsap.fromTo('.stack-icon',
       { autoAlpha: 0, y: 20 },
       {
-        autoAlpha: 1,
-        y: 0,
-        stagger: 0.08,
-        scrollTrigger: {
-          trigger: worksRef.current,
-          start: 'top 82%',
-          toggleActions: 'play none none none',
-        },
+        autoAlpha: 1, y: 0, stagger: 0.05,
+        scrollTrigger: { trigger: stackRef.current, start: 'top 82%', toggleActions: 'play none none none' },
       }
     )
 
-    // Process steps
-    gsap.fromTo(
-      '.step-item',
+    // ── Selected Works ──
+    gsap.fromTo('.work-item',
+      { autoAlpha: 0, y: 20 },
+      {
+        autoAlpha: 1, y: 0, stagger: 0.08,
+        scrollTrigger: { trigger: worksRef.current, start: 'top 82%', toggleActions: 'play none none none' },
+      }
+    )
+
+    // ── Process steps ──
+    gsap.fromTo('.step-item',
       { autoAlpha: 0, y: 30 },
       {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: stepsRef.current,
-          start: 'top 82%',
-          toggleActions: 'play none none none',
-        },
+        autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.12,
+        scrollTrigger: { trigger: stepsRef.current, start: 'top 82%', toggleActions: 'play none none none' },
       }
     )
+
   }, { scope: heroRef })
 
   return (
     <div ref={heroRef}>
+
       {/* ── Hero ── */}
       <main className="min-h-screen flex flex-col justify-between px-6 md:px-10 pt-28 pb-12 max-w-6xl mx-auto">
         <div className="flex-1 flex flex-col justify-center">
-          <p className="hero-anim text-white/40 text-xs font-mono tracking-widest uppercase mb-6">
+          <p className="hero-subtitle text-white/40 text-xs font-mono tracking-widest uppercase mb-6">
             Full Stack Developer · Barcelona
           </p>
-          <h1 className="font-display text-[clamp(3rem,10vw,8rem)] font-medium leading-[0.9] tracking-tighter text-white mb-8">
-            <span className="hero-anim block">Enzo</span>
-            <span className="hero-anim block">Mazzariol</span>
+          <h1
+            ref={nameRef}
+            className="font-display text-[clamp(3rem,10vw,8rem)] font-medium leading-[0.9] tracking-tighter text-white mb-8"
+          >
+            <span className="block">Enzo</span>
+            <span className="block">Mazzariol</span>
           </h1>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mt-4">
-            <p className="hero-anim text-white/50 text-sm md:text-base max-w-sm leading-relaxed">
+            <p className="hero-desc text-white/50 text-sm md:text-base max-w-sm leading-relaxed">
               Desarrollo web y móvil con React, Node.js y Java.<br />
               Estudiante de Ingeniería Audiovisual en UPF.
             </p>
-            <div className="hero-anim flex gap-4 text-sm font-mono">
+            <div className="hero-btns flex gap-4 text-sm font-mono">
               <Link
                 to="/proyectos"
                 className="border border-white/20 text-white/70 hover:text-white hover:border-white/50 transition-all px-5 py-2.5 min-h-[44px] flex items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
@@ -136,7 +156,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom status row */}
-        <div className="flex items-center justify-between mt-16 border-t border-white/5 pt-6">
+        <div className="hero-status flex items-center justify-between mt-16 border-t border-white/5 pt-6">
           <div className="flex gap-6 text-white/30 text-xs font-mono">
             <a href="https://github.com/enzomazzariol" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">GitHub ↗</a>
             <a href="https://www.linkedin.com/in/enzo-mazzariol/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">LinkedIn ↗</a>
@@ -154,7 +174,7 @@ export default function HomePage() {
 
       {/* ── Stack ── */}
       <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-        <p className="text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Stack</p>
+        <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Stack</p>
         <div ref={stackRef} className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-3">
           {stackItems.map(({ name, Icon, color }) => (
             <div
@@ -172,7 +192,7 @@ export default function HomePage() {
 
       {/* ── Selected Works ── */}
       <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-        <p className="text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Selected Works</p>
+        <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Selected Works</p>
         <div ref={worksRef}>
           {portfolioData.slice(0, 3).map(({ title, stack, link }, i) => (
             <a
@@ -217,7 +237,7 @@ export default function HomePage() {
       {/* ── Servicios ── */}
       <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
         <div className="flex items-end justify-between mb-10">
-          <p className="text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase">Servicios</p>
+          <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase">Servicios</p>
           <Link to="/contacto" className="text-[10px] font-mono text-white/30 hover:text-white/70 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
             Hablemos →
           </Link>
@@ -304,7 +324,7 @@ export default function HomePage() {
 
       {/* ── Process ── */}
       <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-        <p className="text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Process</p>
+        <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Process</p>
         <div ref={stepsRef} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
           {processSteps.map(({ n, title, desc }) => (
             <div key={n} className="step-item bg-[#080808] p-8 flex flex-col gap-4">

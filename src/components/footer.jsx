@@ -40,14 +40,6 @@ export default function Footer() {
             Details
           </p>
           <div className="flex flex-col gap-3 text-sm font-mono text-white/60">
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-            >
-              Resume ↗
-            </a>
             <span className="text-white/40 select-all">mazzariolenzo@gmail.com</span>
           </div>
         </div>
