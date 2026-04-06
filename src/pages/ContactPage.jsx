@@ -5,7 +5,7 @@ export default function ContactPage() {
         <p className="text-white/30 text-xs font-mono tracking-widest uppercase mb-4">
           Get in touch
         </p>
-        <h1 className="text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.9] tracking-tighter text-white mb-12">
+        <h1 className="font-display text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.9] tracking-tighter text-white mb-12">
           Let's<br />talk.
         </h1>
 

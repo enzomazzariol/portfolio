@@ -1,5 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
+import { useGSAP } from '@gsap/react'
+
+gsap.registerPlugin(useGSAP)
 import { portfolioData } from '../../public/data/portfolio.js'
 
 function LeftPanel({ project, panelRef }) {
@@ -11,7 +14,7 @@ function LeftPanel({ project, panelRef }) {
       </p>
 
       {/* Title */}
-      <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight text-white mb-6">
+      <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight text-white mb-6">
         {project.title}
       </h2>
 
@@ -135,17 +138,15 @@ export default function ProjectsPage() {
 
   // Entrance animation for page heading
   const headingRef = useRef(null)
-  useEffect(() => {
+  useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    if (!headingRef.current) return
 
     gsap.fromTo(
-      headingRef.current.querySelectorAll('.anim'),
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1, delay: 0.2 }
+      '.anim',
+      { autoAlpha: 0, y: 30 },
+      { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1, delay: 0.2 }
     )
-
-  }, [])
+  }, { scope: headingRef })
 
   return (
     <main className="min-h-screen pt-14">

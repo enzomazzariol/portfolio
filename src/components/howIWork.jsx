@@ -1,7 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import Subtitle from './subtitle.jsx';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const steps = [
   {
@@ -27,33 +30,26 @@ const steps = [
 export default function HowIWork() {
   const stepsRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const cards = stepsRef.current.querySelectorAll('.step-card');
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          ease: 'power3.out',
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: stepsRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-    }, stepsRef);
-
-    return () => ctx.revert();
-  }, []);
+    gsap.fromTo(
+      '.step-card',
+      { autoAlpha: 0, y: 40 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.65,
+        ease: 'power3.out',
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: stepsRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  }, { scope: stepsRef });
 
   return (
     <div className="w-full my-20">

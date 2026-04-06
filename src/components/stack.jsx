@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import {
   SiReact,
   SiNodedotjs,
@@ -13,6 +14,8 @@ import {
   SiGit,
 } from 'react-icons/si';
 import Subtitle from './subtitle.jsx';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const technologies = [
   { name: 'React',         Icon: SiReact,       color: '#61DAFB' },
@@ -29,34 +32,25 @@ const technologies = [
 export default function Stack() {
   const gridRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const items = gridRef.current.querySelectorAll('.stack-item');
-      gsap.fromTo(
-        items,
-        { opacity: 0, y: 30, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-          stagger: 0.07,
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: 'top 82%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-    }, gridRef);
-
-    return () => ctx.revert();
-  }, []);
+    gsap.fromTo(
+      '.stack-item',
+      { autoAlpha: 0, y: 30, scale: 0.9 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        stagger: 0.07,
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  }, { scope: gridRef });
 
   return (
     <div className="w-full my-20">

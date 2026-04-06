@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['Space Mono', 'monospace'],
+        display: ['Melodrama', 'sans-serif'],
+        sans: ['General Sans', 'sans-serif'],
+        mono: ['General Sans', 'sans-serif'],
       },
     },
   },

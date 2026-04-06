@@ -1,14 +1,15 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import {
   SiReact, SiNodedotjs, SiOpenjdk, SiSpringboot,
   SiTailwindcss, SiMysql, SiWordpress, SiExpo, SiGit,
 } from 'react-icons/si'
 import { portfolioData } from '../../public/data/portfolio.js'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const stackItems = [
   { name: 'React',       Icon: SiReact,       color: '#61DAFB' },
@@ -34,82 +35,71 @@ export default function HomePage() {
   const worksRef = useRef(null)
   const stepsRef = useRef(null)
 
-  useEffect(() => {
+  useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    const ctx = gsap.context(() => {
-      // Hero entrance
-      gsap.fromTo(
-        '.hero-anim',
-        { clipPath: 'inset(100% 0% 0% 0%)', y: 30, opacity: 0 },
-        {
-          clipPath: 'inset(0% 0% 0% 0%)',
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: 'power3.out',
-          stagger: 0.12,
-        }
-      )
+    // Hero entrance
+    gsap.fromTo(
+      '.hero-anim',
+      { clipPath: 'inset(100% 0% 0% 0%)', opacity: 0 },
+      {
+        clipPath: 'inset(0% 0% 0% 0%)',
+        opacity: 1,
+        duration: 0.9,
+        ease: 'power3.out',
+        stagger: 0.12,
+      }
+    )
 
-      // Stack section
-      gsap.fromTo(
-        '.stack-icon',
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: stackRef.current,
-            start: 'top 82%',
-            toggleActions: 'play none none none',
-          },
-        }
-      )
+    // Stack section
+    gsap.fromTo(
+      '.stack-icon',
+      { autoAlpha: 0, y: 20 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        stagger: 0.05,
+        scrollTrigger: {
+          trigger: stackRef.current,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      }
+    )
 
-      // Selected Works
-      gsap.fromTo(
-        '.work-item',
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-          stagger: 0.08,
-          scrollTrigger: {
-            trigger: worksRef.current,
-            start: 'top 82%',
-            toggleActions: 'play none none none',
-          },
-        }
-      )
+    // Selected Works
+    gsap.fromTo(
+      '.work-item',
+      { autoAlpha: 0, y: 20 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: worksRef.current,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      }
+    )
 
-      // Process steps
-      gsap.fromTo(
-        '.step-item',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          stagger: 0.12,
-          scrollTrigger: {
-            trigger: stepsRef.current,
-            start: 'top 82%',
-            toggleActions: 'play none none none',
-          },
-        }
-      )
-
-    }, heroRef)
-
-    return () => ctx.revert()
-  }, [])
+    // Process steps
+    gsap.fromTo(
+      '.step-item',
+      { autoAlpha: 0, y: 30 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: stepsRef.current,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      }
+    )
+  }, { scope: heroRef })
 
   return (
     <div ref={heroRef}>
@@ -119,7 +109,7 @@ export default function HomePage() {
           <p className="hero-anim text-white/40 text-xs font-mono tracking-widest uppercase mb-6">
             Full Stack Developer · Barcelona
           </p>
-          <h1 className="text-[clamp(3rem,10vw,8rem)] font-bold leading-[0.9] tracking-tighter text-white mb-8">
+          <h1 className="font-display text-[clamp(3rem,10vw,8rem)] font-medium leading-[0.9] tracking-tighter text-white mb-8">
             <span className="hero-anim block">Enzo</span>
             <span className="hero-anim block">Mazzariol</span>
           </h1>
@@ -195,7 +185,7 @@ export default function HomePage() {
               <span className="text-4xl font-bold text-white/10 font-mono w-14 shrink-0 leading-none">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span className="text-[clamp(1.5rem,4vw,3rem)] font-bold text-white font-mono flex-1 leading-tight">
+              <span className="font-display text-[clamp(1.5rem,4vw,3rem)] font-bold text-white flex-1 leading-tight">
                 {title}
               </span>
               <div className="hidden md:flex flex-wrap gap-1.5 justify-end max-w-[280px]">
@@ -221,6 +211,94 @@ export default function HomePage() {
           >
             Ver todos →
           </Link>
+        </div>
+      </section>
+
+      {/* ── Servicios ── */}
+      <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
+        <div className="flex items-end justify-between mb-10">
+          <p className="text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase">Servicios</p>
+          <Link to="/contacto" className="text-[10px] font-mono text-white/30 hover:text-white/70 transition-colors duration-200">
+            Hablemos →
+          </Link>
+        </div>
+
+        {/* Bento grid */}
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-px bg-white/[0.06]">
+
+          {/* SEO — featured, 3 cols, tall */}
+          <Link to="/contacto" className="group col-span-2 md:col-span-3 row-span-2 bg-[#080808] p-8 md:p-10 flex flex-col justify-between min-h-[280px] hover:bg-white/[0.03] transition-colors duration-300">
+            <div className="flex items-start justify-between">
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">01</span>
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+            </div>
+            <div>
+              <p className="text-white/15 font-display text-[7rem] font-bold leading-none mb-4 select-none">SEO</p>
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-3 leading-tight">SEO services</h3>
+              <p className="text-xs text-white/35 leading-relaxed max-w-xs">Auditoría SEO, optimización on-page y estrategia de palabras clave para mejorar tu visibilidad en Google.</p>
+            </div>
+          </Link>
+
+          {/* WordPress — 3 cols */}
+          <Link to="/contacto" className="group col-span-2 md:col-span-3 bg-[#080808] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.03] transition-colors duration-300">
+            <div className="flex items-start justify-between">
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">02</span>
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+            </div>
+            <div>
+              <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-2 leading-tight">WordPress developer</h3>
+              <p className="text-xs text-white/35 leading-relaxed">Webs en WordPress a medida: maquetación, plugins y formularios.</p>
+            </div>
+          </Link>
+
+          {/* Landing page — 3 cols */}
+          <Link to="/contacto" className="group col-span-2 md:col-span-3 bg-[#080808] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.03] transition-colors duration-300">
+            <div className="flex items-start justify-between">
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">03</span>
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+            </div>
+            <div>
+              <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-2 leading-tight">Landing page design</h3>
+              <p className="text-xs text-white/35 leading-relaxed">Páginas de alta conversión para campañas, lanzamientos o servicios.</p>
+            </div>
+          </Link>
+
+          {/* Web corporativa — 2 cols */}
+          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300">
+            <div className="flex items-start justify-between">
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">04</span>
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+            </div>
+            <div>
+              <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-2 leading-tight">Web corporativa</h3>
+              <p className="text-xs text-white/35 leading-relaxed">Web profesional para empresas y autónomos con diseño personalizado.</p>
+            </div>
+          </Link>
+
+          {/* Tienda Online — 2 cols */}
+          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300">
+            <div className="flex items-start justify-between">
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">05</span>
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+            </div>
+            <div>
+              <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-2 leading-tight">Tienda Online</h3>
+              <p className="text-xs text-white/35 leading-relaxed">WooCommerce o Shopify con catálogo de productos y pasarela de pago.</p>
+            </div>
+          </Link>
+
+          {/* Mantenimiento — 2 cols */}
+          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300">
+            <div className="flex items-start justify-between">
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">06</span>
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+            </div>
+            <div>
+              <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-2 leading-tight">Mantenimiento web</h3>
+              <p className="text-xs text-white/35 leading-relaxed">Servicio mensual: actualizaciones, copias de seguridad y seguridad.</p>
+            </div>
+          </Link>
+
         </div>
       </section>
 

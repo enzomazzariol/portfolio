@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { SiReact, SiExpo, SiOpenjdk, SiTailwindcss } from 'react-icons/si'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const images = [
   '/assets/nvs-preview.webp',
@@ -29,81 +30,77 @@ export default function AboutPage() {
   const dot2Ref = useRef(null)
   const dot3Ref = useRef(null)
 
-  useEffect(() => {
+  useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    const ctx = gsap.context(() => {
-      // 1. Hero title entrance
-      gsap.fromTo(
-        '.about-hero-anim',
-        { clipPath: 'inset(100% 0% 0% 0%)', y: 40, opacity: 0 },
-        { clipPath: 'inset(0% 0% 0% 0%)', y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.12 }
-      )
+    // 1. Hero title entrance
+    gsap.fromTo(
+      '.about-hero-anim',
+      { clipPath: 'inset(100% 0% 0% 0%)', opacity: 0 },
+      { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.12 }
+    )
 
-      // 2. Infinite marquee
-      if (stripTrackRef.current) {
-        gsap.to(stripTrackRef.current, {
-          xPercent: -50,
-          ease: 'none',
-          duration: 25,
-          repeat: -1,
-        })
-      }
-
-      // 3. SVG orbital animation
-      if (circleRef.current) {
-        gsap.fromTo(circleRef.current,
-          { strokeDashoffset: 754 },
-          { strokeDashoffset: 0, duration: 2.5, ease: 'power2.out', delay: 0.3 }
-        )
-      }
-      if (dot1Ref.current) gsap.to(dot1Ref.current, { rotation: 360, duration: 8, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
-      if (dot2Ref.current) gsap.to(dot2Ref.current, { rotation: 360, duration: 14, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
-      if (dot3Ref.current) gsap.to(dot3Ref.current, { rotation: -360, duration: 6, repeat: -1, ease: 'none', transformOrigin: '150px 150px' })
-
-      // 4. Bio paragraphs
-      gsap.fromTo('.bio-para',
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.15,
-          scrollTrigger: { trigger: '.bio-section', start: 'top 75%', toggleActions: 'play none none none' } }
-      )
-
-      // 5. Stats
-      gsap.fromTo('.stat-item',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1,
-          scrollTrigger: { trigger: '.stats-row', start: 'top 80%', toggleActions: 'play none none none' } }
-      )
-
-      // 6. Service rows
-      gsap.utils.toArray('.service-text').forEach((el, i) => {
-        const fromLeft = i % 2 === 0
-        gsap.fromTo(el,
-          { opacity: 0, x: fromLeft ? -60 : 60 },
-          { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' } }
-        )
+    // 2. Infinite marquee
+    if (stripTrackRef.current) {
+      gsap.to(stripTrackRef.current, {
+        xPercent: -50,
+        ease: 'none',
+        duration: 25,
+        repeat: -1,
+        force3D: true,
       })
-      gsap.utils.toArray('.service-pill').forEach((el, i) => {
-        const fromLeft = i % 2 !== 0
-        gsap.fromTo(el,
-          { opacity: 0, x: fromLeft ? -60 : 60 },
-          { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' } }
-        )
-      })
+    }
 
-      // 7. CTA
-      gsap.fromTo('.cta-section',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
-          scrollTrigger: { trigger: '.cta-section', start: 'top 85%', toggleActions: 'play none none none' } }
+    // 3. SVG orbital animation
+    if (circleRef.current) {
+      gsap.fromTo(circleRef.current,
+        { strokeDashoffset: 754 },
+        { strokeDashoffset: 0, duration: 2.5, ease: 'power2.out', delay: 0.3 }
       )
+    }
+    if (dot1Ref.current) gsap.to(dot1Ref.current, { rotation: 360, duration: 8, repeat: -1, ease: 'none', transformOrigin: '150px 150px', force3D: true })
+    if (dot2Ref.current) gsap.to(dot2Ref.current, { rotation: 360, duration: 14, repeat: -1, ease: 'none', transformOrigin: '150px 150px', force3D: true })
+    if (dot3Ref.current) gsap.to(dot3Ref.current, { rotation: -360, duration: 6, repeat: -1, ease: 'none', transformOrigin: '150px 150px', force3D: true })
 
-    }, pageRef)
+    // 4. Bio paragraphs
+    gsap.fromTo('.bio-para',
+      { autoAlpha: 0, y: 24 },
+      { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.15,
+        scrollTrigger: { trigger: '.bio-section', start: 'top 75%', toggleActions: 'play none none none' } }
+    )
 
-    return () => ctx.revert()
-  }, [])
+    // 5. Stats
+    gsap.fromTo('.stat-item',
+      { autoAlpha: 0, y: 20 },
+      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.1,
+        scrollTrigger: { trigger: '.stats-row', start: 'top 80%', toggleActions: 'play none none none' } }
+    )
+
+    // 6. Service rows
+    gsap.utils.toArray('.service-text').forEach((el, i) => {
+      const fromLeft = i % 2 === 0
+      gsap.fromTo(el,
+        { autoAlpha: 0, x: fromLeft ? -60 : 60 },
+        { autoAlpha: 1, x: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' } }
+      )
+    })
+    gsap.utils.toArray('.service-pill').forEach((el, i) => {
+      const fromLeft = i % 2 !== 0
+      gsap.fromTo(el,
+        { autoAlpha: 0, x: fromLeft ? -60 : 60 },
+        { autoAlpha: 1, x: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' } }
+      )
+    })
+
+    // 7. CTA
+    gsap.fromTo('.cta-section',
+      { autoAlpha: 0, y: 30 },
+      { autoAlpha: 1, y: 0, duration: 0.8,
+        scrollTrigger: { trigger: '.cta-section', start: 'top 85%', toggleActions: 'play none none none' } }
+    )
+  }, { scope: pageRef })
 
   const allImages = [...images, ...images] // duplicate for loop
 
@@ -112,7 +109,7 @@ export default function AboutPage() {
 
       {/* ── HERO ── */}
       <section className="px-6 md:px-10 pt-16 pb-8 max-w-6xl mx-auto">
-        <h1 className="about-hero-anim text-[clamp(4rem,14vw,12rem)] font-bold leading-[0.85] tracking-tighter text-white">
+        <h1 className="about-hero-anim font-display text-[clamp(4rem,14vw,12rem)] font-bold leading-[0.85] tracking-tighter text-white">
           About
         </h1>
         <p className="about-hero-anim text-[10px] font-mono tracking-[0.25em] uppercase text-white/30 mt-4">
@@ -143,7 +140,7 @@ export default function AboutPage() {
 
       {/* ── TAGLINE ── */}
       <section className="px-6 md:px-10 py-12 max-w-6xl mx-auto border-b border-white/5">
-        <p className="text-[clamp(1.4rem,3.5vw,2.8rem)] font-bold leading-tight text-white max-w-4xl">
+        <p className="font-display text-[clamp(1.4rem,3.5vw,2.8rem)] font-bold leading-tight text-white max-w-4xl">
           Construyo experiencias web rápidas,<br className="hidden md:block" /> limpias y bien pensadas.
         </p>
       </section>
@@ -229,7 +226,7 @@ export default function AboutPage() {
                 side === 'left' ? 'flex-row-reverse' : 'flex-row'
               }`}
             >
-              <p className="service-text text-[clamp(2rem,5.5vw,4.5rem)] font-bold text-white leading-none flex-1">
+              <p className="service-text font-display text-[clamp(2rem,5.5vw,4.5rem)] font-bold text-white leading-none flex-1">
                 {label}
               </p>
               <div className="service-pill flex-shrink-0 border border-white/10 rounded-[1.5rem] px-6 py-4 flex items-center gap-3 bg-white/[0.03]">
@@ -244,7 +241,7 @@ export default function AboutPage() {
       {/* ── CTA ── */}
       <section className="cta-section px-6 md:px-10 py-24 max-w-6xl mx-auto text-center">
         <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25 mb-6">Trabajo juntos</p>
-        <h2 className="text-[clamp(2rem,6vw,5rem)] font-bold text-white mb-10 leading-tight">
+        <h2 className="font-display text-[clamp(2rem,6vw,5rem)] font-bold text-white mb-10 leading-tight">
           ¿Tienes un proyecto<br className="hidden md:block" /> en mente?
         </h2>
         <Link
