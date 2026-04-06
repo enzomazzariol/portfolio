@@ -2,3 +2,8 @@
 from = "https://enzomazzariol.netlify.app/*"
 to = "https://enzomazzariol.is-a.dev/:splat"
 status = 301
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
