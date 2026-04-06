@@ -106,20 +106,6 @@ export default function HomePage() {
         }
       )
 
-      // Equalizer bars: initial entrance then infinite pulse
-      const barHeights = [0.35, 0.6, 0.45, 0.8, 0.38, 0.7, 0.5, 0.9, 0.42, 0.65, 0.3, 0.75, 0.55, 0.6]
-      gsap.utils.toArray('.eq-bar').forEach((bar, i) => {
-        gsap.set(bar, { scaleY: barHeights[i], transformOrigin: 'center bottom' })
-        gsap.to(bar, {
-          scaleY: barHeights[(i + 7) % 14] * (0.5 + Math.random() * 0.5),
-          duration: 0.7 + (i % 4) * 0.3,
-          ease: 'power1.inOut',
-          yoyo: true,
-          repeat: -1,
-          delay: i * 0.06,
-          transformOrigin: 'center bottom',
-        })
-      })
     }, heroRef)
 
     return () => ctx.revert()
@@ -128,35 +114,7 @@ export default function HomePage() {
   return (
     <div ref={heroRef}>
       {/* ── Hero ── */}
-      <main className="relative min-h-screen flex flex-col justify-between px-6 md:px-10 pt-28 pb-12 max-w-6xl mx-auto">
-        {/* Audio equalizer SVG — music passion decoration */}
-        <svg
-          aria-hidden="true"
-          className="absolute right-8 lg:right-16 top-1/2 -translate-y-1/2 hidden md:block pointer-events-none"
-          width="94"
-          height="100"
-          viewBox="0 0 94 100"
-          fill="none"
-        >
-          {Array.from({ length: 14 }, (_, i) => (
-            <rect
-              key={i}
-              className="eq-bar"
-              x={i * 7}
-              y="0"
-              width="3"
-              height="100"
-              fill={
-                i === 3 || i === 7 || i === 11
-                  ? 'rgba(107,26,42,0.4)'
-                  : i % 2 === 0
-                    ? 'rgba(255,255,255,0.12)'
-                    : 'rgba(255,255,255,0.08)'
-              }
-            />
-          ))}
-        </svg>
-
+      <main className="min-h-screen flex flex-col justify-between px-6 md:px-10 pt-28 pb-12 max-w-6xl mx-auto">
         <div className="flex-1 flex flex-col justify-center">
           <p className="hero-anim text-white/40 text-xs font-mono tracking-widest uppercase mb-6">
             Full Stack Developer · Barcelona

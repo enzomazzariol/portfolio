@@ -5,49 +5,6 @@ import { portfolioData } from '../../public/data/portfolio.js'
 function LeftPanel({ project, panelRef }) {
   return (
     <div ref={panelRef} className="flex flex-col justify-center h-full px-10 lg:px-16">
-      {/* Circuit board SVG — developer/technical decoration */}
-      <svg
-        aria-hidden="true"
-        className="pointer-events-none mb-6 opacity-70"
-        width="80"
-        height="50"
-        viewBox="0 0 80 50"
-        fill="none"
-      >
-        <path
-          className="circuit-path"
-          d="M5 25 H30 V10 H55"
-          stroke="rgba(255,255,255,0.15)"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeDasharray="80"
-          strokeDashoffset="80"
-        />
-        <path
-          className="circuit-path"
-          d="M30 25 H65 V40 H75"
-          stroke="rgba(255,255,255,0.10)"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeDasharray="80"
-          strokeDashoffset="80"
-        />
-        <path
-          className="circuit-path-2"
-          d="M55 10 V40"
-          stroke="rgba(26,26,62,0.8)"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeDasharray="80"
-          strokeDashoffset="80"
-        />
-        {/* Joint dots */}
-        <circle cx="30" cy="25" r="2" fill="rgba(255,255,255,0.2)" />
-        <circle cx="55" cy="10" r="2" fill="rgba(255,255,255,0.2)" />
-        <circle cx="65" cy="40" r="2" fill="rgba(255,255,255,0.2)" />
-        <circle cx="75" cy="40" r="2" fill="rgba(255,255,255,0.2)" />
-      </svg>
-
       {/* Index */}
       <p className="text-white/20 text-xs font-mono tracking-widest uppercase mb-8">
         Selected work
@@ -188,12 +145,6 @@ export default function ProjectsPage() {
       { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1, delay: 0.2 }
     )
 
-    // Circuit path draw-in animation
-    gsap.fromTo(
-      '.circuit-path, .circuit-path-2',
-      { strokeDashoffset: 80 },
-      { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: 0.3, delay: 0.5 }
-    )
   }, [])
 
   return (
