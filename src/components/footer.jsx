@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-[#080808]">
+    <footer className="relative z-[2] border-t border-white/5 bg-[#080808]">
       {/* Columns */}
       <div className="max-w-6xl mx-auto px-6 md:px-10 pt-16 pb-10 grid grid-cols-2 md:grid-cols-3 gap-10">
         <div>
@@ -65,7 +65,7 @@ export default function Footer() {
           className="text-[clamp(4rem,18vw,14rem)] font-bold leading-none tracking-tighter px-4 md:px-8 pb-2"
           style={{
             color: 'transparent',
-            WebkitTextStroke: '1px rgba(255,255,255,0.08)',
+            WebkitTextStroke: '1px rgba(255,255,255,0.18)',
           }}
         >
           MAZZARIOL

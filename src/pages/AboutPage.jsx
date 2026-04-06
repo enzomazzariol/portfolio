@@ -130,6 +130,8 @@ export default function AboutPage() {
                 src={src}
                 alt=""
                 aria-hidden="true"
+                width={300}
+                height={200}
                 className="w-full h-full object-cover grayscale opacity-60 hover:opacity-80 hover:grayscale-0 transition-all duration-500"
                 loading="lazy"
               />

@@ -91,6 +91,8 @@ function ImageSection({ project, onIntersect, index }) {
             <img
               src={src}
               alt={`Proyecto ${project.title}${images.length > 1 ? ` — imagen ${imgIndex + 1}` : ''}`}
+              width={1280}
+              height={720}
               className="w-full h-full object-cover"
               loading={index === 0 && imgIndex === 0 ? 'eager' : 'lazy'}
             />

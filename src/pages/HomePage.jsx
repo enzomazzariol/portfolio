@@ -1,5 +1,6 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Prism from '../components/Prism.jsx'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
@@ -31,9 +32,17 @@ const processSteps = [
 ]
 
 export default function HomePage() {
-  const heroRef  = useRef(null)
-  const nameRef  = useRef(null)
-  const stackRef = useRef(null)
+  const heroRef      = useRef(null)
+  const nameRef      = useRef(null)
+  const subtitleRef  = useRef(null)
+  const stackRef     = useRef(null)
+  const [prismReady, setPrismReady] = useState(false)
+
+  // Defer Prism init until after first paint so it doesn't block content render
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setPrismReady(true))
+    return () => cancelAnimationFrame(raf)
+  }, [])
   const worksRef = useRef(null)
   const stepsRef = useRef(null)
 
@@ -51,7 +60,7 @@ export default function HomePage() {
     })
 
     // ── Subtitle — matrix rain L→R ──
-    const subtitleSplit = SplitText.create('.hero-subtitle', { type: 'chars' })
+    const subtitleSplit = SplitText.create(subtitleRef.current, { type: 'chars' })
     gsap.from(subtitleSplit.chars, {
       y: -50,
       opacity: 0,
@@ -120,15 +129,43 @@ export default function HomePage() {
   return (
     <div ref={heroRef}>
 
+      {/* ── Prism background — deferred so it doesn't block first paint ── */}
+      {prismReady && (
+      <div
+        className="fixed inset-0 pointer-events-none"
+        style={{ zIndex: 1 }}
+      >
+        <Prism
+          animationType="rotate"
+          timeScale={0.4}
+          height={3.5}
+          baseWidth={5.5}
+          scale={3.6}
+          hueShift={0}
+          colorFrequency={1}
+          noise={0}
+          glow={0.6}
+          bloom={0.7}
+          transparent={true}
+        />
+        {/* Dark overlay so content stays readable */}
+        <div className="absolute inset-0" style={{ background: 'rgba(8,8,8,0.72)' }} />
+      </div>
+      )}
+
+      {/* Content above the prism */}
+      <div className="relative" style={{ zIndex: 2 }}>
+
       {/* ── Hero ── */}
       <main className="min-h-screen flex flex-col justify-between px-6 md:px-10 pt-28 pb-12 max-w-6xl mx-auto">
         <div className="flex-1 flex flex-col justify-center">
-          <p className="hero-subtitle text-white/40 text-xs font-mono tracking-widest uppercase mb-6">
+          <p ref={subtitleRef} className="text-white/40 text-xs font-mono tracking-widest uppercase mb-6">
             Full Stack Developer · Barcelona
           </p>
           <h1
             ref={nameRef}
             className="font-display text-[clamp(3rem,10vw,8rem)] font-medium leading-[0.9] tracking-tighter text-white mb-8"
+            style={{ textShadow: '0 2px 40px rgba(0,0,0,0.9)' }}
           >
             <span className="block">Enzo</span>
             <span className="block">Mazzariol</span>
@@ -244,10 +281,10 @@ export default function HomePage() {
         </div>
 
         {/* Bento grid */}
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-px bg-white/[0.06]">
+        <div className="grid grid-cols-2 md:grid-cols-6 border-l border-t border-white/[0.07]">
 
           {/* SEO — featured, 3 cols, tall */}
-          <Link to="/contacto" className="group col-span-2 md:col-span-3 row-span-2 bg-[#080808] p-8 md:p-10 flex flex-col justify-between min-h-[280px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
+          <Link to="/contacto" className="group col-span-2 md:col-span-3 row-span-2 border-r border-b border-white/[0.07] p-8 md:p-10 flex flex-col justify-between min-h-[280px] hover:bg-white/[0.04] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">01</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -260,7 +297,7 @@ export default function HomePage() {
           </Link>
 
           {/* WordPress — 3 cols */}
-          <Link to="/contacto" className="group col-span-2 md:col-span-3 bg-[#080808] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
+          <Link to="/contacto" className="group col-span-2 md:col-span-3 border-r border-b border-white/[0.07] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.04] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">02</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -272,7 +309,7 @@ export default function HomePage() {
           </Link>
 
           {/* Landing page — 3 cols */}
-          <Link to="/contacto" className="group col-span-2 md:col-span-3 bg-[#080808] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
+          <Link to="/contacto" className="group col-span-2 md:col-span-3 border-r border-b border-white/[0.07] p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/[0.04] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">03</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -284,7 +321,7 @@ export default function HomePage() {
           </Link>
 
           {/* Web corporativa — 2 cols */}
-          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
+          <Link to="/contacto" className="group col-span-2 border-r border-b border-white/[0.07] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.04] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">04</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -296,7 +333,7 @@ export default function HomePage() {
           </Link>
 
           {/* Tienda Online — 2 cols */}
-          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
+          <Link to="/contacto" className="group col-span-2 border-r border-b border-white/[0.07] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.04] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">05</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -308,7 +345,7 @@ export default function HomePage() {
           </Link>
 
           {/* Mantenimiento — 2 cols */}
-          <Link to="/contacto" className="group col-span-2 bg-[#080808] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.03] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
+          <Link to="/contacto" className="group col-span-2 border-r border-b border-white/[0.07] p-8 flex flex-col justify-between min-h-[160px] hover:bg-white/[0.04] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset">
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">06</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
@@ -325,9 +362,9 @@ export default function HomePage() {
       {/* ── Process ── */}
       <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
         <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Process</p>
-        <div ref={stepsRef} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+        <div ref={stepsRef} className="grid grid-cols-1 md:grid-cols-3 border-l border-t border-white/[0.07]">
           {processSteps.map(({ n, title, desc }) => (
-            <div key={n} className="step-item bg-[#080808] p-8 flex flex-col gap-4">
+            <div key={n} className="step-item border-r border-b border-white/[0.07] p-8 flex flex-col gap-4">
               <span className="text-5xl font-bold text-white/10 leading-none">{n}</span>
               <h3 className="text-sm font-semibold text-white/80">{title}</h3>
               <p className="text-sm text-white/35 leading-relaxed">{desc}</p>
@@ -335,6 +372,7 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      </div>{/* end content wrapper */}
     </div>
   )
 }
