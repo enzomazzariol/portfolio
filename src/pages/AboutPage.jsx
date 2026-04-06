@@ -8,11 +8,11 @@ import { SiReact, SiGooglesearchconsole, SiOpenjdk, SiTailwindcss } from 'react-
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const images = [
-  '/assets/nvs-preview.webp',
-  '/assets/atelier-preview.webp',
-  '/assets/moodflix-portfolio-1.webp',
+  '/assets/nvs/nvs-1.webp',
+  '/assets/atelier/atelier-1.webp',
+  '/assets/moodflix/moodflix-1.webp',
   '/assets/preview-ecommerce-product-page.webp',
-  '/assets/bsa-preview.webp',
+  '/assets/bsa/bsa-1.webp',
 ]
 
 const services = [

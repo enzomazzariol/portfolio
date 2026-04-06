@@ -2,9 +2,9 @@ export const portfolioData = [
   {
     title: "New Vision Sports",
     slug: "new-vision-sports",
-    imgUrl: "/assets/nvs-preview.webp",
+    imgUrl: "/assets/nvs/nvs-1.webp",
     images: [
-      "/assets/nvs-preview.webp",
+      "/assets/nvs/nvs-1.webp",
       "/assets/nvs/nvs-2.webp",
       "/assets/nvs/nvs-3.webp",
       "/assets/nvs/nvs-4.webp",
@@ -17,9 +17,9 @@ export const portfolioData = [
   {
     title: "Hola Atelier Learning",
     slug: "hola-atelier",
-    imgUrl: "/assets/atelier-preview.webp",
+    imgUrl: "/assets/atelier/atelier-1.webp",
     images: [
-      "/assets/atelier-preview.webp",
+      "/assets/atelier/atelier-1.webp",
       "/assets/atelier/atelier-2.webp",
       "/assets/atelier/atelier-3.webp",
       "/assets/atelier/atelier-4.webp",
@@ -32,9 +32,9 @@ export const portfolioData = [
   {
     title: "Moodflix",
     slug: "moodflix",
-    imgUrl: "/assets/moodflix-portfolio-1.webp",
+    imgUrl: "/assets/moodflix/moodflix-1.webp",
     images: [
-      "/assets/moodflix-portfolio-1.webp",
+      "/assets/moodflix/moodflix-1.webp",
     ],
     stack: ["Java", "Spring Boot", "React Native", "Expo", "MySQL"],
     link: "https://youtube.com/shorts/73CfD0-5Ilw?feature=share",
@@ -58,9 +58,9 @@ export const portfolioData = [
   {
     title: "Boston String Academy",
     slug: "boston-string-academy",
-    imgUrl: "/assets/bsa-preview.webp",
+    imgUrl: "/assets/bsa/bsa-1.webp",
     images: [
-      "/assets/bsa-preview.webp",
+      "/assets/bsa/bsa-1.webp",
       "/assets/bsa/bsa-2.webp",
       "/assets/bsa/bsa-3.webp",
       "/assets/bsa/bsa-4.webp",
