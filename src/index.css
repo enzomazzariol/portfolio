@@ -2,7 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force text rendering for arrow/symbol chars — prevents emoji glyph on iOS mobile */
+html {
+  font-variant-emoji: text;
+}
+
 @layer base {
+  /* Prevent horizontal scroll without creating a new scroll container.
+     overflow-x: hidden on body (not a wrapper div) doesn't break position: sticky. */
+  body {
+    overflow-x: hidden;
+  }
+
   html {
     font-family: 'General Sans', sans-serif;
   }
@@ -11,4 +22,68 @@
   h2 {
     font-family: 'Melodrama', sans-serif;
   }
+}
+
+/* ── Hero: character entrance (replaces GSAP SplitText — eliminates forced reflow) ── */
+@keyframes heroCharIn {
+  from { opacity: 0; transform: translateY(-1.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroFadeDown {
+  from { opacity: 0; transform: translateY(-0.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(0.625rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-char {
+  display: inline-block;
+  opacity: 0;
+  animation: heroCharIn 0.5s ease-out both;
+}
+
+.hero-fade-down {
+  opacity: 0;
+  animation: heroFadeDown 0.35s ease-out both;
+}
+
+.hero-fade-up {
+  opacity: 0;
+  animation: heroFadeUp 0.7s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-char,
+  .hero-fade-down,
+  .hero-fade-up {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ── About: marquee (CSS replaces GSAP infinite tween — runs on compositor thread) ── */
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marqueeScroll 25s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation-play-state: paused; }
+}
+
+/* ── About: orbital SVG dots (CSS replaces 3 GSAP infinite tweens) ── */
+@keyframes spinCW  { to { transform: rotate(360deg); } }
+@keyframes spinCCW { to { transform: rotate(-360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-dot { animation: none !important; }
 }

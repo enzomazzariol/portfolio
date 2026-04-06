@@ -5,9 +5,112 @@ import { useGSAP } from '@gsap/react'
 gsap.registerPlugin(useGSAP)
 import { portfolioData } from '../../public/data/portfolio.js'
 
+/* eslint-disable react/prop-types */
+function MobileProjectCard({ project, index }) {
+  const cardRef = useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = cardRef.current
+    if (!el) return
+    // rAF ensures the browser paints opacity:0 before the observer starts.
+    // Without it, the IO fires in the same tick as the initial render and
+    // React batches the state update — the CSS transition never plays.
+    let io
+    const raf = requestAnimationFrame(() => {
+      io = new IntersectionObserver(
+        ([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect() } },
+        { threshold: 0.1 }
+      )
+      io.observe(el)
+    })
+    return () => { cancelAnimationFrame(raf); io?.disconnect() }
+  }, [])
+
+  const image = project.images && project.images.length > 0 ? project.images[0] : project.imgUrl
+
+  return (
+    <div
+      ref={cardRef}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(20px)',
+        transition: 'opacity 0.5s ease, transform 0.5s ease',
+      }}
+      className="border-b border-white/5 px-5 pt-6 pb-8"
+    >
+      {/* Project number */}
+      <p
+        className="font-mono text-white/10 leading-none mb-1 select-none"
+        style={{ fontSize: 'clamp(4rem, 20vw, 6rem)' }}
+      >
+        {String(index + 1).padStart(2, '0')}
+      </p>
+
+      {/* Title */}
+      <h2 className="font-display text-3xl font-bold text-white leading-tight mb-2">
+        {project.title}
+      </h2>
+
+      {/* Description */}
+      {project.description && (
+        <p className="text-sm font-mono text-white/45 leading-relaxed mb-4">
+          {project.description}
+        </p>
+      )}
+
+      {/* Image */}
+      <div className="w-full aspect-video overflow-hidden rounded-sm mb-4">
+        <img
+          src={image}
+          alt={`Proyecto ${project.title}`}
+          width={1280}
+          height={720}
+          className="w-full h-full object-cover"
+          loading={index === 0 ? 'eager' : 'lazy'}
+        />
+      </div>
+
+      {/* Stack tags */}
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {project.stack.map((tech) => (
+          <span
+            key={tech}
+            className="text-[10px] font-mono text-white/50 border border-white/10 px-2 py-0.5 rounded-full"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      {/* Links */}
+      <div className="flex flex-col gap-2">
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm font-mono text-white/60 hover:text-white transition-colors"
+        >
+          Ver proyecto ↗
+        </a>
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-mono text-white/40 hover:text-white/70 transition-colors"
+          >
+            GitHub ↗
+          </a>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function LeftPanel({ project, panelRef }) {
   return (
-    <div ref={panelRef} className="flex flex-col justify-center h-full px-10 lg:px-16">
+    <div ref={panelRef} className="flex flex-col justify-center flex-1 min-h-0 px-10 lg:px-16 overflow-y-auto">
       {/* Index */}
       <p className="text-white/20 text-xs font-mono tracking-widest uppercase mb-8">
         Selected work
@@ -67,6 +170,97 @@ function LeftPanel({ project, panelRef }) {
   )
 }
 
+function Img({ src, alt, eager }) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="w-full h-auto block"
+      loading={eager ? 'eager' : 'lazy'}
+    />
+  )
+}
+
+function ImageGrid({ images, title, projectIndex, eager }) {
+  const count = images.length
+  const alt = (i) => `${title} — captura ${i + 1}`
+  const flip = projectIndex % 2 === 1
+
+  // Layout configs per image index: [widthClass, marginClass]
+  const layouts5 = flip
+    ? [
+        ['w-full', ''],
+        ['w-[72%]', 'ml-auto'],
+        ['w-[60%]', 'mr-auto'],
+        ['w-[78%]', 'ml-auto'],
+        ['w-[55%]', 'ml-[10%]'],
+      ]
+    : [
+        ['w-full', ''],
+        ['w-[72%]', 'mr-auto'],
+        ['w-[60%]', 'ml-auto'],
+        ['w-[78%]', 'mr-auto'],
+        ['w-[55%]', 'mr-[10%]'],
+      ]
+
+  const layouts4 = flip
+    ? [
+        ['w-full', ''],
+        ['w-[75%]', 'ml-auto'],
+        ['w-[62%]', 'mr-auto'],
+        ['w-[80%]', 'ml-auto'],
+      ]
+    : [
+        ['w-full', ''],
+        ['w-[75%]', 'mr-auto'],
+        ['w-[62%]', 'ml-auto'],
+        ['w-[80%]', 'mr-auto'],
+      ]
+
+  const layouts = count >= 5 ? layouts5 : count >= 4 ? layouts4 : null
+
+  if (count === 1) {
+    return (
+      <div className="py-8 px-8">
+        <Img src={images[0]} alt={title} eager={eager} />
+      </div>
+    )
+  }
+
+  if (layouts) {
+    return (
+      <div className="py-6 flex flex-col gap-3">
+        {images.map((src, i) => {
+          const [width, margin] = layouts[i] || ['w-full', '']
+          return (
+            <div key={i} className={`${width} ${margin}`}>
+              <Img src={src} alt={alt(i)} eager={eager && i === 0} />
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  // 2–3 images
+  const fallback = flip
+    ? [['w-full', ''], ['w-[68%]', 'ml-auto'], ['w-[75%]', 'mr-auto']]
+    : [['w-full', ''], ['w-[68%]', 'mr-auto'], ['w-[75%]', 'ml-auto']]
+
+  return (
+    <div className="py-8 flex flex-col gap-3">
+      {images.map((src, i) => {
+        const [width, margin] = fallback[i] || ['w-full', '']
+        return (
+          <div key={i} className={`${width} ${margin}`}>
+            <Img src={src} alt={alt(i)} eager={eager && i === 0} />
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 function ImageSection({ project, onIntersect, index }) {
   const sectionRef = useRef(null)
 
@@ -75,7 +269,7 @@ function ImageSection({ project, onIntersect, index }) {
       ([entry]) => {
         if (entry.isIntersecting) onIntersect(index)
       },
-      { threshold: 0.3 }
+      { threshold: 0.15 }
     )
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
@@ -84,22 +278,13 @@ function ImageSection({ project, onIntersect, index }) {
   const images = project.images && project.images.length > 0 ? project.images : [project.imgUrl]
 
   return (
-    <div ref={sectionRef} className="relative w-full">
-      <div className="flex flex-col gap-3">
-        {images.map((src, imgIndex) => (
-          <div key={imgIndex} className="relative w-full aspect-video overflow-hidden">
-            <img
-              src={src}
-              alt={`Proyecto ${project.title}${images.length > 1 ? ` — imagen ${imgIndex + 1}` : ''}`}
-              width={1280}
-              height={720}
-              className="w-full h-full object-cover"
-              loading={index === 0 && imgIndex === 0 ? 'eager' : 'lazy'}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
-          </div>
-        ))}
-      </div>
+    <div ref={sectionRef} className="relative w-full border-b border-white/5">
+      <ImageGrid
+        images={images}
+        title={project.title}
+        projectIndex={index}
+        eager={index === 0}
+      />
 
       {/* Mobile info overlay (bottom of last image) */}
       <div className="md:hidden absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
@@ -178,14 +363,13 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      {/* Mobile: vertical stack */}
+      {/* Mobile: card list */}
       <div className="md:hidden">
         {portfolioData.map((project, i) => (
-          <ImageSection
+          <MobileProjectCard
             key={project.slug}
             project={project}
             index={i}
-            onIntersect={handleIntersect}
           />
         ))}
       </div>

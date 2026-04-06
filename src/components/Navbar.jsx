@@ -66,11 +66,12 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger — z-50 so it stays above the overlay */}
         <button
-          className="md:hidden text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          className="md:hidden relative z-50 text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
         >
           {menuOpen ? (
             <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -84,14 +85,71 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-[#080808]/95 backdrop-blur-sm border-b border-white/5 px-6 pb-4 flex flex-col font-mono text-sm">
-          <Link to="/about" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">About</Link>
-          <Link to="/proyectos" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Projects</Link>
-          <Link to="/contacto" className="text-white/70 hover:text-white transition-colors min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Contact</Link>
-        </div>
-      )}
+      {/* Mobile full-screen overlay */}
+      <div
+        className={`md:hidden fixed inset-0 z-40 bg-[#080808]/95 backdrop-blur-md flex flex-col justify-end px-8 pb-16 transition-opacity duration-300 ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        {/* Nav links */}
+        <nav className="flex flex-col gap-2 mb-12">
+          {[
+            { label: 'About', to: '/about' },
+            { label: 'Projects', to: '/proyectos' },
+            { label: 'Contact', to: '/contacto' },
+          ].map(({ label, to }, index) => (
+            <Link
+              key={to}
+              to={to}
+              className={`font-display font-bold text-6xl leading-none tracking-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
+                location.pathname === to ? 'text-white' : 'text-white/30 hover:text-white'
+              }`}
+              style={{
+                transitionProperty: 'transform, opacity, color',
+                transitionDuration: '0.35s',
+                transitionTimingFunction: 'ease',
+                transitionDelay: `${index * 60}ms`,
+                transform: menuOpen ? 'translateY(0)' : 'translateY(1.25rem)',
+                opacity: menuOpen ? 1 : 0,
+              }}
+            >
+              {label}
+            </Link>
+          ))}
+          <a
+            href="/assets/EnzoCV-summer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-display font-bold text-6xl leading-none tracking-tight text-white/30 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            style={{
+              transitionProperty: 'transform, opacity, color',
+              transitionDuration: '0.35s',
+              transitionTimingFunction: 'ease',
+              transitionDelay: '180ms',
+              transform: menuOpen ? 'translateY(0)' : 'translateY(1.25rem)',
+              opacity: menuOpen ? 1 : 0,
+            }}
+          >
+            Resume ↗
+          </a>
+        </nav>
+
+        {/* Metadata footer */}
+        <p
+          className="font-mono text-xs text-white/20 tracking-widest uppercase"
+          style={{
+            transitionProperty: 'transform, opacity',
+            transitionDuration: '0.35s',
+            transitionTimingFunction: 'ease',
+            transitionDelay: '260ms',
+            transform: menuOpen ? 'translateY(0)' : 'translateY(0.75rem)',
+            opacity: menuOpen ? 1 : 0,
+          }}
+        >
+          Enzo Mazzariol · 2025
+        </p>
+      </div>
     </nav>
   )
 }

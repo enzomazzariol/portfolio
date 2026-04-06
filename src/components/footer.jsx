@@ -62,7 +62,7 @@ export default function Footer() {
       {/* Big outline name */}
       <div className="overflow-hidden select-none">
         <p
-          className="text-[clamp(4rem,18vw,14rem)] font-bold leading-none tracking-tighter px-4 md:px-8 pb-2"
+          className="text-[clamp(2.25rem,11.5vw,14rem)] font-bold leading-none tracking-tighter px-4 md:px-8 pb-2"
           style={{
             color: 'transparent',
             WebkitTextStroke: '1px rgba(255,255,255,0.18)',

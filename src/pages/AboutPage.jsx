@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import { SiReact, SiExpo, SiOpenjdk, SiTailwindcss } from 'react-icons/si'
+import { SiReact, SiGooglesearchconsole, SiOpenjdk, SiTailwindcss } from 'react-icons/si'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -17,18 +17,14 @@ const images = [
 
 const services = [
   { label: 'Desarrollo Web',  Icon: SiReact,       color: '#61DAFB', side: 'right' },
-  { label: 'Apps Móviles',    Icon: SiExpo,        color: '#888',    side: 'left' },
+  { label: 'Auditoría SEO',    Icon: SiGooglesearchconsole, color: '#4285F4', side: 'left' },
   { label: 'Backend & APIs',  Icon: SiOpenjdk,     color: '#f89820', side: 'right' },
   { label: 'UI + Frontend',   Icon: SiTailwindcss, color: '#06B6D4', side: 'left' },
 ]
 
 export default function AboutPage() {
   const pageRef = useRef(null)
-  const stripTrackRef = useRef(null)
   const circleRef = useRef(null)
-  const dot1Ref = useRef(null)
-  const dot2Ref = useRef(null)
-  const dot3Ref = useRef(null)
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -40,27 +36,16 @@ export default function AboutPage() {
       { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.12 }
     )
 
-    // 2. Infinite marquee
-    if (stripTrackRef.current) {
-      gsap.to(stripTrackRef.current, {
-        xPercent: -50,
-        ease: 'none',
-        duration: 25,
-        repeat: -1,
-        force3D: true,
-      })
-    }
+    // 2. Marquee → now handled by CSS (.marquee-track) — no GSAP needed
 
-    // 3. SVG orbital animation
+    // 3. SVG circle draw-in (one-shot, not infinite)
     if (circleRef.current) {
       gsap.fromTo(circleRef.current,
         { strokeDashoffset: 754 },
         { strokeDashoffset: 0, duration: 2.5, ease: 'power2.out', delay: 0.3 }
       )
     }
-    if (dot1Ref.current) gsap.to(dot1Ref.current, { rotation: 360, duration: 8, repeat: -1, ease: 'none', transformOrigin: '150px 150px', force3D: true })
-    if (dot2Ref.current) gsap.to(dot2Ref.current, { rotation: 360, duration: 14, repeat: -1, ease: 'none', transformOrigin: '150px 150px', force3D: true })
-    if (dot3Ref.current) gsap.to(dot3Ref.current, { rotation: -360, duration: 6, repeat: -1, ease: 'none', transformOrigin: '150px 150px', force3D: true })
+    // Orbital dots → now handled by CSS (.orbit-dot) — no GSAP needed
 
     // 4. Bio paragraphs
     gsap.fromTo('.bio-para',
@@ -123,7 +108,7 @@ export default function AboutPage() {
         <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #080808, transparent)' }} />
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #080808, transparent)' }} />
 
-        <div ref={stripTrackRef} className="flex gap-3 w-max">
+        <div className="marquee-track flex gap-3 w-max">
           {allImages.map((src, i) => (
             <div key={i} className="h-[200px] w-[300px] flex-shrink-0 overflow-hidden">
               <img
@@ -189,10 +174,13 @@ export default function AboutPage() {
               <circle cx="150" cy="150" r="30"
                 stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
               <circle cx="150" cy="150" r="3" fill="rgba(255,255,255,0.5)" />
-              {/* Orbiting dots */}
-              <circle ref={dot1Ref} cx="270" cy="150" r="5" fill="rgba(255,255,255,0.7)" />
-              <circle ref={dot2Ref} cx="90" cy="254" r="3.5" fill="rgba(255,255,255,0.35)" />
-              <circle ref={dot3Ref} cx="220" cy="150" r="4" fill="rgba(255,255,255,0.5)" />
+              {/* Orbiting dots — CSS animated, runs on compositor thread */}
+              <circle className="orbit-dot" cx="270" cy="150" r="5" fill="rgba(255,255,255,0.7)"
+                style={{ transformBox: 'view-box', transformOrigin: '50% 50%', animation: 'spinCW 8s linear infinite' }} />
+              <circle className="orbit-dot" cx="90" cy="254" r="3.5" fill="rgba(255,255,255,0.35)"
+                style={{ transformBox: 'view-box', transformOrigin: '50% 50%', animation: 'spinCW 14s linear infinite' }} />
+              <circle className="orbit-dot" cx="220" cy="150" r="4" fill="rgba(255,255,255,0.5)"
+                style={{ transformBox: 'view-box', transformOrigin: '50% 50%', animation: 'spinCCW 6s linear infinite' }} />
             </svg>
           </div>
 
@@ -221,7 +209,7 @@ export default function AboutPage() {
         <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25 mb-10">Servicios</p>
 
         <div className="flex flex-col">
-          {services.map(({ label, Icon, color, side }, i) => (
+          {services.map(({ label, Icon, color, side }) => (
             <div
               key={label}
               className={`flex items-center gap-6 py-5 border-b border-white/5 ${
