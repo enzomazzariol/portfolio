@@ -72,24 +72,31 @@ function ImageSection({ project, onIntersect, index }) {
       ([entry]) => {
         if (entry.isIntersecting) onIntersect(index)
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     )
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [index, onIntersect])
 
-  return (
-    <div ref={sectionRef} className="relative h-screen w-full overflow-hidden">
-      <img
-        src={project.imgUrl}
-        alt={`Proyecto ${project.title}`}
-        className="w-full h-full object-cover"
-        loading={index === 0 ? 'eager' : 'lazy'}
-      />
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+  const images = project.images && project.images.length > 0 ? project.images : [project.imgUrl]
 
-      {/* Mobile info overlay (bottom) */}
+  return (
+    <div ref={sectionRef} className="relative w-full">
+      <div className="flex flex-col gap-3">
+        {images.map((src, imgIndex) => (
+          <div key={imgIndex} className="relative w-full aspect-video overflow-hidden">
+            <img
+              src={src}
+              alt={`Proyecto ${project.title}${images.length > 1 ? ` — imagen ${imgIndex + 1}` : ''}`}
+              className="w-full h-full object-cover"
+              loading={index === 0 && imgIndex === 0 ? 'eager' : 'lazy'}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+          </div>
+        ))}
+      </div>
+
+      {/* Mobile info overlay (bottom of last image) */}
       <div className="md:hidden absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
         <h3 className="text-white text-xl font-bold mb-2">{project.title}</h3>
         <p className="text-white/50 text-xs font-mono mb-3">{project.stack.join(' · ')}</p>
