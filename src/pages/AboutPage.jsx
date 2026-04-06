@@ -11,7 +11,7 @@ const images = [
   '/assets/nvs/nvs-1.webp',
   '/assets/atelier/atelier-1.webp',
   '/assets/moodflix/moodflix-1.webp',
-  '/assets/preview-ecommerce-product-page.webp',
+  '/assets/abode/abode-1.webp',
   '/assets/bsa/bsa-1.webp',
 ]
 
