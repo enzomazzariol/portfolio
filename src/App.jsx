@@ -9,14 +9,16 @@ const AboutPage    = lazy(() => import('./pages/AboutPage.jsx'))
 
 function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/"          element={<Suspense><HomePage /></Suspense>} />
-        <Route path="/about"     element={<Suspense><AboutPage /></Suspense>} />
-        <Route path="/proyectos" element={<Suspense><ProjectsPage /></Suspense>} />
-        <Route path="/contacto"  element={<Suspense><ContactPage /></Suspense>} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<div className="min-h-screen" />}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/"          element={<HomePage />} />
+          <Route path="/about"     element={<AboutPage />} />
+          <Route path="/proyectos" element={<ProjectsPage />} />
+          <Route path="/contacto"  element={<ContactPage />} />
+        </Route>
+      </Routes>
+    </Suspense>
   )
 }
 
