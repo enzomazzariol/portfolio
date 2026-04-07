@@ -7,3 +7,23 @@ status = 301
 from = "/*"
 to = "/index.html"
 status = 200
+
+# Cache assets estáticos 1 año (Vite añade hash al nombre de archivo)
+[[headers]]
+for = "/assets/*"
+[headers.values]
+  "Cache-Control" = "public, max-age=31536000, immutable"
+
+# HTML sin cache para ver cambios de inmediato
+[[headers]]
+for = "/*.html"
+[headers.values]
+  "Cache-Control" = "public, max-age=0, must-revalidate"
+
+# Seguridad básica en todas las rutas
+[[headers]]
+for = "/*"
+[headers.values]
+  "X-Content-Type-Options" = "nosniff"
+  "X-Frame-Options" = "DENY"
+  "Referrer-Policy" = "strict-origin-when-cross-origin"
