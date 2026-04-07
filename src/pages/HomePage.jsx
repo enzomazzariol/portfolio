@@ -99,7 +99,7 @@ export default function HomePage() {
               className="hero-fade-down text-white/55 text-xs font-mono tracking-widest uppercase mb-6"
               style={{ animationDelay: '0.55s' }}
             >
-              Full Stack Developer · Barcelona
+              Desarrollador Full Stack · Barcelona
             </p>
 
             <h1

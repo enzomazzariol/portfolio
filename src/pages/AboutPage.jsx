@@ -22,8 +22,8 @@ const images = [
 const timelineEntries = [
   { year: '2023 - 2025',         label: 'DAM — Desarrollo de Aplicaciones Multiplataforma' },
   { year: '2025',         label: 'Prácticas en Regalexia.com' },
-  { year: '2024 - present',         label: 'Software Developer en Guarapo Media' },
-  { year: '2025 - present', label: 'Ingeniería Audiovisual en UPF' },
+  { year: '2024 - actualidad',         label: 'Software Developer en Guarapo Media' },
+  { year: '2025 - actualidad', label: 'Ingeniería Audiovisual en UPF' },
 ]
 
 const services = [
@@ -113,7 +113,7 @@ export default function AboutPage() {
       {/* ── HERO ── */}
       <section className="px-6 md:px-10 pt-16 pb-8 max-w-6xl mx-auto">
         <h1 className="about-hero-anim font-display text-[clamp(4rem,14vw,12rem)] font-bold leading-[0.85] tracking-tighter text-white">
-          About
+          Sobre mí
         </h1>
         <p className="about-hero-anim text-[10px] font-mono tracking-[0.25em] uppercase text-white/30 mt-4">
           Full Stack Developer · Barcelona · 2025

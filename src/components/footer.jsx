@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 md:px-10 pt-16 pb-10 grid grid-cols-2 md:grid-cols-3 gap-10">
         <div>
           <p className="text-white/30 text-xs font-mono tracking-widest uppercase mb-5">
-            Let's connect
+            Conecta
           </p>
           <div className="flex flex-col gap-3 text-sm font-mono text-white/60">
             <a
@@ -37,7 +37,7 @@ export default function Footer() {
 
         <div>
           <p className="text-white/30 text-xs font-mono tracking-widest uppercase mb-5">
-            Details
+            Contacto
           </p>
           <div className="flex flex-col gap-3 text-sm font-mono text-white/60">
             <span className="text-white/40 select-all">mazzariolenzo@gmail.com</span>
@@ -46,14 +46,14 @@ export default function Footer() {
 
         <div>
           <p className="text-white/30 text-xs font-mono tracking-widest uppercase mb-5">
-            Links
+            Navegación
           </p>
           <div className="flex flex-col gap-3 text-sm font-mono text-white/60">
             <Link to="/proyectos" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
-              Projects
+              Proyectos
             </Link>
             <Link to="/contacto" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
-              Contact
+              Contacto
             </Link>
           </div>
         </div>

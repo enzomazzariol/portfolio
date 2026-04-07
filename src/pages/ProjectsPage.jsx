@@ -113,7 +113,7 @@ function LeftPanel({ project, panelRef }) {
     <div ref={panelRef} className="flex flex-col justify-center flex-1 min-h-0 px-10 lg:px-16 overflow-y-auto">
       {/* Index */}
       <p className="text-white/20 text-xs font-mono tracking-widest uppercase mb-8">
-        Selected work
+        Trabajo seleccionado
       </p>
 
       {/* Title */}
@@ -344,7 +344,7 @@ export default function ProjectsPage() {
           {/* Page label */}
           <div ref={headingRef} className="px-10 lg:px-16 pt-12 pb-0">
             <p className="anim text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase">
-              Enzo Mazzariol · Work
+              Enzo Mazzariol · Proyectos
             </p>
           </div>
           <LeftPanel project={portfolioData[activeIndex]} panelRef={panelRef} />

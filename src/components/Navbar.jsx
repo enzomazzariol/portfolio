@@ -41,7 +41,7 @@ export default function Navbar() {
                 location.pathname === '/about' ? 'text-white' : 'text-white/50'
               }`}
             >
-              About
+              Sobre mí
             </Link>
             <Link
               to="/proyectos"
@@ -49,7 +49,7 @@ export default function Navbar() {
                 location.pathname === '/proyectos' ? 'text-white' : 'text-white/50'
               }`}
             >
-              Projects
+              Proyectos
             </Link>
             <Link
               to="/contacto"
@@ -57,7 +57,7 @@ export default function Navbar() {
                 location.pathname === '/contacto' ? 'text-white' : 'text-white/50'
               }`}
             >
-              Contact
+              Contacto
             </Link>
             <a
               href="/assets/EnzoCV-summer.pdf"
@@ -65,7 +65,7 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
-              Resume ↗︎
+              CV ↗︎
             </a>
           </div>
 
@@ -73,7 +73,7 @@ export default function Navbar() {
           <button
             className="md:hidden relative z-50 text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
           >
             {menuOpen ? (
@@ -99,9 +99,9 @@ export default function Navbar() {
         {/* Nav links */}
         <nav className="flex flex-col gap-2 mb-12">
           {[
-            { label: 'About', to: '/about' },
-            { label: 'Projects', to: '/proyectos' },
-            { label: 'Contact', to: '/contacto' },
+            { label: 'Sobre mí', to: '/about' },
+            { label: 'Proyectos', to: '/proyectos' },
+            { label: 'Contacto', to: '/contacto' },
           ].map(({ label, to }, index) => (
             <Link
               key={to}
@@ -135,7 +135,7 @@ export default function Navbar() {
               opacity: menuOpen ? 1 : 0,
             }}
           >
-            Resume ↗︎
+            CV ↗︎
           </a>
         </nav>
 
