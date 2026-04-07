@@ -221,19 +221,33 @@ const Prism = ({
     });
     const mesh = new Mesh(gl, { geometry, program });
 
+    let resizeTimer = null;
     const resize = () => {
-      const w = container.clientWidth || 1;
-      const h = container.clientHeight || 1;
-      renderer.setSize(w, h);
-      iResBuf[0] = gl.drawingBufferWidth;
-      iResBuf[1] = gl.drawingBufferHeight;
-      offsetPxBuf[0] = offX * dpr;
-      offsetPxBuf[1] = offY * dpr;
-      program.uniforms.uPxScale.value = 1 / ((gl.drawingBufferHeight || 1) * 0.1 * SCALE);
+      // Debounce: mobile browsers fire resize on every scroll tick (toolbar show/hide),
+      // causing visible shader flashes. 150ms delay skips those spurious events.
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const w = container.clientWidth || 1;
+        const h = container.clientHeight || 1;
+        renderer.setSize(w, h);
+        iResBuf[0] = gl.drawingBufferWidth;
+        iResBuf[1] = gl.drawingBufferHeight;
+        offsetPxBuf[0] = offX * dpr;
+        offsetPxBuf[1] = offY * dpr;
+        program.uniforms.uPxScale.value = 1 / ((gl.drawingBufferHeight || 1) * 0.1 * SCALE);
+      }, 150);
     };
     const ro = new ResizeObserver(resize);
     ro.observe(container);
-    resize();
+    // Initial resize runs immediately (no debounce needed on mount)
+    const w0 = container.clientWidth || 1;
+    const h0 = container.clientHeight || 1;
+    renderer.setSize(w0, h0);
+    iResBuf[0] = gl.drawingBufferWidth;
+    iResBuf[1] = gl.drawingBufferHeight;
+    offsetPxBuf[0] = offX * dpr;
+    offsetPxBuf[1] = offY * dpr;
+    program.uniforms.uPxScale.value = 1 / ((gl.drawingBufferHeight || 1) * 0.1 * SCALE);
 
     const rotBuf = new Float32Array(9);
     const setMat3FromEuler = (yawY, pitchX, rollZ, out) => {

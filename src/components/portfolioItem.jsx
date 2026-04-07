@@ -23,7 +23,7 @@ export default function PortfolioItem({ project, large }) {
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
           <span className="text-white text-xs font-mono tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white/50 px-4 py-2">
-            View project ↗
+            View project ↗︎
           </span>
         </div>
       </div>

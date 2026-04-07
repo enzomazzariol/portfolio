@@ -149,9 +149,9 @@ export default function HomePage() {
             style={{ animationDelay: '0.99s' }}
           >
             <div className="flex gap-6 text-white/40 text-xs font-mono">
-              <a href="https://github.com/enzomazzariol" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">GitHub ↗</a>
-              <a href="https://www.linkedin.com/in/enzo-mazzariol/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">LinkedIn ↗</a>
-              <a href="mailto:mazzariolenzo@gmail.com" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Email ↗</a>
+              <a href="https://github.com/enzomazzariol" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">GitHub ↗︎</a>
+              <a href="https://www.linkedin.com/in/enzo-mazzariol/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">LinkedIn ↗︎</a>
+              <a href="mailto:mazzariolenzo@gmail.com" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Email ↗︎</a>
             </div>
             <div className="flex items-center gap-2 text-xs text-white/45 font-mono">
               <span className="relative flex h-1.5 w-1.5">

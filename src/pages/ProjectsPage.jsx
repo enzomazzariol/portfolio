@@ -91,7 +91,7 @@ function MobileProjectCard({ project, index }) {
           rel="noopener noreferrer"
           className="text-sm font-mono text-white/60 hover:text-white transition-colors"
         >
-          Ver proyecto ↗
+          Ver proyecto ↗︎
         </a>
         {project.github && (
           <a
@@ -100,7 +100,7 @@ function MobileProjectCard({ project, index }) {
             rel="noopener noreferrer"
             className="text-sm font-mono text-white/40 hover:text-white/70 transition-colors"
           >
-            GitHub ↗
+            GitHub ↗︎
           </a>
         )}
       </div>
@@ -147,7 +147,7 @@ function LeftPanel({ project, panelRef }) {
           className="flex items-center gap-2 text-sm font-mono text-white/70 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
         >
           <span className="w-4 h-px bg-white/30 group-hover:w-6 group-hover:bg-white transition-all duration-300" />
-          Ver proyecto ↗
+          Ver proyecto ↗︎
         </a>
         {project.github && (
           <a
@@ -157,7 +157,7 @@ function LeftPanel({ project, panelRef }) {
             className="flex items-center gap-2 text-sm font-mono text-white/40 hover:text-white/70 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
           >
             <span className="w-4 h-px bg-white/20 group-hover:w-6 group-hover:bg-white/40 transition-all duration-300" />
-            GitHub ↗
+            GitHub ↗︎
           </a>
         )}
       </div>
@@ -296,7 +296,7 @@ function ImageSection({ project, onIntersect, index }) {
           rel="noopener noreferrer"
           className="text-white/70 text-xs font-mono underline"
         >
-          Ver proyecto ↗
+          Ver proyecto ↗︎
         </a>
       </div>
     </div>

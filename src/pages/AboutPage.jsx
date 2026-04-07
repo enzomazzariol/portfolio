@@ -16,10 +16,10 @@ const images = [
 ]
 
 const timelineEntries = [
-  { year: '2025',         label: 'DAM — Desarrollo de Aplicaciones Multiplataforma' },
+  { year: '2023 - 2025',         label: 'DAM — Desarrollo de Aplicaciones Multiplataforma' },
   { year: '2025',         label: 'Prácticas en Regalexia.com' },
-  { year: 'Desde 2024',         label: 'Colaboración con Guarapo Media — NVS · Hola Atelier' },
-  { year: '2025–present', label: 'Ingeniería Audiovisual en UPF' },
+  { year: '2024 - present',         label: 'Software Developer en Guarapo Media' },
+  { year: '2025 - present', label: 'Ingeniería Audiovisual en UPF' },
 ]
 
 const services = [

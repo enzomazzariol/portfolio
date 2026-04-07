@@ -30,8 +30,8 @@ export default function SelectedWorks({ containerRef }) {
               ))}
             </div>
             <span className="text-white/30 group-hover:text-white transition-colors duration-200 text-xl font-mono shrink-0 ml-2">
-              ↗
-            </span>
+              ↗︎
+</span>
           </a>
         ))}
       </div>

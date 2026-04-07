@@ -16,7 +16,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
-              LinkedIn ↗
+              LinkedIn ↗︎
             </a>
             <a
               href="https://github.com/enzomazzariol"
@@ -24,13 +24,13 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
-              GitHub ↗
+              GitHub ↗︎
             </a>
             <a
               href="mailto:mazzariolenzo@gmail.com"
               className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
-              Email ↗
+              Email ↗︎
             </a>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function Footer() {
       {/* Big outline name */}
       <div className="overflow-hidden select-none">
         <p
-          className="text-[clamp(2.25rem,11.5vw,14rem)] font-bold leading-none tracking-tighter px-4 md:px-8 pb-2"
+          className="text-[clamp(3.5rem,15vw,18rem)] font-bold leading-none tracking-tighter px-4 md:px-8 pb-2"
           style={{
             color: 'transparent',
             WebkitTextStroke: '1px rgba(255,255,255,0.18)',

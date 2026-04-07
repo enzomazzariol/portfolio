@@ -105,7 +105,7 @@ export default function ContactPage() {
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col gap-2 text-sm font-mono text-white/30">
           <p>Or reach me directly:</p>
           <a href="mailto:mazzariolenzo@gmail.com" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
-            mazzariolenzo@gmail.com ↗
+            mazzariolenzo@gmail.com ↗︎
           </a>
         </div>
       </div>

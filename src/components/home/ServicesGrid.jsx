@@ -28,7 +28,7 @@ export default function ServicesGrid() {
           >
             <div className="flex items-start justify-between">
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">{n}</span>
-              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗︎</span>
             </div>
             <div>
               {big && (
