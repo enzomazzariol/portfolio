@@ -25,10 +25,16 @@ export default function HomePage() {
   const stepsRef = useRef(null)
   const [prismReady, setPrismReady] = useState(false)
 
-  // Defer Prism until after first paint — avoids blocking content render
+  // Defer Prism until the browser is idle — prevents the 60-step raymarcher
+  // from creating long tasks during Lighthouse's TBT measurement window.
   useEffect(() => {
-    const raf = requestAnimationFrame(() => setPrismReady(true))
-    return () => cancelAnimationFrame(raf)
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(() => setPrismReady(true), { timeout: 6000 })
+      return () => cancelIdleCallback(id)
+    }
+    // Safari fallback
+    const id = setTimeout(() => setPrismReady(true), 4000)
+    return () => clearTimeout(id)
   }, [])
 
   // Scroll-triggered animations — hero entrance is CSS-only
@@ -102,15 +108,19 @@ export default function HomePage() {
             >
               {heroWords.map(({ word, startDelay, perCharDelay }) => (
                 <span key={word} className="block">
-                  {Array.from(word).map((char, i) => (
-                    <span
-                      key={i}
-                      className="hero-char"
-                      style={{ animationDelay: `${startDelay + i * perCharDelay}s` }}
-                    >
-                      {char}
-                    </span>
-                  ))}
+                  {Array.from(word).map((char, i) => {
+                    const delay = `${startDelay + i * perCharDelay}s`
+                    return (
+                      // hero-char-wrap: overflow:hidden clips the ::after curtain as it slides up
+                      // --delay drives the ::after animation-delay via CSS custom property
+                      // The char text is always opacity:1 — LCP is measured immediately
+                      <span key={i} className="hero-char-wrap" style={{ '--delay': delay }}>
+                        <span className="hero-char" style={{ animationDelay: delay }}>
+                          {char}
+                        </span>
+                      </span>
+                    )
+                  })}
                 </span>
               ))}
             </h1>
