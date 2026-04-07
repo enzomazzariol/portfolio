@@ -15,6 +15,13 @@ const images = [
   '/assets/bsa/bsa-1.webp',
 ]
 
+const timelineEntries = [
+  { year: '2025',         label: 'DAM — Desarrollo de Aplicaciones Multiplataforma' },
+  { year: '2025',         label: 'Prácticas en Regalexia.com' },
+  { year: 'Desde 2024',         label: 'Colaboración con Guarapo Media — NVS · Hola Atelier' },
+  { year: '2025–present', label: 'Ingeniería Audiovisual en UPF' },
+]
+
 const services = [
   { label: 'Desarrollo Web',  Icon: SiReact,       color: '#61DAFB', side: 'right' },
   { label: 'Auditoría SEO',    Icon: SiGooglesearchconsole, color: '#4285F4', side: 'left' },
@@ -61,7 +68,14 @@ export default function AboutPage() {
         scrollTrigger: { trigger: '.stats-row', start: 'top 80%', toggleActions: 'play none none none' } }
     )
 
-    // 6. Service rows
+    // 6. Timeline entries
+    gsap.fromTo('.timeline-entry',
+      { autoAlpha: 0, y: 30 },
+      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.1,
+        scrollTrigger: { trigger: '.timeline-section', start: 'top 78%', toggleActions: 'play none none none' } }
+    )
+
+    // 7. Service rows
     gsap.utils.toArray('.service-text').forEach((el, i) => {
       const fromLeft = i % 2 === 0
       gsap.fromTo(el,
@@ -201,6 +215,26 @@ export default function AboutPage() {
               interfaces que funcionen bien y se vean todavía mejor.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* ── TIMELINE ── */}
+      <section className="timeline-section px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
+        <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25 mb-10">Trayectoria</p>
+        <div className="flex flex-col">
+          {timelineEntries.map(({ year, label }) => (
+            <div
+              key={year + label}
+              className="timeline-entry flex items-start gap-8 py-5 border-b border-white/5"
+            >
+              <span className="text-[10px] font-mono tracking-[0.15em] text-white/25 w-28 shrink-0 pt-0.5">
+                {year}
+              </span>
+              <p className="text-sm font-mono text-white/60 leading-relaxed">
+                {label}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 

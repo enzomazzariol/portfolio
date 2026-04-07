@@ -12,7 +12,7 @@ export const portfolioData = [
     ],
     stack: ["React", "Vite", "TailwindCSS", "JavaScript"],
     link: "https://playwithnewvision.com/",
-    description: "Desarrollo completo del sitio web para una academia de deportes. Single-page React con secciones de entrenamiento, galería y diseño responsive mobile-first.",
+    description: "La academia necesitaba una presencia online que transmitiera energía y profesionalidad. Desarrollé el sitio completo como SPA con React y Vite, incluyendo secciones de entrenamiento, galería de equipos y formulario de contacto. La maquetación usa TailwindCSS con enfoque mobile-first y animaciones de scroll. El resultado es una web rápida y accesible que refleja la identidad de la academia.",
   },
   {
     title: "Hola Atelier Learning",
@@ -27,7 +27,7 @@ export const portfolioData = [
     ],
     stack: ["WordPress", "Elementor", "CSS"],
     link: "https://holatelierlearning.com/home/",
-    description: "Plataforma educativa desarrollada en WordPress con Elementor. Landing pages de cursos, diseño personalizado y sistema de inscripciones integrado.",
+    description: "La plataforma necesitaba presentar cursos de diseño de forma clara y gestionar inscripciones directamente desde la web. Desarrollé el sitio en WordPress con Elementor, creando landing pages personalizadas para cada curso y configurando el sistema de inscripciones. Se aplicó CSS adicional para ajustar el diseño al brand. Proyecto realizado en colaboración con Guarapo Media.",
   },
   {
     title: "Moodflix",
@@ -39,7 +39,7 @@ export const portfolioData = [
     stack: ["Java", "Spring Boot", "React Native", "Expo", "MySQL"],
     link: "https://youtube.com/shorts/73CfD0-5Ilw?feature=share",
     github: "https://github.com/enzomazzariol/moodflix",
-    description: "App móvil con React Native/Expo y backend Java + Spring Boot. Recomienda películas según el estado de ánimo del usuario con MySQL como base de datos.",
+    description: "El reto era recomendar películas de forma personalizada sin depender solo de géneros o ratings. Construí la app móvil con React Native y Expo en el cliente, y un backend REST con Java y Spring Boot conectado a MySQL. El motor de recomendación cruza el estado de ánimo del usuario con metadatos de una API de películas. Proyecto final de DAM desarrollado en equipo.",
   },
   {
     title: "Abode Pets",
@@ -53,7 +53,7 @@ export const portfolioData = [
     ],
     stack: ["Shopify", "Liquid", "CSS"],
     link: "https://abodepets.com/",
-    description: "E-commerce de productos para mascotas implementado en Shopify. Diseño personalizado y funcionalidad de carrito de compras.",
+    description: "La tienda necesitaba una experiencia de compra cuidada y coherente con la identidad visual de la marca. Implementé el e-commerce en Shopify con personalización completa en Liquid y CSS: paleta, tipografía, layout de productos y carrito. El proyecto incluyó configuración de pasarela de pago, envíos y metafields de producto. Resultado: tienda operativa y lista para vender desde el primer día.",
   },
   {
     title: "Boston String Academy",
@@ -67,6 +67,6 @@ export const portfolioData = [
     ],
     stack: ["HTML", "CSS", "WordPress"],
     link: "https://bostonstringacademy.org/",
-    description: "Sitio web para academia de música de Boston. WordPress con tema personalizado, sistema de clases online y diseño elegante orientado a la comunidad musical.",
+    description: "La academia necesitaba renovar su presencia online y comunicar mejor su oferta de clases de cuerda. Construí el sitio en WordPress con tema personalizado en HTML y CSS, organizando las secciones de clases, profesores y eventos. Se integró un sistema de registro para clases online y se optimizó el rendimiento general. El diseño transmite la seriedad y calidez de la institución.",
   },
 ];
