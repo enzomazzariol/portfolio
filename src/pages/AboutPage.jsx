@@ -10,8 +10,12 @@ gsap.registerPlugin(ScrollTrigger, useGSAP)
 const images = [
   '/assets/nvs/nvs-1.webp',
   '/assets/atelier/atelier-1.webp',
+  '/assets/me.jpeg',
   '/assets/moodflix/moodflix-1.webp',
+  '/assets/nvs/nvs-3.webp',
+  '/assets/me-2.jpeg',
   '/assets/abode/abode-1.webp',
+  '/assets/atelier/atelier-2.webp',
   '/assets/bsa/bsa-1.webp',
 ]
 
