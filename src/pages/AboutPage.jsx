@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { SiReact, SiGooglesearchconsole, SiOpenjdk, SiTailwindcss } from 'react-icons/si'
+import TerminalTyper from '../components/TerminalTyper'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -32,10 +33,8 @@ const services = [
   { label: 'Backend & APIs',  Icon: SiOpenjdk,     color: '#f89820', side: 'right' },
   { label: 'UI + Frontend',   Icon: SiTailwindcss, color: '#06B6D4', side: 'left' },
 ]
-
 export default function AboutPage() {
   const pageRef = useRef(null)
-  const circleRef = useRef(null)
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -49,16 +48,7 @@ export default function AboutPage() {
 
     // 2. Marquee → now handled by CSS (.marquee-track) — no GSAP needed
 
-    // 3. SVG circle draw-in (one-shot, not infinite)
-    if (circleRef.current) {
-      gsap.fromTo(circleRef.current,
-        { strokeDashoffset: 754 },
-        { strokeDashoffset: 0, duration: 2.5, ease: 'power2.out', delay: 0.3 }
-      )
-    }
-    // Orbital dots → now handled by CSS (.orbit-dot) — no GSAP needed
-
-    // 4. Bio paragraphs
+    // 3. Bio paragraphs
     gsap.fromTo('.bio-para',
       { autoAlpha: 0, y: 24 },
       { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.15,
@@ -177,30 +167,12 @@ export default function AboutPage() {
         ))}
       </section>
 
-      {/* ── BIO + SVG ── */}
+      {/* ── BIO + SCRAMBLE ── */}
       <section className="bio-section px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
         <div className="flex flex-col md:flex-row gap-16 items-start">
 
-          {/* SVG orbital */}
-          <div className="flex-shrink-0 flex justify-center md:justify-start w-full md:w-auto">
-            <svg width="260" height="260" viewBox="0 0 300 300" fill="none" aria-hidden="true">
-              <circle cx="150" cy="150" r="120" ref={circleRef}
-                stroke="rgba(255,255,255,0.12)" strokeWidth="1"
-                strokeDasharray="754" strokeDashoffset="754" />
-              <circle cx="150" cy="150" r="70"
-                stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
-              <circle cx="150" cy="150" r="30"
-                stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-              <circle cx="150" cy="150" r="3" fill="rgba(255,255,255,0.5)" />
-              {/* Orbiting dots — CSS animated, runs on compositor thread */}
-              <circle className="orbit-dot" cx="270" cy="150" r="5" fill="rgba(255,255,255,0.7)"
-                style={{ transformBox: 'view-box', transformOrigin: '50% 50%', animation: 'spinCW 8s linear infinite' }} />
-              <circle className="orbit-dot" cx="90" cy="254" r="3.5" fill="rgba(255,255,255,0.35)"
-                style={{ transformBox: 'view-box', transformOrigin: '50% 50%', animation: 'spinCW 14s linear infinite' }} />
-              <circle className="orbit-dot" cx="220" cy="150" r="4" fill="rgba(255,255,255,0.5)"
-                style={{ transformBox: 'view-box', transformOrigin: '50% 50%', animation: 'spinCCW 6s linear infinite' }} />
-            </svg>
-          </div>
+          {/* Terminal typer */}
+          <TerminalTyper />
 
           {/* Bio text */}
           <div className="flex flex-col gap-6 max-w-lg">

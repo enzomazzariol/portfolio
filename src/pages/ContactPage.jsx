@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SkillScramble from '../components/SkillScramble'
 
 export default function ContactPage() {
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
@@ -29,14 +30,18 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen px-6 md:px-10 pt-28 pb-20 max-w-6xl mx-auto flex flex-col justify-center">
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-16 mb-12">
+        <div>
+          <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-4">Hablemos</p>
+          <h1 className="font-display text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.9] tracking-tighter text-white">
+            Cuéntame<br />tu proyecto.
+          </h1>
+        </div>
+        <div className="md:pt-6">
+          <SkillScramble />
+        </div>
+      </div>
       <div className="max-w-xl">
-        <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-4">
-          Hablemos
-        </p>
-        <h1 className="font-display text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.9] tracking-tighter text-white mb-12">
-          Cuéntame<br />tu proyecto.
-        </h1>
-
         {status === 'success' ? (
           <div className="py-12 flex flex-col gap-4">
             <p className="font-display text-2xl text-white">Mensaje enviado.</p>
