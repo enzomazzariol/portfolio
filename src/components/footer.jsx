@@ -49,11 +49,17 @@ export default function Footer() {
             Navegación
           </p>
           <div className="flex flex-col gap-3 text-sm font-mono text-white/60">
+            <Link to="/" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
+              Inicio
+            </Link>
             <Link to="/proyectos" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
               Proyectos
             </Link>
             <Link to="/contacto" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
               Contacto
+            </Link>
+            <Link to="/sobre-mi" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
+              Sobre mí
             </Link>
           </div>
         </div>

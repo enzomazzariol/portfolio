@@ -36,9 +36,9 @@ export default function Navbar() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8 text-sm font-mono">
             <Link
-              to="/about"
+              to="/sobre-mi"
               className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                location.pathname === '/about' ? 'text-white' : 'text-white/50'
+                location.pathname === '/sobre-mi' ? 'text-white' : 'text-white/50'
               }`}
             >
               Sobre mí
@@ -99,7 +99,7 @@ export default function Navbar() {
         {/* Nav links */}
         <nav className="flex flex-col gap-2 mb-12">
           {[
-            { label: 'Sobre mí', to: '/about' },
+            { label: 'Sobre mí', to: '/sobre-mi' },
             { label: 'Proyectos', to: '/proyectos' },
             { label: 'Contacto', to: '/contacto' },
           ].map(({ label, to }, index) => (

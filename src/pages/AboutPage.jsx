@@ -116,7 +116,7 @@ export default function AboutPage() {
           Sobre mí
         </h1>
         <p className="about-hero-anim text-[10px] font-mono tracking-[0.25em] uppercase text-white/30 mt-4">
-          Full Stack Developer · Barcelona · 2025
+          Full Stack Developer · Barcelona · 2026
         </p>
       </section>
 
