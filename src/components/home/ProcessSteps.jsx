@@ -8,7 +8,7 @@ const processSteps = [
 export default function ProcessSteps({ containerRef }) {
   return (
     <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-      <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Process</p>
+      <p className="section-label text-white/50 text-xs font-mono tracking-[0.2em] uppercase mb-8">Process</p>
       <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-3 border-l border-t border-white/[0.07]">
         {processSteps.map(({ n, title, desc }) => (
           <div key={n} className="step-item border-r border-b border-white/[0.07] p-8 flex flex-col gap-4">

@@ -40,7 +40,7 @@ export default function Footer() {
             Contacto
           </p>
           <div className="flex flex-col gap-3 text-sm font-mono text-white/60">
-            <span className="text-white/40 select-all">mazzariolenzo@gmail.com</span>
+            <span className="text-white/60 select-all">mazzariolenzo@gmail.com</span>
           </div>
         </div>
 

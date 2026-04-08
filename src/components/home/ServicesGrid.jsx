@@ -13,8 +13,8 @@ export default function ServicesGrid() {
   return (
     <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
       <div className="flex items-end justify-between mb-10">
-        <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase">Servicios</p>
-        <Link to="/contacto" className="text-[10px] font-mono text-white/30 hover:text-white/70 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
+        <p className="section-label text-white/50 text-xs font-mono tracking-[0.2em] uppercase">Servicios</p>
+        <Link to="/contacto" className="text-xs font-mono text-white/50 hover:text-white/80 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
           Hablemos →
         </Link>
       </div>
@@ -27,7 +27,7 @@ export default function ServicesGrid() {
             className={`group ${span} border-r border-b border-white/[0.07] p-8 ${n === '01' ? 'md:p-10' : ''} flex flex-col justify-between ${minH} hover:bg-white/[0.04] transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset`}
           >
             <div className="flex items-start justify-between">
-              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">{n}</span>
+              <span className="text-xs font-mono text-white/40 tracking-widest uppercase">{n}</span>
               <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗︎</span>
             </div>
             <div>

@@ -60,7 +60,7 @@ export default function Navbar() {
               Contacto
             </Link>
             <a
-              href="/assets/EnzoCV-summer.pdf"
+              href="/assets/EnzoMazzariol-CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
@@ -122,7 +122,7 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="/assets/EnzoCV-summer.pdf"
+            href="/assets/EnzoMazzariol-CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="font-display font-bold text-6xl leading-none tracking-tight text-white/30 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
@@ -141,7 +141,7 @@ export default function Navbar() {
 
         {/* Metadata footer */}
         <p
-          className="font-mono text-xs text-white/20 tracking-widest uppercase"
+          className="font-mono text-xs text-white/40 tracking-widest uppercase"
           style={{
             transitionProperty: 'transform, opacity',
             transitionDuration: '0.35s',
@@ -151,7 +151,7 @@ export default function Navbar() {
             opacity: menuOpen ? 1 : 0,
           }}
         >
-          Enzo Mazzariol · 2025
+          Enzo Mazzariol · {new Date().getFullYear()}
         </p>
       </div>
     </>

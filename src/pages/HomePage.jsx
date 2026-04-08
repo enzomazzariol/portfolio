@@ -105,9 +105,10 @@ export default function HomePage() {
             <h1
               className="font-display text-[clamp(5rem,14vw,8rem)] font-medium leading-[0.9] tracking-tighter text-white mb-8"
               style={{ textShadow: '0 2px 40px rgba(0,0,0,0.9)' }}
+              aria-label="Enzo Mazzariol"
             >
               {heroWords.map(({ word, startDelay, perCharDelay }) => (
-                <span key={word} className="block">
+                <span key={word} className="block" aria-hidden="true">
                   {Array.from(word).map((char, i) => {
                     const delay = `${startDelay + i * perCharDelay}s`
                     return (
@@ -158,7 +159,7 @@ export default function HomePage() {
             className="hero-status hero-fade-up flex items-center justify-between mt-16 border-t border-white/5 pt-6"
             style={{ animationDelay: '0.99s' }}
           >
-            <div className="flex gap-6 text-white/40 text-xs font-mono">
+            <div className="flex gap-6 text-white/55 text-xs font-mono">
               <a href="https://github.com/enzomazzariol" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">GitHub ↗︎</a>
               <a href="https://www.linkedin.com/in/enzo-mazzariol/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">LinkedIn ↗︎</a>
               <a href="mailto:mazzariolenzo@gmail.com" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">Email ↗︎</a>

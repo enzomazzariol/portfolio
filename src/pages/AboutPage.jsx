@@ -115,7 +115,7 @@ export default function AboutPage() {
         <h1 className="about-hero-anim font-display text-[clamp(4rem,14vw,12rem)] font-bold leading-[0.85] tracking-tighter text-white">
           Sobre mí
         </h1>
-        <p className="about-hero-anim text-[10px] font-mono tracking-[0.25em] uppercase text-white/30 mt-4">
+        <p className="about-hero-anim text-xs font-mono tracking-[0.25em] uppercase text-white/30 mt-4">
           Full Stack Developer · Barcelona · 2026
         </p>
       </section>
@@ -159,7 +159,7 @@ export default function AboutPage() {
         ].map(({ label, value }) => (
           <div key={label} className="stat-item">
             <div className="flex items-center gap-3 mb-3">
-              <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25">{label}</p>
+              <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45">{label}</p>
               <div className="flex-1 border-t border-white/[0.08]" />
             </div>
             {value ? (
@@ -224,14 +224,14 @@ export default function AboutPage() {
 
       {/* ── TIMELINE ── */}
       <section className="timeline-section px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
-        <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25 mb-10">Trayectoria</p>
+        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-10">Trayectoria</p>
         <div className="flex flex-col">
           {timelineEntries.map(({ year, label }) => (
             <div
               key={year + label}
               className="timeline-entry flex items-start gap-8 py-5 border-b border-white/5"
             >
-              <span className="text-[10px] font-mono tracking-[0.15em] text-white/25 w-28 shrink-0 pt-0.5">
+              <span className="text-xs font-mono tracking-[0.15em] text-white/45 w-28 shrink-0 pt-0.5">
                 {year}
               </span>
               <p className="text-sm font-mono text-white/60 leading-relaxed">
@@ -244,7 +244,7 @@ export default function AboutPage() {
 
       {/* ── SERVICES (editorial style) ── */}
       <section className="px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
-        <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25 mb-10">Servicios</p>
+        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-10">Servicios</p>
 
         <div className="flex flex-col">
           {services.map(({ label, Icon, color, side }) => (
@@ -268,7 +268,7 @@ export default function AboutPage() {
 
       {/* ── CTA ── */}
       <section className="cta-section px-6 md:px-10 py-24 max-w-6xl mx-auto text-center">
-        <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/25 mb-6">Trabajo juntos</p>
+        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-6">Trabajo juntos</p>
         <h2 className="font-display text-[clamp(2rem,6vw,5rem)] font-bold text-white mb-10 leading-tight">
           ¿Tienes un proyecto<br className="hidden md:block" /> en mente?
         </h2>

@@ -6,7 +6,7 @@ import { portfolioData } from '../../../public/data/portfolio.js'
 export default function SelectedWorks({ containerRef }) {
   return (
     <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-      <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Selected Works</p>
+      <p className="section-label text-white/50 text-xs font-mono tracking-[0.2em] uppercase mb-8">Selected Works</p>
       <div ref={containerRef}>
         {portfolioData.slice(0, 3).map(({ title, stack, link }, i) => (
           <a
@@ -24,7 +24,7 @@ export default function SelectedWorks({ containerRef }) {
             </span>
             <div className="hidden md:flex flex-wrap gap-1.5 justify-end max-w-[280px]">
               {stack.map((tag) => (
-                <span key={tag} className="text-[10px] font-mono text-white/30 border border-white/10 px-2 py-0.5">
+                <span key={tag} className="text-xs font-mono text-white/45 border border-white/10 px-2 py-0.5">
                   {tag}
                 </span>
               ))}
@@ -38,7 +38,7 @@ export default function SelectedWorks({ containerRef }) {
       <div className="mt-10 flex justify-end">
         <Link
           to="/proyectos"
-          className="text-sm font-mono text-white/40 hover:text-white/80 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          className="text-sm font-mono text-white/60 hover:text-white/90 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
         >
           Ver todos →
         </Link>

@@ -24,28 +24,28 @@ const stackExperiencia = [
 export default function StackSection({ containerRef }) {
   return (
     <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-      <p className="section-label text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase mb-8">Stack</p>
+      <p className="section-label text-white/50 text-xs font-mono tracking-[0.2em] uppercase mb-8">Stack</p>
       <div ref={containerRef} className="flex flex-col gap-8">
 
         <div>
-          <p className="text-[9px] font-mono tracking-[0.2em] uppercase text-white/20 mb-3">Dominio</p>
+          <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-3">Dominio</p>
           <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
             {stackDominio.map(({ name, Icon, color }) => (
               <div key={name} className="stack-icon flex flex-col items-center gap-2.5 p-4 border border-white/5 hover:border-white/15 transition-colors duration-200 cursor-default group">
                 <Icon size={26} style={{ color }} className="transition-transform duration-200 group-hover:scale-110" />
-                <span className="text-[9px] font-mono text-white/25 group-hover:text-white/50 transition-colors text-center leading-tight">{name}</span>
+                <span className="text-xs font-mono text-white/45 group-hover:text-white/70 transition-colors text-center leading-tight">{name}</span>
               </div>
             ))}
           </div>
         </div>
 
         <div>
-          <p className="text-[9px] font-mono tracking-[0.2em] uppercase text-white/15 mb-3">Experiencia</p>
+          <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/40 mb-3">Experiencia</p>
           <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
             {stackExperiencia.map(({ name, Icon, color }) => (
               <div key={name} className="stack-icon flex flex-col items-center gap-2.5 p-4 border border-white/5 hover:border-white/15 transition-colors duration-200 cursor-default group">
                 <Icon size={26} style={{ color }} className="transition-transform duration-200 group-hover:scale-110" />
-                <span className="text-[9px] font-mono text-white/25 group-hover:text-white/50 transition-colors text-center leading-tight">{name}</span>
+                <span className="text-xs font-mono text-white/45 group-hover:text-white/70 transition-colors text-center leading-tight">{name}</span>
               </div>
             ))}
           </div>

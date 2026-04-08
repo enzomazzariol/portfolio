@@ -76,7 +76,7 @@ function MobileProjectCard({ project, index }) {
         {project.stack.map((tech) => (
           <span
             key={tech}
-            className="text-[10px] font-mono text-white/50 border border-white/10 px-2 py-0.5 rounded-full"
+            className="text-xs font-mono text-white/50 border border-white/10 px-2 py-0.5 rounded-full"
           >
             {tech}
           </span>
@@ -112,7 +112,7 @@ function LeftPanel({ project, panelRef }) {
   return (
     <div ref={panelRef} className="flex flex-col justify-center flex-1 min-h-0 px-10 lg:px-16 overflow-y-auto">
       {/* Index */}
-      <p className="text-white/20 text-xs font-mono tracking-widest uppercase mb-8">
+      <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-8">
         Trabajo seleccionado
       </p>
 
@@ -163,7 +163,7 @@ function LeftPanel({ project, panelRef }) {
       </div>
 
       {/* Project counter */}
-      <p className="mt-auto text-white/15 text-xs font-mono">
+      <p className="mt-auto text-white/35 text-xs font-mono">
         {String(portfolioData.indexOf(project) + 1).padStart(2, '0')} / {String(portfolioData.length).padStart(2, '0')}
       </p>
     </div>
@@ -343,7 +343,7 @@ export default function ProjectsPage() {
         <div className="w-[42%] sticky top-14 h-[calc(100vh-3.5rem)] border-r border-white/5 flex flex-col">
           {/* Page label */}
           <div ref={headingRef} className="px-10 lg:px-16 pt-12 pb-0">
-            <p className="anim text-white/20 text-[10px] font-mono tracking-[0.2em] uppercase">
+            <p className="anim text-white/50 text-xs font-mono tracking-[0.2em] uppercase">
               Enzo Mazzariol · Proyectos
             </p>
           </div>

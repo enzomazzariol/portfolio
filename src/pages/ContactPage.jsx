@@ -30,7 +30,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen px-6 md:px-10 pt-28 pb-20 max-w-6xl mx-auto flex flex-col justify-center">
       <div className="max-w-xl">
-        <p className="text-white/30 text-xs font-mono tracking-widest uppercase mb-4">
+        <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-4">
           Hablemos
         </p>
         <h1 className="font-display text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.9] tracking-tighter text-white mb-12">
@@ -56,9 +56,9 @@ export default function ContactPage() {
                 id="name"
                 type="text"
                 name="name"
-                placeholder="Tu nombre"
+                placeholder="Tu nombre *"
                 required
-                className="w-full bg-transparent text-white placeholder-white/20 text-base font-mono outline-none"
+                className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none"
               />
             </div>
             <div className="border-b border-white/10 py-4 focus-within:border-white/40 transition-colors">
@@ -67,19 +67,19 @@ export default function ContactPage() {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="Tu email"
+                placeholder="Tu email *"
                 required
-                className="w-full bg-transparent text-white placeholder-white/20 text-base font-mono outline-none"
+                className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none"
               />
             </div>
             <div className="border-b border-white/10 py-4 focus-within:border-white/40 transition-colors">
-              <label htmlFor="phone" className="sr-only">Teléfono</label>
+              <label htmlFor="phone" className="sr-only">Teléfono (opcional)</label>
               <input
                 id="phone"
                 type="tel"
                 name="phone"
                 placeholder="Teléfono (opcional)"
-                className="w-full bg-transparent text-white placeholder-white/20 text-base font-mono outline-none"
+                className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none"
               />
             </div>
             <div className="border-b border-white/10 py-4 focus-within:border-white/40 transition-colors">
@@ -104,10 +104,10 @@ export default function ContactPage() {
               <textarea
                 id="message"
                 name="message"
-                placeholder="Cuéntame sobre tu proyecto"
+                placeholder="Cuéntame sobre tu proyecto *"
                 rows="5"
                 required
-                className="w-full bg-transparent text-white placeholder-white/20 text-base font-mono outline-none resize-none"
+                className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none resize-none"
               />
             </div>
 
@@ -117,7 +117,9 @@ export default function ContactPage() {
               </p>
             )}
 
-            <div className="mt-8">
+            <p className="mt-6 text-xs font-mono text-white/30">* Campos obligatorios</p>
+
+            <div className="mt-4">
               <button
                 type="submit"
                 disabled={status === 'submitting'}
@@ -129,7 +131,7 @@ export default function ContactPage() {
           </form>
         )}
 
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col gap-2 text-sm font-mono text-white/30">
+        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col gap-2 text-sm font-mono text-white/50">
           <p>O escríbeme directamente:</p>
           <a href="mailto:mazzariolenzo@gmail.com" className="hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
             mazzariolenzo@gmail.com ↗︎
