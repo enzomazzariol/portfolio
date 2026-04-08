@@ -12,11 +12,8 @@ const services = [
 export default function ServicesGrid() {
   return (
     <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-      <div className="flex items-end justify-between mb-10">
+      <div className="mb-10">
         <p className="section-label text-white/50 text-xs font-mono tracking-[0.2em] uppercase">Servicios</p>
-        <Link to="/contacto" className="text-xs font-mono text-white/50 hover:text-white/80 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
-          Hablemos →
-        </Link>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-6 border-l border-t border-white/[0.07]">
@@ -39,6 +36,23 @@ export default function ServicesGrid() {
             </div>
           </Link>
         ))}
+      </div>
+
+      {/* CTA button */}
+      <div className="mt-10 flex justify-center">
+        <Link
+          to="/contacto"
+          className="group relative flex items-center gap-3 border border-white/20 px-8 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          style={{ height: '44px' }}
+        >
+          <div className="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out" />
+          <span className="relative text-sm font-mono text-white group-hover:text-black transition-colors duration-300 group-hover:delay-100 whitespace-nowrap">
+            Hablemos
+          </span>
+          <span className="relative text-sm text-white group-hover:text-black group-hover:translate-x-1 transition-all duration-300 group-hover:delay-100">
+            →
+          </span>
+        </Link>
       </div>
     </section>
   )

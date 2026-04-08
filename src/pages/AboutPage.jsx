@@ -22,7 +22,7 @@ const images = [
 const timelineEntries = [
   { year: '2023 - 2025',         label: 'DAM — Desarrollo de Aplicaciones Multiplataforma' },
   { year: '2025',         label: 'Prácticas en Regalexia.com' },
-  { year: '2024 - actualidad',         label: 'Software Developer en Guarapo Media' },
+  { year: '2024 - actualidad',         label: 'Software Developer en Guarapo Media', url: 'https://guarapomedia.com/' },
   { year: '2025 - actualidad', label: 'Ingeniería Audiovisual en UPF' },
 ]
 
@@ -153,7 +153,7 @@ export default function AboutPage() {
       {/* ── STATS ROW ── */}
       <section className="stats-row px-6 md:px-10 py-12 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          { label: 'Experiencia', value: '3 años programando' },
+          { label: 'Experiencia', value: `${new Date().getFullYear() - 2023} años programando` },
           { label: 'Ubicación', value: 'Barcelona, España' },
           { label: 'Freelance', value: null },
         ].map(({ label, value }) => (
@@ -210,7 +210,7 @@ export default function AboutPage() {
               estudio Ingeniería Audiovisual Computacional en la UPF.
             </p>
             <p className="bio-para text-sm font-mono text-white/50 leading-relaxed">
-              Trabajo como becario en Guarapo Media, donde colaboro en
+              Trabajo como becario en <a href="https://guarapomedia.com/" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white underline underline-offset-2 transition-colors">Guarapo Media</a>, donde colaboro en
               proyectos como New Vision Sports y Hola Atelier. También hice
               prácticas en Regalexia.com mejorando SEO y frontend.
             </p>
@@ -226,7 +226,7 @@ export default function AboutPage() {
       <section className="timeline-section px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
         <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-10">Trayectoria</p>
         <div className="flex flex-col">
-          {timelineEntries.map(({ year, label }) => (
+          {timelineEntries.map(({ year, label, url }) => (
             <div
               key={year + label}
               className="timeline-entry flex items-start gap-8 py-5 border-b border-white/5"
@@ -234,9 +234,18 @@ export default function AboutPage() {
               <span className="text-xs font-mono tracking-[0.15em] text-white/45 w-28 shrink-0 pt-0.5">
                 {year}
               </span>
-              <p className="text-sm font-mono text-white/60 leading-relaxed">
-                {label}
-              </p>
+              {url ? (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-mono text-white/60 leading-relaxed hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                >
+                  {label} ↗︎
+                </a>
+              ) : (
+                <p className="text-sm font-mono text-white/60 leading-relaxed">{label}</p>
+              )}
             </div>
           ))}
         </div>

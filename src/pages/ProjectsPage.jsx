@@ -6,7 +6,7 @@ gsap.registerPlugin(useGSAP)
 import { portfolioData } from '../../public/data/portfolio.js'
 
 /* eslint-disable react/prop-types */
-function MobileProjectCard({ project, index }) {
+function MobileProjectCard({ project, index, onIntersect }) {
   const cardRef = useRef(null)
   const [visible, setVisible] = useState(false)
 
@@ -19,18 +19,24 @@ function MobileProjectCard({ project, index }) {
     let io
     const raf = requestAnimationFrame(() => {
       io = new IntersectionObserver(
-        ([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect() } },
-        { threshold: 0.1 }
+        ([e]) => {
+          if (e.isIntersecting) {
+            setVisible(true)
+            onIntersect?.(index)
+          }
+        },
+        { threshold: 0.3 }
       )
       io.observe(el)
     })
     return () => { cancelAnimationFrame(raf); io?.disconnect() }
-  }, [])
+  }, [index, onIntersect])
 
   const image = project.images && project.images.length > 0 ? project.images[0] : project.imgUrl
 
   return (
     <div
+      id={project.slug}
       ref={cardRef}
       style={{
         opacity: visible ? 1 : 0,
@@ -108,11 +114,11 @@ function MobileProjectCard({ project, index }) {
   )
 }
 
-function LeftPanel({ project, panelRef }) {
+function LeftPanel({ project, panelRef, activeIndex, onSelectProject }) {
   return (
-    <div ref={panelRef} className="flex flex-col justify-center flex-1 min-h-0 px-10 lg:px-16 overflow-y-auto">
-      {/* Index */}
-      <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-8">
+    <div ref={panelRef} className="flex flex-col flex-1 min-h-0 px-10 lg:px-16 overflow-y-auto py-10">
+      {/* Index label */}
+      <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-4">
         Trabajo seleccionado
       </p>
 
@@ -139,7 +145,7 @@ function LeftPanel({ project, panelRef }) {
       </div>
 
       {/* Links */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 mb-3">
         <a
           href={project.link}
           target="_blank"
@@ -162,10 +168,26 @@ function LeftPanel({ project, panelRef }) {
         )}
       </div>
 
-      {/* Project counter */}
-      <p className="mt-auto text-white/35 text-xs font-mono">
-        {String(portfolioData.indexOf(project) + 1).padStart(2, '0')} / {String(portfolioData.length).padStart(2, '0')}
-      </p>
+      {/* Project index */}
+      <nav className="mt-auto pt-8 border-t border-white/5" aria-label="Índice de proyectos">
+        <p className="text-xs font-mono text-white/30 tracking-widest uppercase mb-4">
+          Todos los proyectos
+        </p>
+        <div className="flex flex-col gap-1">
+          {portfolioData.map((p, i) => (
+            <button
+              key={p.slug}
+              onClick={() => onSelectProject(p.slug)}
+              className={`text-left text-xs font-mono transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
+                i === activeIndex ? 'text-white' : 'text-white/30 hover:text-white/65'
+              }`}
+            >
+              <span className="text-white/20 mr-2.5">{String(i + 1).padStart(2, '0')}</span>
+              {p.title}
+            </button>
+          ))}
+        </div>
+      </nav>
     </div>
   )
 }
@@ -278,7 +300,7 @@ function ImageSection({ project, onIntersect, index }) {
   const images = project.images && project.images.length > 0 ? project.images : [project.imgUrl]
 
   return (
-    <div ref={sectionRef} className="relative w-full border-b border-white/5">
+    <div id={project.slug} ref={sectionRef} className="relative w-full border-b border-white/5">
       <ImageGrid
         images={images}
         title={project.title}
@@ -308,6 +330,12 @@ export default function ProjectsPage() {
   const panelRef = useRef(null)
   const prevIndexRef = useRef(0)
 
+  // Reset scroll on mount so browser scroll restoration doesn't cause
+  // a mismatch between activeIndex (starts at 0) and the restored position.
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const handleIntersect = useCallback((index) => {
     if (index === prevIndexRef.current) return
     prevIndexRef.current = index
@@ -321,6 +349,11 @@ export default function ProjectsPage() {
     }
 
     setActiveIndex(index)
+  }, [])
+
+  const scrollToProject = useCallback((slug) => {
+    const el = document.getElementById(slug)
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [])
 
   // Entrance animation for page heading
@@ -347,7 +380,12 @@ export default function ProjectsPage() {
               Enzo Mazzariol · Proyectos
             </p>
           </div>
-          <LeftPanel project={portfolioData[activeIndex]} panelRef={panelRef} />
+          <LeftPanel
+            project={portfolioData[activeIndex]}
+            panelRef={panelRef}
+            activeIndex={activeIndex}
+            onSelectProject={scrollToProject}
+          />
         </div>
 
         {/* Right: scrollable images */}
@@ -363,13 +401,36 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      {/* Mobile: card list */}
+      {/* Mobile: sticky index bar + card list */}
       <div className="md:hidden">
+        {/* Sticky horizontal index */}
+        <nav
+          className="sticky top-14 z-30 bg-[#080808]/95 backdrop-blur-sm border-b border-white/5 overflow-x-auto scrollbar-none"
+          aria-label="Índice de proyectos"
+        >
+          <div className="flex gap-0 px-5 py-0 w-max">
+            {portfolioData.map((project, i) => (
+              <button
+                key={project.slug}
+                onClick={() => scrollToProject(project.slug)}
+                className={`text-xs font-mono px-3 py-3.5 whitespace-nowrap transition-colors duration-200 border-b-2 focus-visible:outline-none ${
+                  i === activeIndex
+                    ? 'text-white border-white'
+                    : 'text-white/35 border-transparent hover:text-white/60'
+                }`}
+              >
+                {project.title}
+              </button>
+            ))}
+          </div>
+        </nav>
+
         {portfolioData.map((project, i) => (
           <MobileProjectCard
             key={project.slug}
             project={project}
             index={i}
+            onIntersect={handleIntersect}
           />
         ))}
       </div>
