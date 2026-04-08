@@ -116,7 +116,7 @@ function MobileProjectCard({ project, index, onIntersect }) {
 
 function LeftPanel({ project, panelRef, activeIndex, onSelectProject }) {
   return (
-    <div ref={panelRef} className="flex flex-col flex-1 min-h-0 px-10 lg:px-16 overflow-y-auto py-10">
+    <div ref={panelRef} className="flex flex-col flex-1 min-h-0 px-10 lg:px-16 pt-3 pb-10">
       {/* Index label */}
       <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-4">
         Trabajo seleccionado
@@ -384,7 +384,7 @@ export default function ProjectsPage() {
         {/* Left: sticky info panel */}
         <div className="w-[42%] sticky top-14 h-[calc(100vh-3.5rem)] border-r border-white/5 flex flex-col">
           {/* Page label */}
-          <div ref={headingRef} className="px-10 lg:px-16 pt-12 pb-0">
+          <div ref={headingRef} className="px-10 lg:px-16 pt-8 pb-0">
             <p className="anim text-white/50 text-xs font-mono tracking-[0.2em] uppercase">
               Enzo Mazzariol · Proyectos
             </p>
