@@ -2,9 +2,13 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { portfolioData } from '../../../public/data/portfolio.js'
 
+const isTouchDevice = () =>
+  typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
+
 // eslint-disable-next-line react/prop-types
 export default function SelectedWorks({ containerRef }) {
   const [hoveredIndex, setHoveredIndex] = useState(null)
+  const [isMobile] = useState(isTouchDevice)
 
   return (
     <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
@@ -13,7 +17,6 @@ export default function SelectedWorks({ containerRef }) {
         {portfolioData.slice(0, 3).map(({ title, stack, link, images, imgUrl }, i) => {
           const previews = (images && images.length > 0 ? images : [imgUrl]).slice(0, 3)
           const isOpen = hoveredIndex === i
-
           return (
             <div key={title} className="border-b border-white/5">
               <a
@@ -44,9 +47,10 @@ export default function SelectedWorks({ containerRef }) {
 
               {/* Expandable image gallery */}
               <div
+                className="relative"
                 style={{
                   display: 'grid',
-                  gridTemplateRows: isOpen ? '1fr' : '0fr',
+                  gridTemplateRows: (isOpen || isMobile) ? '1fr' : '0fr',
                   transition: 'grid-template-rows 1.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
                 onMouseEnter={() => setHoveredIndex(i)}
@@ -59,8 +63,8 @@ export default function SelectedWorks({ containerRef }) {
                         key={j}
                         className="flex-1 overflow-hidden"
                         style={{
-                          opacity: isOpen ? 1 : 0,
-                          transform: isOpen ? 'translateY(0)' : 'translateY(8px)',
+                          opacity: (isOpen || isMobile) ? 1 : 0,
+                          transform: (isOpen || isMobile) ? 'translateY(0)' : 'translateY(8px)',
                           transition: `opacity 0.9s ease ${j * 150}ms, transform 0.9s ease ${j * 150}ms`,
                         }}
                       >
@@ -73,7 +77,18 @@ export default function SelectedWorks({ containerRef }) {
                       </div>
                     ))}
                   </div>
+                  <div className="md:hidden pb-5">
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-xs font-mono text-white/60 border border-white/15 px-4 py-2 hover:text-white hover:border-white/40 transition-colors"
+                    >
+                      Ver proyecto ↗︎
+                    </a>
+                  </div>
                 </div>
+
               </div>
             </div>
           )
