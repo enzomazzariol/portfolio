@@ -353,7 +353,16 @@ export default function ProjectsPage() {
 
   const scrollToProject = useCallback((slug) => {
     const el = document.getElementById(slug)
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (!el) return
+    const isMobile = window.innerWidth < 768
+    if (isMobile) {
+      // Navbar (56px) + sticky index bar (~44px)
+      const offset = 56 + 44
+      const top = el.getBoundingClientRect().top + window.scrollY - offset
+      window.scrollTo({ top, behavior: 'smooth' })
+    } else {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }, [])
 
   // Entrance animation for page heading

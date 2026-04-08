@@ -135,7 +135,7 @@ export default function AboutPage() {
                 aria-hidden="true"
                 width={300}
                 height={200}
-                className="w-full h-full object-cover grayscale opacity-60 hover:opacity-80 hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover opacity-80 md:grayscale md:opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-500"
                 loading="lazy"
               />
             </div>

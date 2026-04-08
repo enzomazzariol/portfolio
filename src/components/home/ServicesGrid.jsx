@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 const services = [
-  { n: '01', span: 'col-span-2 md:col-span-3 row-span-2', minH: 'min-h-[280px]', title: 'Servicios SEO', desc: 'Auditoría SEO, optimización on-page y estrategia de palabras clave para mejorar tu visibilidad en Google.', big: 'SEO' },
+  { n: '01', span: 'col-span-2 md:col-span-3 row-span-2', minH: 'min-h-[160px] md:min-h-[280px]', title: 'Servicios SEO', desc: 'Auditoría SEO, optimización on-page y estrategia de palabras clave para mejorar tu visibilidad en Google.', big: 'SEO' },
   { n: '02', span: 'col-span-2 md:col-span-3', minH: 'min-h-[140px]', title: 'Desarrollador WordPress', desc: 'Webs en WordPress a medida: maquetación, plugins y formularios.' },
   { n: '03', span: 'col-span-2 md:col-span-3', minH: 'min-h-[140px]', title: 'Diseño de landing pages', desc: 'Páginas de alta conversión para campañas, lanzamientos o servicios.' },
   { n: '04', span: 'col-span-2', minH: 'min-h-[160px]', title: 'Web corporativa', desc: 'Web profesional para empresas y autónomos con diseño personalizado.' },

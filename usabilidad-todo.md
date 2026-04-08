@@ -57,8 +57,8 @@
 - [ ] **Añadir resultados/métricas en las descripciones de proyectos**
   En la página `/proyectos`, añade 1-2 datos concretos por proyecto (ej: "Aumentó el tiempo en página un 40%", "Tienda operativa desde el primer día con X ventas").
 
-- [ ] **Hacer dinámico "X años programando" en About**
-  En `AboutPage.jsx`, reemplaza `'3 años programando'` por cálculo dinámico: `` `${new Date().getFullYear() - 2023} años programando` `` o cambia a "Programando desde 2023".
+- [x] **Hacer dinámico "X años programando" en About** ✅
+  `AboutPage.jsx`: ahora calcula `new Date().getFullYear() - 2023` automáticamente.
 
 - [x] **Hacer dinámico el año en el copyright** ✅
   Ya usa `{new Date().getFullYear()}` en `footer.jsx`.
