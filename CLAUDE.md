@@ -6,7 +6,7 @@ This file provides context for AI assistants working on this repository.
 
 Personal portfolio website for Enzo Mazzariol, a Full Stack Developer. Built as a single-page React application showcasing projects, experience, and a contact form.
 
-**Live site:** https://enzomazzariol.is-a.dev/
+**Live site:** https://enzomazzariol.com/
 
 ## Tech Stack
 
@@ -16,7 +16,7 @@ Personal portfolio website for Enzo Mazzariol, a Full Stack Developer. Built as 
 | Build tool | Vite 6 with SWC plugin |
 | Styling | Tailwind CSS 3 (class-based dark mode) |
 | Linting | ESLint 9 (flat config) |
-| Deployment | Netlify |
+| Deployment | Vercel |
 | Contact form | Getform.io |
 | Analytics | Google Analytics 4 (G-3MR3P0H4X3) |
 
