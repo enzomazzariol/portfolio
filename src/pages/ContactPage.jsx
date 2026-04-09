@@ -1,14 +1,45 @@
 import { useState } from 'react'
 import SkillScramble from '../components/SkillScramble'
 
+function validate({ name, email, service, message }) {
+  const errs = {}
+  if (!name.trim()) errs.name = 'Nombre requerido'
+  else if (name.trim().length < 2) errs.name = 'Nombre demasiado corto'
+
+  if (!email.trim()) errs.email = 'Email requerido'
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errs.email = 'Email inválido'
+
+  if (!service) errs.service = 'Selecciona un tipo de servicio'
+
+  if (!message.trim()) errs.message = 'Mensaje requerido'
+  else if (message.trim().length < 10) errs.message = 'Cuéntame un poco más'
+
+  return errs
+}
+
 export default function ContactPage() {
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const [errors, setErrors] = useState({})
 
   async function handleSubmit(e) {
     e.preventDefault()
-    setStatus('submitting')
 
     const data = new FormData(e.target)
+    const values = {
+      name: data.get('name') ?? '',
+      email: data.get('email') ?? '',
+      service: data.get('service') ?? '',
+      message: data.get('message') ?? '',
+    }
+
+    const errs = validate(values)
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs)
+      return
+    }
+
+    setErrors({})
+    setStatus('submitting')
 
     try {
       const res = await fetch('https://getform.io/f/bnlldomb', {
@@ -43,39 +74,39 @@ export default function ContactPage() {
       </div>
       <div className="max-w-xl">
         {status === 'success' ? (
-          <div className="py-12 flex flex-col gap-4">
+          <div className="py-12 flex flex-col gap-4 animate-[heroFadeDown_0.5s_ease_forwards]">
             <p className="font-display text-2xl text-white">Mensaje enviado.</p>
             <p className="text-sm font-mono text-white/40">Me pondré en contacto contigo pronto.</p>
             <button
-              onClick={() => setStatus('idle')}
+              onClick={() => { setStatus('idle'); setErrors({}) }}
               className="mt-4 text-xs font-mono text-white/30 hover:text-white/70 transition-colors self-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
               ← Enviar otro mensaje
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-0">
-            <div className="border-b border-white/10 py-4 focus-within:border-white/40 transition-colors">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-0">
+            <div className={`border-b py-4 focus-within:border-white/40 transition-colors ${errors.name ? 'border-red-400/60' : 'border-white/10'}`}>
               <label htmlFor="name" className="sr-only">Tu nombre</label>
               <input
                 id="name"
                 type="text"
                 name="name"
                 placeholder="Tu nombre *"
-                required
                 className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none"
               />
+              {errors.name && <p className="text-xs font-mono text-red-400 mt-1">{errors.name}</p>}
             </div>
-            <div className="border-b border-white/10 py-4 focus-within:border-white/40 transition-colors">
+            <div className={`border-b py-4 focus-within:border-white/40 transition-colors ${errors.email ? 'border-red-400/60' : 'border-white/10'}`}>
               <label htmlFor="email" className="sr-only">Tu email</label>
               <input
                 id="email"
                 type="email"
                 name="email"
                 placeholder="Tu email *"
-                required
                 className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none"
               />
+              {errors.email && <p className="text-xs font-mono text-red-400 mt-1">{errors.email}</p>}
             </div>
             <div className="border-b border-white/10 py-4 focus-within:border-white/40 transition-colors">
               <label htmlFor="phone" className="sr-only">Teléfono (opcional)</label>
@@ -87,12 +118,11 @@ export default function ContactPage() {
                 className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none"
               />
             </div>
-            <div className="border-b border-white/10 py-4 focus-within:border-white/40 transition-colors">
+            <div className={`border-b py-4 focus-within:border-white/40 transition-colors ${errors.service ? 'border-red-400/60' : 'border-white/10'}`}>
               <label htmlFor="service" className="sr-only">¿Qué necesitas?</label>
               <select
                 id="service"
                 name="service"
-                required
                 defaultValue=""
                 className="w-full bg-transparent text-white text-base font-mono outline-none appearance-none cursor-pointer [&>option]:bg-[#080808] [&>option]:text-white"
               >
@@ -103,17 +133,18 @@ export default function ContactPage() {
                 <option value="mantenimiento">Mantenimiento / mejoras</option>
                 <option value="otro">Otro</option>
               </select>
+              {errors.service && <p className="text-xs font-mono text-red-400 mt-1">{errors.service}</p>}
             </div>
-            <div className="border-b border-white/10 py-4 focus-within:border-white/40 transition-colors">
+            <div className={`border-b py-4 focus-within:border-white/40 transition-colors ${errors.message ? 'border-red-400/60' : 'border-white/10'}`}>
               <label htmlFor="message" className="sr-only">Tu mensaje</label>
               <textarea
                 id="message"
                 name="message"
                 placeholder="Cuéntame sobre tu proyecto *"
                 rows="5"
-                required
                 className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none resize-none"
               />
+              {errors.message && <p className="text-xs font-mono text-red-400 mt-1">{errors.message}</p>}
             </div>
 
             {status === 'error' && (
@@ -130,7 +161,15 @@ export default function ContactPage() {
                 disabled={status === 'submitting'}
                 className="bg-white text-black font-mono text-sm px-8 py-3 min-h-[44px] cursor-pointer hover:bg-white/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#080808] disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {status === 'submitting' ? 'Enviando...' : 'Enviar mensaje →'}
+                {status === 'submitting' ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                    </svg>
+                    Enviando...
+                  </span>
+                ) : 'Enviar mensaje →'}
               </button>
             </div>
           </form>
