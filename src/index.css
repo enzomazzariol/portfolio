@@ -103,6 +103,10 @@ html {
   will-change: transform;
 }
 
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation-play-state: paused; }
 }

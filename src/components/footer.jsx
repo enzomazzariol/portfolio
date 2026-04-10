@@ -40,7 +40,9 @@ export default function Footer() {
             Contacto
           </p>
           <div className="flex flex-col gap-3 text-sm font-mono text-white/60">
-            <span className="text-white/60 select-all">mazzariolenzo@gmail.com</span>
+            <a href="mailto:mazzariolenzo@gmail.com" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
+              mazzariolenzo@gmail.com
+            </a>
           </div>
         </div>
 

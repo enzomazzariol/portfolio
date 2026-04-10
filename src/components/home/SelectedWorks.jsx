@@ -12,7 +12,7 @@ export default function SelectedWorks({ containerRef }) {
 
   return (
     <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-      <p className="section-label text-white/50 text-xs font-mono tracking-[0.2em] uppercase mb-8">Selected Works</p>
+      <p className="section-label text-white/50 text-xs font-mono tracking-[0.2em] uppercase mb-8">Trabajos seleccionados</p>
       <div ref={containerRef}>
         {portfolioData.slice(0, 3).map(({ title, stack, link, images, imgUrl }, i) => {
           const previews = (images && images.length > 0 ? images : [imgUrl]).slice(0, 3)

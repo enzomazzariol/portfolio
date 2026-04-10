@@ -300,27 +300,13 @@ function ImageSection({ project, onIntersect, index }) {
   const images = project.images && project.images.length > 0 ? project.images : [project.imgUrl]
 
   return (
-    <div id={project.slug} ref={sectionRef} className="relative w-full border-b border-white/5">
+    <div id={project.slug} ref={sectionRef} className="w-full border-b border-white/5">
       <ImageGrid
         images={images}
         title={project.title}
         projectIndex={index}
         eager={index === 0}
       />
-
-      {/* Mobile info overlay (bottom of last image) */}
-      <div className="md:hidden absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
-        <h3 className="text-white text-xl font-bold mb-2">{project.title}</h3>
-        <p className="text-white/50 text-xs font-mono mb-3">{project.stack.join(' · ')}</p>
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white/70 text-xs font-mono underline"
-        >
-          Ver proyecto ↗︎
-        </a>
-      </div>
     </div>
   )
 }

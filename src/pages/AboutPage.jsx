@@ -46,30 +46,28 @@ export default function AboutPage() {
       { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.12 }
     )
 
-    // 2. Marquee → now handled by CSS (.marquee-track) — no GSAP needed
-
-    // 3. Bio paragraphs
+    // 2. Bio paragraphs
     gsap.fromTo('.bio-para',
       { autoAlpha: 0, y: 24 },
       { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.15,
         scrollTrigger: { trigger: '.bio-section', start: 'top 75%', toggleActions: 'play none none none' } }
     )
 
-    // 5. Stats
+    // 3. Stats
     gsap.fromTo('.stat-item',
       { autoAlpha: 0, y: 20 },
       { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.1,
         scrollTrigger: { trigger: '.stats-row', start: 'top 80%', toggleActions: 'play none none none' } }
     )
 
-    // 6. Timeline entries
+    // 4. Timeline entries
     gsap.fromTo('.timeline-entry',
       { autoAlpha: 0, y: 30 },
       { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.1,
         scrollTrigger: { trigger: '.timeline-section', start: 'top 78%', toggleActions: 'play none none none' } }
     )
 
-    // 7. Service rows
+    // 5. Service rows
     gsap.utils.toArray('.service-text').forEach((el, i) => {
       const fromLeft = i % 2 === 0
       gsap.fromTo(el,
@@ -87,7 +85,7 @@ export default function AboutPage() {
       )
     })
 
-    // 7. CTA
+    // 6. CTA
     gsap.fromTo('.cta-section',
       { autoAlpha: 0, y: 30 },
       { autoAlpha: 1, y: 0, duration: 0.8,
@@ -182,7 +180,7 @@ export default function AboutPage() {
               estudio Ingeniería Audiovisual Computacional en la UPF.
             </p>
             <p className="bio-para text-sm font-mono text-white/50 leading-relaxed">
-              Trabajo como becario en <a href="https://guarapomedia.com/" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white underline underline-offset-2 transition-colors">Guarapo Media</a>, donde colaboro en
+              Trabajo como Software Developer en <a href="https://guarapomedia.com/" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white underline underline-offset-2 transition-colors">Guarapo Media</a>, donde colaboro en
               proyectos como New Vision Sports y Hola Atelier. También hice
               prácticas en Regalexia.com mejorando SEO y frontend.
             </p>
