@@ -1,10 +1,39 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+
+const NAV_LINKS = [
+  { to: '/sobre-mi',  label: 'Sobre mí' },
+  { to: '/proyectos', label: 'Proyectos' },
+  { to: '/contacto',  label: 'Contacto' },
+]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
+
+  // Sliding indicator refs
+  const navContainerRef = useRef(null)
+  const indicatorRef = useRef(null)
+  const linkRefs = useRef({})
+
+  const positionIndicator = useCallback(() => {
+    const container = navContainerRef.current
+    const indicator = indicatorRef.current
+    const activeLink = linkRefs.current[location.pathname]
+    if (!container || !indicator || !activeLink) {
+      if (indicator) indicator.style.opacity = '0'
+      return
+    }
+    const containerRect = container.getBoundingClientRect()
+    const linkRect = activeLink.getBoundingClientRect()
+    indicator.style.opacity = '1'
+    indicator.style.left = `${linkRect.left - containerRect.left + linkRect.width / 2 - 2}px`
+  }, [location.pathname])
+
+  useLayoutEffect(() => {
+    positionIndicator()
+  }, [positionIndicator])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -34,31 +63,25 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-mono">
-            <Link
-              to="/sobre-mi"
-              className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                location.pathname === '/sobre-mi' ? 'text-white' : 'text-white/50'
-              }`}
-            >
-              Sobre mí
-            </Link>
-            <Link
-              to="/proyectos"
-              className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                location.pathname === '/proyectos' ? 'text-white' : 'text-white/50'
-              }`}
-            >
-              Proyectos
-            </Link>
-            <Link
-              to="/contacto"
-              className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                location.pathname === '/contacto' ? 'text-white' : 'text-white/50'
-              }`}
-            >
-              Contacto
-            </Link>
+          <div ref={navContainerRef} className="hidden md:flex items-center gap-8 text-sm font-mono relative">
+            {/* Sliding dot indicator */}
+            <span
+              ref={indicatorRef}
+              className="absolute -bottom-1.5 h-[3px] w-[3px] rounded-full bg-white transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] pointer-events-none"
+              style={{ opacity: 0, boxShadow: '0 0 6px rgba(255,255,255,0.5)' }}
+            />
+            {NAV_LINKS.map(({ to, label }) => (
+              <Link
+                key={to}
+                to={to}
+                ref={(el) => { linkRefs.current[to] = el }}
+                className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
+                  location.pathname === to ? 'text-white' : 'text-white/50'
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
             <a
               href="/assets/EnzoMazzariol-CV.pdf"
               target="_blank"

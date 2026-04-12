@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
+import StarBorder from '../components/StarBorder.jsx'
 import SelectedWorks from '../components/home/SelectedWorks.jsx'
 import ServicesGrid from '../components/home/ServicesGrid.jsx'
 import ProcessSteps from '../components/home/ProcessSteps.jsx'
@@ -138,18 +139,22 @@ export default function HomePage() {
                 className="hero-btns hero-fade-up flex gap-4 text-sm font-mono"
                 style={{ animationDelay: '0.87s' }}
               >
-                <Link
-                  to="/proyectos"
-                  className="border border-white/20 text-white/70 hover:text-white hover:border-white/50 transition-all px-5 py-2.5 min-h-[44px] flex items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-                >
-                  Ver proyectos →
-                </Link>
-                <Link
-                  to="/contacto"
-                  className="bg-white text-black hover:bg-white/90 transition-all px-5 py-2.5 min-h-[44px] flex items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
-                >
-                  Hablemos
-                </Link>
+                <StarBorder color="rgba(255,255,255,0.5)" speed="7s">
+                  <Link
+                    to="/proyectos"
+                    className="text-white/70 hover:text-white transition-all px-5 py-2.5 min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                  >
+                    Ver proyectos →
+                  </Link>
+                </StarBorder>
+                <StarBorder color="rgba(100,180,255,0.6)" speed="5s" innerClassName="!bg-white">
+                  <Link
+                    to="/contacto"
+                    className="text-black transition-all px-5 py-2.5 min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
+                  >
+                    Hablemos
+                  </Link>
+                </StarBorder>
               </div>
             </div>
           </div>
