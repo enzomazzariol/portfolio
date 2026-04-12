@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { SiReact, SiGooglesearchconsole, SiOpenjdk, SiTailwindcss } from 'react-icons/si'
+import StarBorder from '../components/StarBorder'
 import TerminalTyper from '../components/TerminalTyper'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -251,12 +252,14 @@ export default function AboutPage() {
         <h2 className="font-display text-[clamp(2rem,6vw,5rem)] font-bold text-white mb-10 leading-tight">
           ¿Tienes un proyecto<br className="hidden md:block" /> en mente?
         </h2>
-        <Link
-          to="/contacto"
-          className="inline-flex items-center bg-white text-black font-mono text-sm px-8 py-3 min-h-[44px] hover:bg-white/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
-        >
-          Hablemos →
-        </Link>
+        <StarBorder color="rgba(100,180,255,0.6)" speed="6s" innerClassName="!bg-white">
+          <Link
+            to="/contacto"
+            className="inline-flex items-center text-black font-mono text-sm px-8 py-3 min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
+          >
+            Hablemos →
+          </Link>
+        </StarBorder>
       </section>
 
     </div>
