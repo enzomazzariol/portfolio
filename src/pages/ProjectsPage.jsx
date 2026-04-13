@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { usePageMeta } from '../hooks/usePageMeta'
 
 gsap.registerPlugin(useGSAP)
 import { portfolioData } from '../../public/data/portfolio.js'
@@ -312,6 +313,13 @@ function ImageSection({ project, onIntersect, index }) {
 }
 
 export default function ProjectsPage() {
+  usePageMeta({
+    title: 'Proyectos — Enzo Mazzariol · Portfolio Web Barcelona',
+    description: 'Portfolio de Enzo Mazzariol: webs y apps con React, Node.js y Java Spring Boot. Proyectos reales para clientes en Barcelona. Desarrollador web y full stack.',
+    canonical: 'https://enzomazzariol.com/proyectos',
+    ogImage: 'https://enzomazzariol.com/assets/og-images/proyectos-og.png',
+  })
+
   const [activeIndex, setActiveIndex] = useState(0)
   const panelRef = useRef(null)
   const prevIndexRef = useRef(0)

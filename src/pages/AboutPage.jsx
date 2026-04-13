@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { usePageMeta } from '../hooks/usePageMeta'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -35,6 +36,13 @@ const services = [
   { label: 'UI + Frontend',   Icon: SiTailwindcss, color: '#06B6D4', side: 'left' },
 ]
 export default function AboutPage() {
+  usePageMeta({
+    title: 'Sobre mí — Enzo Mazzariol · Desarrollador Web Barcelona',
+    description: 'Enzo Mazzariol, desarrollador web y full stack en Barcelona. Creo webs con React, Node.js y Java. Software Developer en Guarapo Media. Disponible freelance.',
+    canonical: 'https://enzomazzariol.com/sobre-mi',
+    ogImage: 'https://enzomazzariol.com/assets/og-images/about-og.png',
+  })
+
   const pageRef = useRef(null)
 
   useGSAP(() => {

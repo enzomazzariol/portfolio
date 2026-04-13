@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
+import { usePageMeta } from '../hooks/usePageMeta'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -20,6 +21,13 @@ const heroWords = [
 ]
 
 export default function HomePage() {
+  usePageMeta({
+    title: 'Enzo Mazzariol — Desarrollador Web Freelance · Barcelona',
+    description: 'Desarrollador web freelance en Barcelona: webs modernas, tiendas online y apps React para pymes. Full stack con React, Node.js y Java. Webs que convierten.',
+    canonical: 'https://enzomazzariol.com/',
+    ogImage: 'https://enzomazzariol.com/assets/portfolio-og.webp',
+  })
+
   const heroRef  = useRef(null)
   const stackRef = useRef(null)
   const worksRef = useRef(null)
