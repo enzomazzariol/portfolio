@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { lazy, Suspense, useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Layout from './Layout.jsx'
 
 const HomePage      = lazy(() => import('./pages/HomePage.jsx'))
@@ -8,9 +8,20 @@ const ContactPage   = lazy(() => import('./pages/ContactPage.jsx'))
 const AboutPage     = lazy(() => import('./pages/AboutPage.jsx'))
 const NotFoundPage  = lazy(() => import('./pages/NotFoundPage.jsx'))
 
+function RouteTracker() {
+  const location = useLocation()
+  useEffect(() => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('config', 'G-3MR3P0H4X3', { page_path: location.pathname })
+    }
+  }, [location])
+  return null
+}
+
 function App() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-[#080808]" />}>
+      <RouteTracker />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/"          element={<HomePage />} />
