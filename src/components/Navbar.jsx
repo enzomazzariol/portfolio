@@ -1,0 +1,178 @@
+import { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react'
+
+const NAV_LINKS = [
+  { to: '/sobre-mi',  label: 'Sobre mí' },
+  { to: '/proyectos', label: 'Proyectos' },
+  { to: '/contacto',  label: 'Contacto' },
+]
+
+// eslint-disable-next-line react/prop-types
+export default function Navbar({ pathname }) {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  // Sliding indicator refs
+  const navContainerRef = useRef(null)
+  const indicatorRef = useRef(null)
+  const linkRefs = useRef({})
+
+  const positionIndicator = useCallback(() => {
+    const container = navContainerRef.current
+    const indicator = indicatorRef.current
+    const activeLink = linkRefs.current[pathname]
+    if (!container || !indicator || !activeLink) {
+      if (indicator) indicator.style.opacity = '0'
+      return
+    }
+    const containerRect = container.getBoundingClientRect()
+    const linkRect = activeLink.getBoundingClientRect()
+    indicator.style.opacity = '1'
+    indicator.style.left = `${linkRect.left - containerRect.left + linkRect.width / 2 - 2}px`
+  }, [pathname])
+
+  useLayoutEffect(() => {
+    positionIndicator()
+  }, [positionIndicator])
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  return (
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-[#080808]/90 backdrop-blur-sm border-b border-white/5'
+            : 'bg-[#080808]/80 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none'
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
+          <a
+            href="/"
+            className="text-white font-mono text-sm tracking-wider hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          >
+            enzo.
+          </a>
+
+          {/* Desktop nav */}
+          <div ref={navContainerRef} className="hidden md:flex items-center gap-8 text-sm font-mono relative">
+            {/* Sliding dot indicator */}
+            <span
+              ref={indicatorRef}
+              className="absolute -bottom-1.5 h-[3px] w-[3px] rounded-full bg-white transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] pointer-events-none"
+              style={{ opacity: 0, boxShadow: '0 0 6px rgba(255,255,255,0.5)' }}
+            />
+            {NAV_LINKS.map(({ to, label }) => (
+              <a
+                key={to}
+                href={to}
+                ref={(el) => { linkRefs.current[to] = el }}
+                className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
+                  pathname === to ? 'text-white' : 'text-white/50'
+                }`}
+              >
+                {label}
+              </a>
+            ))}
+            <a
+              href="/assets/EnzoMazzariol-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            >
+              CV ↗︎
+            </a>
+          </div>
+
+          {/* Mobile hamburger — z-50 so it stays above the overlay */}
+          <button
+            className="md:hidden relative z-50 text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? (
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M4 4l12 12M4 16L16 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile full-screen overlay — outside <nav> to avoid scroll interference */}
+      <div
+        className={`md:hidden fixed inset-0 z-40 bg-[#080808]/95 backdrop-blur-md flex flex-col justify-end px-8 pb-16 transition-opacity duration-300 ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        {/* Nav links */}
+        <nav className="flex flex-col gap-2 mb-12">
+          {[
+            { label: 'Sobre mí', to: '/sobre-mi' },
+            { label: 'Proyectos', to: '/proyectos' },
+            { label: 'Contacto', to: '/contacto' },
+          ].map(({ label, to }, index) => (
+            <a
+              key={to}
+              href={to}
+              onClick={() => setMenuOpen(false)}
+              className={`font-display font-bold text-6xl leading-none tracking-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
+                pathname === to ? 'text-white' : 'text-white/30 hover:text-white'
+              }`}
+              style={{
+                transitionProperty: 'transform, opacity, color',
+                transitionDuration: '0.35s',
+                transitionTimingFunction: 'ease',
+                transitionDelay: `${index * 60}ms`,
+                transform: menuOpen ? 'translateY(0)' : 'translateY(1.25rem)',
+                opacity: menuOpen ? 1 : 0,
+              }}
+            >
+              {label}
+            </a>
+          ))}
+          <a
+            href="/assets/EnzoMazzariol-CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-display font-bold text-6xl leading-none tracking-tight text-white/30 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            style={{
+              transitionProperty: 'transform, opacity, color',
+              transitionDuration: '0.35s',
+              transitionTimingFunction: 'ease',
+              transitionDelay: '180ms',
+              transform: menuOpen ? 'translateY(0)' : 'translateY(1.25rem)',
+              opacity: menuOpen ? 1 : 0,
+            }}
+          >
+            CV ↗︎
+          </a>
+        </nav>
+
+        {/* Metadata footer */}
+        <p
+          className="font-mono text-xs text-white/40 tracking-widest uppercase"
+          style={{
+            transitionProperty: 'transform, opacity',
+            transitionDuration: '0.35s',
+            transitionTimingFunction: 'ease',
+            transitionDelay: '260ms',
+            transform: menuOpen ? 'translateY(0)' : 'translateY(0.75rem)',
+            opacity: menuOpen ? 1 : 0,
+          }}
+        >
+          Enzo Mazzariol · {new Date().getFullYear()}
+        </p>
+      </div>
+    </>
+  )
+}

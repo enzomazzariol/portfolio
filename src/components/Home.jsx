@@ -1,16 +1,14 @@
 import { useRef, useState, useEffect, lazy, Suspense } from 'react'
-import { Link } from 'react-router-dom'
-import { usePageMeta } from '../hooks/usePageMeta'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import StarBorder from '../components/StarBorder.jsx'
-import SelectedWorks from '../components/home/SelectedWorks.jsx'
-import ServicesGrid from '../components/home/ServicesGrid.jsx'
-import ProcessSteps from '../components/home/ProcessSteps.jsx'
-import StackSection from '../components/home/StackSection.jsx'
+import StarBorder from './StarBorder.jsx'
+import SelectedWorks from './home/SelectedWorks.jsx'
+import ServicesGrid from './home/ServicesGrid.jsx'
+import ProcessSteps from './home/ProcessSteps.jsx'
+import StackSection from './home/StackSection.jsx'
 
-const Prism = lazy(() => import('../components/Prism.jsx'))
+const Prism = lazy(() => import('./Prism.jsx'))
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -20,14 +18,7 @@ const heroWords = [
   { word: 'Mazzariol', startDelay: 0.22, perCharDelay: 0.04 },
 ]
 
-export default function HomePage() {
-  usePageMeta({
-    title: 'Enzo Mazzariol — Desarrollador Web en Barcelona',
-    description: 'Desarrollador web en Barcelona: webs modernas, tiendas online y apps React para pymes. Full stack con React, Node.js y Java. Webs que convierten.',
-    canonical: 'https://enzomazzariol.com/',
-    ogImage: 'https://enzomazzariol.com/assets/portfolio-og.webp',
-  })
-
+export default function Home() {
   const heroRef  = useRef(null)
   const stackRef = useRef(null)
   const worksRef = useRef(null)
@@ -148,20 +139,20 @@ export default function HomePage() {
                 style={{ animationDelay: '0.87s' }}
               >
                 <StarBorder color="rgba(255,255,255,0.5)" speed="7s">
-                  <Link
-                    to="/proyectos"
+                  <a
+                    href="/proyectos"
                     className="text-white/70 hover:text-white transition-all px-5 py-2.5 min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
                   >
                     Ver proyectos →
-                  </Link>
+                  </a>
                 </StarBorder>
                 <StarBorder color="rgba(100,180,255,0.6)" speed="5s" innerClassName="!bg-white">
-                  <Link
-                    to="/contacto"
+                  <a
+                    href="/contacto"
                     className="text-black transition-all px-5 py-2.5 min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
                   >
                     Hablemos
-                  </Link>
+                  </a>
                 </StarBorder>
               </div>
             </div>
