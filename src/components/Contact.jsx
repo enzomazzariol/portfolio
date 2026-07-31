@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import SkillScramble from '../components/SkillScramble'
-import { usePageMeta } from '../hooks/usePageMeta'
+import SkillScramble from './SkillScramble.jsx'
 
 function validate({ name, email, service, message }) {
   const errs = {}
@@ -18,14 +17,7 @@ function validate({ name, email, service, message }) {
   return errs
 }
 
-export default function ContactPage() {
-  usePageMeta({
-    title: 'Contacto — Enzo Mazzariol · Desarrollador Web Barcelona',
-    description: '¿Tienes un proyecto web en mente? Escríbeme. Enzo Mazzariol, desarrollador web freelance y full stack en Barcelona, disponible para nuevos proyectos ahora.',
-    canonical: 'https://enzomazzariol.com/contacto',
-    ogImage: 'https://enzomazzariol.com/assets/og-images/contacto-og.png',
-  })
-
+export default function Contact() {
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [errors, setErrors] = useState({})
 

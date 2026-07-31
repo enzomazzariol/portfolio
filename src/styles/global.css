@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Melodrama', sans-serif;
+  --font-sans: 'General Sans', sans-serif;
+  --font-mono: 'General Sans', sans-serif;
+}
+
+/* Force text rendering for arrow/symbol chars — prevents emoji glyph on iOS mobile */
+html {
+  font-variant-emoji: text;
+}
+
+@layer base {
+  /* Prevent horizontal scroll without creating a new scroll container.
+     overflow-x: hidden on body (not a wrapper div) doesn't break position: sticky. */
+  body {
+    overflow-x: hidden;
+  }
+
+  html {
+    font-family: 'General Sans', sans-serif;
+  }
+
+  h1,
+  h2 {
+    font-family: 'Melodrama', sans-serif;
+  }
+}
+
+/* ── Hero: curtain reveal — text always opacity:1 (LCP-friendly), curtain slides up ── */
+
+/* Wrapper clips the sliding curtain via overflow:hidden */
+.hero-char-wrap {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+/* The char itself rises slightly as the curtain uncovers it */
+.hero-char {
+  display: inline-block;
+  animation: heroCharRise 0.55s ease-out both;
+}
+
+@keyframes heroCharRise {
+  from { transform: translateY(18%); }
+  to   { transform: translateY(0); }
+}
+
+/* Same-color curtain slides up and out of the wrapper, revealing the char */
+.hero-char-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #080808;
+  animation: curtainUp 0.45s cubic-bezier(0.76, 0, 0.24, 1) both;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes curtainUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-101%); }
+}
+
+@keyframes heroFadeDown {
+  from { opacity: 0; transform: translateY(-0.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(0.625rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-fade-down {
+  opacity: 0;
+  animation: heroFadeDown 0.35s ease-out both;
+}
+
+.hero-fade-up {
+  opacity: 0;
+  animation: heroFadeUp 0.7s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-char,
+  .hero-fade-down,
+  .hero-fade-up {
+    animation: none;
+    opacity: 1;
+  }
+  .hero-char-wrap::after {
+    display: none;
+  }
+}
+
+/* ── About: marquee (CSS replaces GSAP infinite tween — runs on compositor thread) ── */
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marqueeScroll 25s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation-play-state: paused; }
+}
+
+/* ── About: orbital SVG dots (CSS replaces 3 GSAP infinite tweens) ── */
+@keyframes spinCW  { to { transform: rotate(360deg); } }
+@keyframes spinCCW { to { transform: rotate(-360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-dot { animation: none !important; }
+}

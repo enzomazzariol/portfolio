@@ -1,12 +1,10 @@
 import { useRef } from 'react'
-import { Link } from 'react-router-dom'
-import { usePageMeta } from '../hooks/usePageMeta'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { SiReact, SiGooglesearchconsole, SiOpenjdk, SiTailwindcss } from 'react-icons/si'
-import StarBorder from '../components/StarBorder'
-import TerminalTyper from '../components/TerminalTyper'
+import StarBorder from './StarBorder.jsx'
+import TerminalTyper from './TerminalTyper.jsx'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -35,14 +33,8 @@ const services = [
   { label: 'Backend & APIs',  Icon: SiOpenjdk,     color: '#f89820', side: 'right' },
   { label: 'UI + Frontend',   Icon: SiTailwindcss, color: '#06B6D4', side: 'left' },
 ]
-export default function AboutPage() {
-  usePageMeta({
-    title: 'Sobre mí — Enzo Mazzariol · Desarrollador Web Barcelona',
-    description: 'Enzo Mazzariol, desarrollador web y full stack en Barcelona. Creo webs con React, Node.js y Java. Software Developer en Guarapo Media. Disponible freelance.',
-    canonical: 'https://enzomazzariol.com/sobre-mi',
-    ogImage: 'https://enzomazzariol.com/assets/og-images/about-og.png',
-  })
 
+export default function About() {
   const pageRef = useRef(null)
 
   useGSAP(() => {
@@ -152,7 +144,7 @@ export default function AboutPage() {
         {[
           { label: 'Experiencia', value: `${new Date().getFullYear() - 2023} años programando` },
           { label: 'Ubicación', value: 'Barcelona, España' },
-          { label: 'Freelance', value: null },
+          { label: 'Disponibilidad', value: null },
         ].map(({ label, value }) => (
           <div key={label} className="stat-item">
             <div className="flex items-center gap-3 mb-3">
@@ -261,12 +253,12 @@ export default function AboutPage() {
           ¿Tienes un proyecto<br className="hidden md:block" /> en mente?
         </h2>
         <StarBorder color="rgba(100,180,255,0.6)" speed="6s" innerClassName="!bg-white">
-          <Link
-            to="/contacto"
+          <a
+            href="/contacto"
             className="inline-flex items-center text-black font-mono text-sm px-8 py-3 min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
           >
             Hablemos →
-          </Link>
+          </a>
         </StarBorder>
       </section>
 

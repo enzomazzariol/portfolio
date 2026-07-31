@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { portfolioData } from '../../data/portfolio.js'
+import { Link } from 'react-router-dom'
+import { portfolioData } from '../../../public/data/portfolio.js'
 
 const isTouchDevice = () =>
   typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
@@ -94,12 +95,12 @@ export default function SelectedWorks({ containerRef }) {
         })}
       </div>
       <div className="mt-10 flex justify-end">
-        <a
-          href="/proyectos"
+        <Link
+          to="/proyectos"
           className="text-sm font-mono text-white/60 hover:text-white/90 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
         >
           Ver todos →
-        </a>
+        </Link>
       </div>
     </section>
   )

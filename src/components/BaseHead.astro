@@ -1,0 +1,134 @@
+---
+interface Props {
+  title: string
+  description: string
+  ogImage?: string
+}
+
+const {
+  title,
+  description,
+  ogImage = 'https://enzomazzariol.com/assets/portfolio-og.webp',
+} = Astro.props
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/'
+const canonical = new URL(pathname, Astro.site)
+---
+
+<meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="/code-favicon.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>{title}</title>
+
+<meta name="google-site-verification" content="ZTN4ED_AsrL0KhJu_IvJSbO3dOlghfrA70wZ7gRnJ5A" />
+
+<!-- Primary Meta Tags -->
+<meta name="title" content={title} />
+<meta name="author" content="Enzo Mazzariol" />
+<meta name="description" content={description} />
+<meta
+  name="keywords"
+  content="desarrollador full stack Barcelona, programador web Barcelona, contratar desarrollador web Barcelona, React developer Barcelona, Node.js Barcelona, Java Spring Boot, desarrollo web Barcelona, portfolio desarrollador"
+/>
+<meta name="robots" content="index, follow" />
+<meta property="og:locale" content="es_ES" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content="Enzo Mazzariol Portfolio" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonical} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImage} />
+
+<!-- Canonical -->
+<link rel="canonical" href={canonical} />
+
+<!-- Structured Data (JSON-LD) — site-wide, identical on every page -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://enzomazzariol.com/#person',
+      name: 'Enzo Mazzariol',
+      jobTitle: 'Desarrollador Web',
+      url: 'https://enzomazzariol.com/',
+      image: {
+        '@type': 'ImageObject',
+        url: 'https://enzomazzariol.com/assets/me.jpeg',
+        width: 800,
+        height: 800,
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Barcelona',
+        addressRegion: 'Cataluña',
+        addressCountry: 'ES',
+      },
+      sameAs: [
+        'https://www.linkedin.com/in/enzo-mazzariol/',
+        'https://github.com/enzomazzariol',
+        'https://www.instagram.com/enzomazzariol/',
+      ],
+      email: 'mazzariolenzo@gmail.com',
+      description: 'Desarrollador web en Barcelona: webs modernas, tiendas online y apps React para pymes. Full stack con React, Node.js y Java. Webs que convierten.',
+      knowsAbout: ['React', 'Node.js', 'Java', 'Spring Boot', 'Tailwind CSS', 'Docker', 'MySQL', 'Firebase', 'Desarrollo Web', 'Desarrollo Móvil'],
+      availableLanguage: ['Español', 'Inglés'],
+      hasOccupation: {
+        '@type': 'Occupation',
+        name: 'Desarrollador Full Stack',
+        occupationLocation: { '@type': 'City', name: 'Barcelona' },
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://enzomazzariol.com/#website',
+      name: 'Enzo Mazzariol — Portfolio',
+      url: 'https://enzomazzariol.com/',
+      description: 'Desarrollador web en Barcelona: webs modernas, tiendas online y apps React para pymes. Full stack con React, Node.js y Java. Webs que convierten.',
+      author: { '@id': 'https://enzomazzariol.com/#person' },
+      image: {
+        '@type': 'ImageObject',
+        url: 'https://enzomazzariol.com/assets/portfolio-og.webp',
+        width: 1428,
+        height: 742,
+      },
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': 'https://enzomazzariol.com/#service',
+      name: 'Enzo Mazzariol — Desarrollo Web',
+      description: 'Servicios de desarrollo web y móvil en Barcelona. Aplicaciones React, APIs Node.js/Spring Boot, bases de datos y despliegue en la nube.',
+      provider: { '@id': 'https://enzomazzariol.com/#person' },
+      areaServed: { '@type': 'City', name: 'Barcelona' },
+      url: 'https://enzomazzariol.com/',
+      email: 'mazzariolenzo@gmail.com',
+      serviceType: ['Desarrollo Web', 'Desarrollo de Aplicaciones Móviles', 'Consultoría Técnica'],
+    },
+  ],
+})} />
+
+<!-- Fonts — non-render-blocking; preconnect to CDN where font files are served -->
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=melodrama@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=melodrama@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap"></noscript>
+
+<!-- Google tag (gtag.js) — real page loads per route, no manual RouteTracker needed -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3MR3P0H4X3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3MR3P0H4X3');
+</script>

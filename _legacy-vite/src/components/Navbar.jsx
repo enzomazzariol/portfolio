@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 const NAV_LINKS = [
   { to: '/sobre-mi',  label: 'Sobre mí' },
@@ -6,10 +7,10 @@ const NAV_LINKS = [
   { to: '/contacto',  label: 'Contacto' },
 ]
 
-// eslint-disable-next-line react/prop-types
-export default function Navbar({ pathname }) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const location = useLocation()
 
   // Sliding indicator refs
   const navContainerRef = useRef(null)
@@ -19,7 +20,7 @@ export default function Navbar({ pathname }) {
   const positionIndicator = useCallback(() => {
     const container = navContainerRef.current
     const indicator = indicatorRef.current
-    const activeLink = linkRefs.current[pathname]
+    const activeLink = linkRefs.current[location.pathname]
     if (!container || !indicator || !activeLink) {
       if (indicator) indicator.style.opacity = '0'
       return
@@ -28,7 +29,7 @@ export default function Navbar({ pathname }) {
     const linkRect = activeLink.getBoundingClientRect()
     indicator.style.opacity = '1'
     indicator.style.left = `${linkRect.left - containerRect.left + linkRect.width / 2 - 2}px`
-  }, [pathname])
+  }, [location.pathname])
 
   useLayoutEffect(() => {
     positionIndicator()
@@ -40,6 +41,10 @@ export default function Navbar({ pathname }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location])
+
   return (
     <>
       <nav
@@ -50,12 +55,12 @@ export default function Navbar({ pathname }) {
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="text-white font-mono text-sm tracking-wider hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
           >
             enzo.
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <div ref={navContainerRef} className="hidden md:flex items-center gap-8 text-sm font-mono relative">
@@ -66,16 +71,16 @@ export default function Navbar({ pathname }) {
               style={{ opacity: 0, boxShadow: '0 0 6px rgba(255,255,255,0.5)' }}
             />
             {NAV_LINKS.map(({ to, label }) => (
-              <a
+              <Link
                 key={to}
-                href={to}
+                to={to}
                 ref={(el) => { linkRefs.current[to] = el }}
                 className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                  pathname === to ? 'text-white' : 'text-white/50'
+                  location.pathname === to ? 'text-white' : 'text-white/50'
                 }`}
               >
                 {label}
-              </a>
+              </Link>
             ))}
             <a
               href="/assets/EnzoMazzariol-CV.pdf"
@@ -121,12 +126,11 @@ export default function Navbar({ pathname }) {
             { label: 'Proyectos', to: '/proyectos' },
             { label: 'Contacto', to: '/contacto' },
           ].map(({ label, to }, index) => (
-            <a
+            <Link
               key={to}
-              href={to}
-              onClick={() => setMenuOpen(false)}
+              to={to}
               className={`font-display font-bold text-6xl leading-none tracking-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                pathname === to ? 'text-white' : 'text-white/30 hover:text-white'
+                location.pathname === to ? 'text-white' : 'text-white/30 hover:text-white'
               }`}
               style={{
                 transitionProperty: 'transform, opacity, color',
@@ -138,7 +142,7 @@ export default function Navbar({ pathname }) {
               }}
             >
               {label}
-            </a>
+            </Link>
           ))}
           <a
             href="/assets/EnzoMazzariol-CV.pdf"

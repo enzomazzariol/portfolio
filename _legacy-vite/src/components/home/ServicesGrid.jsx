@@ -1,4 +1,5 @@
 import { useRef, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import StarBorder from '../StarBorder.jsx'
 
 const services = [
@@ -32,9 +33,9 @@ function ServiceCard({ n, span, minH, title, desc, big }) {
   }, [])
 
   return (
-    <a
+    <Link
       ref={cardRef}
-      href="/contacto"
+      to="/contacto"
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       className={`service-card group relative ${span} border-r border-b border-white/[0.07] p-8 ${n === '01' ? 'md:p-10' : ''} flex flex-col justify-between ${minH} transition-all duration-300 cursor-pointer overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-inset hover:border-white/[0.15]`}
@@ -55,7 +56,7 @@ function ServiceCard({ n, span, minH, title, desc, big }) {
         <h3 className={`font-display ${n === '01' ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-bold text-white mb-2 leading-tight group-hover:translate-x-1 transition-transform duration-300`}>{title}</h3>
         <p className={`text-xs text-white/35 leading-relaxed group-hover:text-white/50 transition-colors duration-300 ${n === '01' ? 'max-w-xs' : ''}`}>{desc}</p>
       </div>
-    </a>
+    </Link>
   )
 }
 
@@ -75,8 +76,8 @@ export default function ServicesGrid() {
       {/* CTA button */}
       <div className="mt-10 flex justify-center">
         <StarBorder color="rgba(255,255,255,0.5)" speed="6s">
-          <a
-            href="/contacto"
+          <Link
+            to="/contacto"
             className="flex items-center gap-3 px-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 hover:text-white/90 transition-colors"
             style={{ height: '44px' }}
           >
@@ -86,7 +87,7 @@ export default function ServicesGrid() {
             <span className="text-sm text-white">
               →
             </span>
-          </a>
+          </Link>
         </StarBorder>
       </div>
     </section>
