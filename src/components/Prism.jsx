@@ -308,7 +308,19 @@ const Prism = ({
       program.uniforms.uUseBaseWobble.value = 1;
     }
 
+    // Cap the raymarcher to ~30fps — the shader is expensive per-frame and
+    // running it at full 60fps burns main-thread time for no visible gain
+    // (this WebGL loop, not anything Astro-specific, was the TBT culprit).
+    const FRAME_INTERVAL = 1000 / 30;
+    let lastRenderTime = 0;
+
     const render = t => {
+      if (t - lastRenderTime < FRAME_INTERVAL) {
+        raf = requestAnimationFrame(render);
+        return;
+      }
+      lastRenderTime = t;
+
       const time = (t - t0) * 0.001;
       program.uniforms.iTime.value = time;
       let continueRAF = true;
