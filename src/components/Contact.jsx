@@ -1,15 +1,13 @@
 import { useState } from 'react'
 import SkillScramble from './SkillScramble.jsx'
 
-function validate({ name, email, service, message }) {
+function validate({ name, email, message }) {
   const errs = {}
   if (!name.trim()) errs.name = 'Nombre requerido'
   else if (name.trim().length < 2) errs.name = 'Nombre demasiado corto'
 
   if (!email.trim()) errs.email = 'Email requerido'
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errs.email = 'Email inválido'
-
-  if (!service) errs.service = 'Selecciona un tipo de servicio'
 
   if (!message.trim()) errs.message = 'Mensaje requerido'
   else if (message.trim().length < 10) errs.message = 'Cuéntame un poco más'
@@ -28,7 +26,6 @@ export default function Contact() {
     const values = {
       name: data.get('name') ?? '',
       email: data.get('email') ?? '',
-      service: data.get('service') ?? '',
       message: data.get('message') ?? '',
     }
 
@@ -63,9 +60,9 @@ export default function Contact() {
     <main className="min-h-screen px-6 md:px-10 pt-28 pb-20 max-w-6xl mx-auto flex flex-col justify-center">
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-16 mb-12">
         <div>
-          <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-4">Hablemos</p>
+          <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-4">Contacto</p>
           <h1 className="font-display text-[clamp(3rem,8vw,6rem)] font-bold leading-[0.9] tracking-tighter text-white">
-            Cuéntame<br />tu proyecto.
+            Escríbeme.
           </h1>
         </div>
         <div className="md:pt-6">
@@ -118,29 +115,12 @@ export default function Contact() {
                 className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none"
               />
             </div>
-            <div className={`border-b py-4 focus-within:border-white/40 transition-colors ${errors.service ? 'border-red-400/60' : 'border-white/10'}`}>
-              <label htmlFor="service" className="sr-only">¿Qué necesitas?</label>
-              <select
-                id="service"
-                name="service"
-                defaultValue=""
-                className="w-full bg-transparent text-white text-base font-mono outline-none appearance-none cursor-pointer [&>option]:bg-[#080808] [&>option]:text-white"
-              >
-                <option value="" disabled className="text-white/20">¿Qué necesitas?</option>
-                <option value="web">Sitio web / Landing page</option>
-                <option value="ecommerce">Tienda online</option>
-                <option value="app">Aplicación web o móvil</option>
-                <option value="mantenimiento">Mantenimiento / mejoras</option>
-                <option value="otro">Otro</option>
-              </select>
-              {errors.service && <p className="text-xs font-mono text-red-400 mt-1">{errors.service}</p>}
-            </div>
             <div className={`border-b py-4 focus-within:border-white/40 transition-colors ${errors.message ? 'border-red-400/60' : 'border-white/10'}`}>
               <label htmlFor="message" className="sr-only">Tu mensaje</label>
               <textarea
                 id="message"
                 name="message"
-                placeholder="Cuéntame sobre tu proyecto *"
+                placeholder="Tu mensaje *"
                 rows="5"
                 className="w-full bg-transparent text-white placeholder-white/35 text-base font-mono outline-none resize-none"
               />

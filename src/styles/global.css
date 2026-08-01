@@ -2,8 +2,8 @@
 
 @theme {
   --font-display: 'Melodrama', sans-serif;
-  --font-sans: 'General Sans', sans-serif;
-  --font-mono: 'General Sans', sans-serif;
+  --font-sans: 'Satoshi', sans-serif;
+  --font-mono: 'Satoshi', sans-serif;
 }
 
 /* Force text rendering for arrow/symbol chars — prevents emoji glyph on iOS mobile */
@@ -19,7 +19,7 @@ html {
   }
 
   html {
-    font-family: 'General Sans', sans-serif;
+    font-family: 'Satoshi', sans-serif;
   }
 
   h1,

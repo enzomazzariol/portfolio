@@ -4,8 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import StarBorder from './StarBorder.jsx'
 import SelectedWorks from './home/SelectedWorks.jsx'
-import ServicesGrid from './home/ServicesGrid.jsx'
-import ProcessSteps from './home/ProcessSteps.jsx'
+import ExperienceSection from './home/ExperienceSection.jsx'
 import StackSection from './home/StackSection.jsx'
 
 const Prism = lazy(() => import('./Prism.jsx'))
@@ -22,7 +21,7 @@ export default function Home() {
   const heroRef  = useRef(null)
   const stackRef = useRef(null)
   const worksRef = useRef(null)
-  const stepsRef = useRef(null)
+  const expRef   = useRef(null)
   const [prismReady, setPrismReady] = useState(false)
 
   // Defer Prism until the browser is idle — prevents the 60-step raymarcher
@@ -57,9 +56,9 @@ export default function Home() {
       { autoAlpha: 0, y: 20 },
       { autoAlpha: 1, y: 0, stagger: 0.08, scrollTrigger: { trigger: worksRef.current, start: 'top 82%', toggleActions: 'play none none none' } }
     )
-    gsap.fromTo('.step-item',
+    gsap.fromTo('.exp-item',
       { autoAlpha: 0, y: 30 },
-      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.12, scrollTrigger: { trigger: stepsRef.current, start: 'top 82%', toggleActions: 'play none none none' } }
+      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.12, scrollTrigger: { trigger: expRef.current, start: 'top 82%', toggleActions: 'play none none none' } }
     )
   }, { scope: heroRef })
 
@@ -146,14 +145,6 @@ export default function Home() {
                     Ver proyectos →
                   </a>
                 </StarBorder>
-                <StarBorder color="rgba(100,180,255,0.6)" speed="5s" innerClassName="!bg-white">
-                  <a
-                    href="/contacto"
-                    className="text-black transition-all px-5 py-2.5 min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
-                  >
-                    Hablemos
-                  </a>
-                </StarBorder>
               </div>
             </div>
           </div>
@@ -173,14 +164,13 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500" />
               </span>
-              Disponible para proyectos
+              Abierto a nuevas oportunidades
             </div>
           </div>
         </main>
 
         <SelectedWorks containerRef={worksRef} />
-        <ServicesGrid />
-        <ProcessSteps containerRef={stepsRef} />
+        <ExperienceSection containerRef={expRef} />
         <StackSection containerRef={stackRef} />
 
       </div>

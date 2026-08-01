@@ -159,7 +159,7 @@ export default function About() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
                 </span>
-                Disponible
+                Abierto a nuevas oportunidades
               </p>
             )}
           </div>
@@ -222,9 +222,9 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── SERVICES (editorial style) ── */}
+      {/* ── ESPECIALIDADES (editorial style) ── */}
       <section className="px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
-        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-10">Servicios</p>
+        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-10">Especialidades</p>
 
         <div className="flex flex-col">
           {services.map(({ label, Icon, color, side }) => (
@@ -248,16 +248,16 @@ export default function About() {
 
       {/* ── CTA ── */}
       <section className="cta-section px-6 md:px-10 py-24 max-w-6xl mx-auto text-center">
-        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-6">Trabajo juntos</p>
+        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-6">Contacto</p>
         <h2 className="font-display text-[clamp(2rem,6vw,5rem)] font-bold text-white mb-10 leading-tight">
-          ¿Tienes un proyecto<br className="hidden md:block" /> en mente?
+          ¿Buscas un developer<br className="hidden md:block" /> para tu equipo?
         </h2>
         <StarBorder color="rgba(100,180,255,0.6)" speed="6s" innerClassName="!bg-white">
           <a
             href="/contacto"
             className="inline-flex items-center text-black font-mono text-sm px-8 py-3 min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
           >
-            Hablemos →
+            Contactarme →
           </a>
         </StarBorder>
       </section>

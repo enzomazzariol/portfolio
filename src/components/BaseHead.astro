@@ -29,7 +29,7 @@ const canonical = new URL(pathname, Astro.site)
 <meta name="description" content={description} />
 <meta
   name="keywords"
-  content="desarrollador full stack Barcelona, programador web Barcelona, contratar desarrollador web Barcelona, React developer Barcelona, Node.js Barcelona, Java Spring Boot, desarrollo web Barcelona, portfolio desarrollador"
+  content="desarrollador full stack Barcelona, React developer, Node.js developer, Java Spring Boot developer, desarrollador junior Barcelona, portfolio desarrollador web, software developer Barcelona"
 />
 <meta name="robots" content="index, follow" />
 <meta property="og:locale" content="es_ES" />
@@ -81,21 +81,29 @@ const canonical = new URL(pathname, Astro.site)
         'https://www.instagram.com/enzomazzariol/',
       ],
       email: 'mazzariolenzo@gmail.com',
-      description: 'Desarrollador web en Barcelona: webs modernas, tiendas online y apps React para pymes. Full stack con React, Node.js y Java. Webs que convierten.',
-      knowsAbout: ['React', 'Node.js', 'Java', 'Spring Boot', 'Tailwind CSS', 'Docker', 'MySQL', 'Firebase', 'Desarrollo Web', 'Desarrollo Móvil'],
+      description: 'Desarrollador full stack en Barcelona. Software Developer en Guarapo Media, estudiante de Ingeniería Audiovisual en la UPF. Proyectos con React, Node.js y Java. Abierto a nuevas oportunidades.',
+      knowsAbout: ['React', 'Astro', 'Node.js', 'Java', 'Spring Boot', 'Tailwind CSS', 'Docker', 'MySQL', 'Supabase', 'Desarrollo Web', 'Desarrollo Móvil'],
       availableLanguage: ['Español', 'Inglés'],
       hasOccupation: {
         '@type': 'Occupation',
         name: 'Desarrollador Full Stack',
         occupationLocation: { '@type': 'City', name: 'Barcelona' },
       },
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Guarapo Media',
+        url: 'https://guarapomedia.com/',
+      },
+      alumniOf: [
+        { '@type': 'CollegeOrUniversity', name: 'Universitat Pompeu Fabra' },
+      ],
     },
     {
       '@type': 'WebSite',
       '@id': 'https://enzomazzariol.com/#website',
       name: 'Enzo Mazzariol — Portfolio',
       url: 'https://enzomazzariol.com/',
-      description: 'Desarrollador web en Barcelona: webs modernas, tiendas online y apps React para pymes. Full stack con React, Node.js y Java. Webs que convierten.',
+      description: 'Desarrollador full stack en Barcelona. Software Developer en Guarapo Media, estudiante de Ingeniería Audiovisual en la UPF. Proyectos con React, Node.js y Java. Abierto a nuevas oportunidades.',
       author: { '@id': 'https://enzomazzariol.com/#person' },
       image: {
         '@type': 'ImageObject',
@@ -104,25 +112,14 @@ const canonical = new URL(pathname, Astro.site)
         height: 742,
       },
     },
-    {
-      '@type': 'ProfessionalService',
-      '@id': 'https://enzomazzariol.com/#service',
-      name: 'Enzo Mazzariol — Desarrollo Web',
-      description: 'Servicios de desarrollo web y móvil en Barcelona. Aplicaciones React, APIs Node.js/Spring Boot, bases de datos y despliegue en la nube.',
-      provider: { '@id': 'https://enzomazzariol.com/#person' },
-      areaServed: { '@type': 'City', name: 'Barcelona' },
-      url: 'https://enzomazzariol.com/',
-      email: 'mazzariolenzo@gmail.com',
-      serviceType: ['Desarrollo Web', 'Desarrollo de Aplicaciones Móviles', 'Consultoría Técnica'],
-    },
   ],
 })} />
 
 <!-- Fonts — non-render-blocking; preconnect to CDN where font files are served -->
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=melodrama@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=melodrama@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=melodrama@400,500,600,700&f[]=satoshi@400,500,600,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=melodrama@400,500,600,700&f[]=satoshi@400,500,600,700&display=swap"></noscript>
 
 <!-- Google tag (gtag.js) — real page loads per route, no manual RouteTracker needed -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MR3P0H4X3"></script>

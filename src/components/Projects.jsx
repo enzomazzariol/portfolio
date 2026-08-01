@@ -54,15 +54,34 @@ function MobileProjectCard({ project, index, onIntersect }) {
       </p>
 
       {/* Title */}
-      <h2 className="font-display text-3xl font-bold text-white leading-tight mb-2">
+      <h2 className="font-display text-3xl font-bold text-white leading-tight mb-1">
         {project.title}
       </h2>
+
+      {/* Role / year */}
+      {(project.role || project.year) && (
+        <p className="text-xs font-mono text-white/35 tracking-wide mb-4">
+          {[project.role, project.year].filter(Boolean).join(' · ')}
+        </p>
+      )}
 
       {/* Description */}
       {project.description && (
         <p className="text-sm font-mono text-white/45 leading-relaxed mb-4">
           {project.description}
         </p>
+      )}
+
+      {/* Highlights */}
+      {project.highlights && project.highlights.length > 0 && (
+        <ul className="flex flex-col gap-1.5 mb-4">
+          {project.highlights.map((h) => (
+            <li key={h} className="text-xs font-mono text-white/50 leading-relaxed flex gap-2">
+              <span className="text-white/25 shrink-0">→</span>
+              {h}
+            </li>
+          ))}
+        </ul>
       )}
 
       {/* Image */}
@@ -116,21 +135,40 @@ function MobileProjectCard({ project, index, onIntersect }) {
 
 function LeftPanel({ project, panelRef, activeIndex, onSelectProject }) {
   return (
-    <div ref={panelRef} className="flex flex-col flex-1 min-h-0 px-10 lg:px-16 pt-3 pb-10">
+    <div ref={panelRef} className="flex flex-col flex-1 min-h-0 overflow-y-auto px-10 lg:px-16 pt-3 pb-10">
       {/* Index label */}
       <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-4">
         Trabajo seleccionado
       </p>
 
       {/* Title */}
-      <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight text-white mb-6">
+      <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight text-white mb-1">
         {project.title}
       </h2>
 
+      {/* Role / year */}
+      {(project.role || project.year) && (
+        <p className="text-xs font-mono text-white/35 tracking-wide mb-6">
+          {[project.role, project.year].filter(Boolean).join(' · ')}
+        </p>
+      )}
+
       {/* Description */}
-      <p className="text-white/50 text-sm leading-relaxed max-w-sm mb-8">
+      <p className="text-white/50 text-sm leading-relaxed max-w-sm mb-6">
         {project.description}
       </p>
+
+      {/* Highlights */}
+      {project.highlights && project.highlights.length > 0 && (
+        <ul className="flex flex-col gap-2 max-w-sm mb-8">
+          {project.highlights.map((h) => (
+            <li key={h} className="text-xs font-mono text-white/45 leading-relaxed flex gap-2">
+              <span className="text-white/25 shrink-0">→</span>
+              {h}
+            </li>
+          ))}
+        </ul>
+      )}
 
       {/* Stack */}
       <div className="flex flex-wrap gap-2 mb-10">

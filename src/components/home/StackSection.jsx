@@ -1,7 +1,7 @@
 import {
   SiReact, SiNodedotjs, SiOpenjdk, SiSpringboot,
   SiTailwindcss, SiMysql, SiWordpress, SiExpo, SiGit,
-  SiJavascript,
+  SiJavascript, SiAstro, SiHtml5, SiCss, SiSupabase,
 } from 'react-icons/si'
 
 const stackDominio = [
@@ -10,14 +10,18 @@ const stackDominio = [
   { name: 'WordPress',   Icon: SiWordpress,   color: '#21759B' },
   { name: 'Git',         Icon: SiGit,         color: '#F05032' },
   { name: 'JavaScript',  Icon: SiJavascript,  color: '#F7DF1E' },
+  { name: 'HTML',        Icon: SiHtml5,       color: '#E34F26' },
+  { name: 'CSS',         Icon: SiCss,         color: '#663399' },
 ]
 
 const stackExperiencia = [
+  { name: 'Astro',       Icon: SiAstro,       color: '#FF5D01' },
   { name: 'Node.js',     Icon: SiNodedotjs,   color: '#339933' },
   { name: 'Java',        Icon: SiOpenjdk,     color: '#f89820' },
   { name: 'Spring Boot', Icon: SiSpringboot,  color: '#6DB33F' },
   { name: 'MySQL',       Icon: SiMysql,       color: '#4479A1' },
   { name: 'Expo',        Icon: SiExpo,        color: '#888' },
+  { name: 'Supabase',    Icon: SiSupabase,    color: '#3ECF8E' },
 ]
 
 // eslint-disable-next-line react/prop-types
