@@ -45,14 +45,14 @@ export default function Navbar({ pathname }) {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-[#080808]/90 backdrop-blur-sm border-b border-white/5'
-            : 'bg-[#080808]/80 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none'
+            ? 'bg-canvas/90 backdrop-blur-sm border-b border-ink/5'
+            : 'bg-canvas/80 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none'
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
           <a
             href="/"
-            className="text-white font-mono text-sm tracking-wider hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="text-ink font-mono text-sm tracking-wider hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
           >
             enzo.
           </a>
@@ -62,16 +62,16 @@ export default function Navbar({ pathname }) {
             {/* Sliding dot indicator */}
             <span
               ref={indicatorRef}
-              className="absolute -bottom-1.5 h-[3px] w-[3px] rounded-full bg-white transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] pointer-events-none"
-              style={{ opacity: 0, boxShadow: '0 0 6px rgba(255,255,255,0.5)' }}
+              className="absolute -bottom-1.5 h-[3px] w-[3px] rounded-full bg-ink transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] pointer-events-none"
+              style={{ opacity: 0 }}
             />
             {NAV_LINKS.map(({ to, label }) => (
               <a
                 key={to}
                 href={to}
                 ref={(el) => { linkRefs.current[to] = el }}
-                className={`transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                  pathname === to ? 'text-white' : 'text-white/50'
+                className={`transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
+                  pathname === to ? 'text-ink' : 'text-ink/50'
                 }`}
               >
                 {label}
@@ -81,7 +81,7 @@ export default function Navbar({ pathname }) {
               href="/assets/EnzoMazzariol-CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+              className="text-ink/50 hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
             >
               CV ↗︎
             </a>
@@ -89,7 +89,7 @@ export default function Navbar({ pathname }) {
 
           {/* Mobile hamburger — z-50 so it stays above the overlay */}
           <button
-            className="md:hidden relative z-50 text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="md:hidden relative z-50 text-ink/70 hover:text-ink transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
@@ -109,7 +109,7 @@ export default function Navbar({ pathname }) {
 
       {/* Mobile full-screen overlay — outside <nav> to avoid scroll interference */}
       <div
-        className={`md:hidden fixed inset-0 z-40 bg-[#080808]/95 backdrop-blur-md flex flex-col justify-end px-8 pb-16 transition-opacity duration-300 ${
+        className={`md:hidden fixed inset-0 z-40 bg-canvas/95 backdrop-blur-md flex flex-col justify-end px-8 pb-16 transition-opacity duration-300 ${
           menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         aria-hidden={!menuOpen}
@@ -125,8 +125,8 @@ export default function Navbar({ pathname }) {
               key={to}
               href={to}
               onClick={() => setMenuOpen(false)}
-              className={`font-display font-bold text-6xl leading-none tracking-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                pathname === to ? 'text-white' : 'text-white/30 hover:text-white'
+              className={`font-display font-bold text-6xl leading-none tracking-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
+                pathname === to ? 'text-ink' : 'text-ink/30 hover:text-ink'
               }`}
               style={{
                 transitionProperty: 'transform, opacity, color',
@@ -144,7 +144,7 @@ export default function Navbar({ pathname }) {
             href="/assets/EnzoMazzariol-CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-display font-bold text-6xl leading-none tracking-tight text-white/30 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="font-display font-bold text-6xl leading-none tracking-tight text-ink/30 hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
             style={{
               transitionProperty: 'transform, opacity, color',
               transitionDuration: '0.35s',
@@ -160,7 +160,7 @@ export default function Navbar({ pathname }) {
 
         {/* Metadata footer */}
         <p
-          className="font-mono text-xs text-white/40 tracking-widest uppercase"
+          className="font-mono text-xs text-ink/40 tracking-widest uppercase"
           style={{
             transitionProperty: 'transform, opacity',
             transitionDuration: '0.35s',

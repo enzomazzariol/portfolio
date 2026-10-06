@@ -17,7 +17,7 @@ const { title, description, ogImage } = Astro.props
   <head>
     <BaseHead title={title} description={description} ogImage={ogImage} />
   </head>
-  <body class="bg-[#080808] text-white min-h-screen font-sans">
+  <body id="top" class="bg-canvas text-ink min-h-screen font-sans antialiased">
     <Navbar pathname={Astro.url.pathname} client:load />
     <slot />
     <Footer />

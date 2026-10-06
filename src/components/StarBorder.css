@@ -31,8 +31,8 @@
 
 .inner-content {
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: #080808;
+  border: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
+  background: var(--color-canvas);
   color: white;
   font-size: 16px;
   text-align: center;

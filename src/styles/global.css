@@ -1,9 +1,72 @@
 @import "tailwindcss";
 
+/* ── Design tokens ──
+   Every color/font in the UI goes through these — change the look here, not in components. */
 @theme {
-  --font-display: 'Melodrama', sans-serif;
-  --font-sans: 'Satoshi', sans-serif;
-  --font-mono: 'Satoshi', sans-serif;
+  --color-canvas: #f7f5f3;   /* page background */
+  --color-surface: #ffffff;  /* cards, inputs */
+  --color-ink: #0d0d0d;      /* text, borders (use /opacity for muted) */
+  --color-accent: #bc361b;   /* sparing: status dot, small highlights */
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Instrument Sans', system-ui, sans-serif;
+  /* `font-mono` is used for small UI labels across the site; it maps to the sans on purpose.
+     Real code (terminal on /sobre-mi) uses `font-code`. */
+  --font-mono: 'Instrument Sans', system-ui, sans-serif;
+  --font-code: 'Geist Mono', ui-monospace, monospace;
+
+  --radius-ui: 16px;         /* buttons, cards — use rounded-ui */
+  --radius-tile: 12px;       /* images — use rounded-tile */
+}
+
+/* Contrast band: any subtree with .band swaps canvas/ink, so every utility inside
+   (text-ink/50, border-ink/10…) flips automatically. */
+.band {
+  --color-canvas: #ffffff;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+/* .inverted scope (footer): dark canvas, light ink — same token-swap trick as .band */
+.inverted {
+  --color-canvas: #0d0d0d;
+  --color-ink: #f7f5f3;
+  --color-surface: #1a1a1a;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+/* Footer email: underline draws in from the left on hover */
+.footer-email {
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0% 1px;
+  transition: background-size 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.footer-email:hover { background-size: 100% 1px; }
+.footer-email:hover span { transform: translate(0.08em, -0.08em); }
+
+/* Footer name rises as it enters the viewport — native scroll-driven animation,
+   browsers without support just show it in place */
+@supports (animation-timeline: view()) {
+  .footer-name {
+    animation: footerRise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+}
+@keyframes footerRise {
+  from { transform: translateY(40%); opacity: 0.2; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-name { animation: none; }
+}
+
+/* Display headings: whisper-weight serif, tight tracking */
+.display {
+  font-family: var(--font-display);
+  font-weight: 350;
+  letter-spacing: -0.035em;
+  font-variation-settings: "opsz" 144;
 }
 
 /* Force text rendering for arrow/symbol chars — prevents emoji glyph on iOS mobile */
@@ -19,12 +82,12 @@ html {
   }
 
   html {
-    font-family: 'Satoshi', sans-serif;
+    font-family: var(--font-sans);
   }
 
   h1,
   h2 {
-    font-family: 'Melodrama', sans-serif;
+    font-family: var(--font-display);
   }
 }
 
@@ -54,7 +117,7 @@ html {
   content: '';
   position: absolute;
   inset: 0;
-  background: #080808;
+  background: var(--color-canvas);
   animation: curtainUp 0.45s cubic-bezier(0.76, 0, 0.24, 1) both;
   animation-delay: var(--delay, 0s);
 }

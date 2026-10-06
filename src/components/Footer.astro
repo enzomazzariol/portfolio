@@ -1,81 +1,92 @@
-<footer class="relative z-[2] border-t border-white/5 bg-[#080808]">
-  <!-- Columns -->
-  <div class="max-w-6xl mx-auto px-6 md:px-10 pt-16 pb-10 grid grid-cols-2 md:grid-cols-3 gap-10">
-    <div>
-      <p class="text-white/30 text-xs font-mono tracking-widest uppercase mb-5">
-        Conecta
-      </p>
-      <div class="flex flex-col gap-3 text-sm font-mono text-white/60">
-        <a
-          href="https://www.linkedin.com/in/enzo-mazzariol/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-        >
-          LinkedIn ↗︎
-        </a>
-        <a
-          href="https://github.com/enzomazzariol"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-        >
-          GitHub ↗︎
-        </a>
-        <a
-          href="mailto:mazzariolenzo@gmail.com"
-          class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-        >
-          Email ↗︎
-        </a>
-      </div>
-    </div>
+---
+const nav = [
+  { href: '/', label: 'Inicio' },
+  { href: '/proyectos', label: 'Proyectos' },
+  { href: '/sobre-mi', label: 'Sobre mí' },
+  { href: '/contacto', label: 'Contacto' },
+]
+const social = [
+  { href: 'https://www.linkedin.com/in/enzo-mazzariol/', label: 'LinkedIn' },
+  { href: 'https://github.com/enzomazzariol', label: 'GitHub' },
+  { href: '/assets/EnzoMazzariol-CV.pdf', label: 'CV (PDF)' },
+]
+const link = 'text-ink/70 hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40'
+const label = 'text-xs font-medium tracking-[0.18em] uppercase text-ink/45 mb-5'
+---
 
-    <div>
-      <p class="text-white/30 text-xs font-mono tracking-widest uppercase mb-5">
-        Contacto
-      </p>
-      <div class="flex flex-col gap-3 text-sm font-mono text-white/60">
-        <a href="mailto:mazzariolenzo@gmail.com" class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
-          mazzariolenzo@gmail.com
-        </a>
-      </div>
-    </div>
+<footer class="inverted relative z-[2] overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 pt-24 md:pt-32">
 
-    <div>
-      <p class="text-white/30 text-xs font-mono tracking-widest uppercase mb-5">
-        Navegación
-      </p>
-      <div class="flex flex-col gap-3 text-sm font-mono text-white/60">
-        <a href="/" class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
-          Inicio
-        </a>
-        <a href="/proyectos" class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
-          Proyectos
-        </a>
-        <a href="/contacto" class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
-          Contacto
-        </a>
-        <a href="/sobre-mi" class="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
-          Sobre mí
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Copyright -->
-  <div class="max-w-6xl mx-auto px-6 md:px-10 pb-6 flex items-center justify-between text-xs font-mono text-white/20">
-    <span>© {new Date().getFullYear()} Enzo Mazzariol</span>
-    <span>Barcelona, España</span>
-  </div>
-
-  <!-- Big outline name — last element, cropped by the page edge -->
-  <div class="overflow-hidden select-none">
-    <p
-      class="font-display text-[clamp(4.5rem,20vw,22rem)] font-bold leading-none tracking-tighter px-4 md:px-8"
-      style="color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.18); margin-bottom: -0.3em;"
+    <!-- Lead: the one thing to do from here -->
+    <p class={label}>¿Trabajamos juntos?</p>
+    <a
+      href="mailto:mazzariolenzo@gmail.com"
+      class="footer-email display inline-block text-[clamp(2rem,6.5vw,5.5rem)] leading-none text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
     >
-      MAZZARIOL
-    </p>
+      mazzariolenzo@gmail.com <span class="inline-block transition-transform duration-300">↗︎</span>
+    </a>
+
+    <!-- Columns -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mt-20 md:mt-28 pt-10 border-t border-ink/15">
+      <nav aria-label="Pie de página">
+        <p class={label}>Navegación</p>
+        <ul class="flex flex-col gap-3">
+          {nav.map(({ href, label }) => <li><a href={href} class={link}>{label}</a></li>)}
+        </ul>
+      </nav>
+
+      <div>
+        <p class={label}>En la red</p>
+        <ul class="flex flex-col gap-3">
+          {social.map(({ href, label }) => (
+            <li><a href={href} target="_blank" rel="noopener noreferrer" class={link}>{label} ↗︎</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <p class={label}>Ubicación</p>
+        <p class="text-ink/70">Barcelona, España</p>
+        <p class="text-ink/70 mt-3 tabular-nums">
+          <span data-local-time>—</span> <span class="text-ink/45">hora local</span>
+        </p>
+      </div>
+
+      <div>
+        <p class={label}>Estado</p>
+        <p class="flex items-center gap-2 text-ink/70">
+          <span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+          Disponible
+        </p>
+        <p class="text-ink/45 text-sm mt-3 leading-relaxed">Full stack, backend y proyectos freelance.</p>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mt-16 text-sm text-ink/45">
+      <span>© {new Date().getFullYear()} Enzo Mazzariol</span>
+      <a href="#top" class="hover:text-ink transition-colors" onclick="event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' })">
+        Volver arriba ↑
+      </a>
+    </div>
   </div>
+
+  <!-- Big name — rises into place as the footer scrolls in, cropped by the page edge -->
+  <p
+    class="footer-name display text-ink text-[29vw] leading-[0.78] text-center whitespace-nowrap select-none mt-12 -mb-[0.06em]"
+    aria-hidden="true"
+  >
+    Mazzariol
+  </p>
 </footer>
+
+<script>
+  // Live Barcelona time — tiny "a real person is here" signal
+  const el = document.querySelector('[data-local-time]')
+  if (el) {
+    const fmt = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })
+    const tick = () => (el.textContent = fmt.format(new Date()))
+    tick()
+    setInterval(tick, 30_000)
+  }
+</script>

@@ -108,7 +108,7 @@ export default function NotFound() {
 
       {/* Scramble subtitle */}
       <p
-        className="text-white/40 text-xs font-mono tracking-[0.35em] mb-2 h-5"
+        className="text-ink/40 text-xs font-mono tracking-[0.35em] mb-2 h-5"
         aria-label="Página no encontrada"
       >
         {subtitle}
@@ -116,22 +116,22 @@ export default function NotFound() {
 
       {/* Scanline decoration */}
       <div className="flex items-center gap-3 my-8">
-        <span className="w-8 h-px bg-white/10" />
-        <span className="w-1.5 h-1.5 rounded-full bg-white/20 animate-pulse" />
-        <span className="w-8 h-px bg-white/10" />
+        <span className="w-8 h-px bg-ink/10" />
+        <span className="w-1.5 h-1.5 rounded-full bg-ink/20 animate-pulse" />
+        <span className="w-8 h-px bg-ink/10" />
       </div>
 
       {/* Terminal-style message */}
-      <p className="text-white/25 text-xs font-mono mb-8 max-w-xs leading-relaxed">
-        <span className="text-white/40">$</span> La ruta que buscas no existe en este servidor.
+      <p className="text-ink/25 text-xs font-mono mb-8 max-w-xs leading-relaxed">
+        <span className="text-ink/40">$</span> La ruta que buscas no existe en este servidor.
       </p>
 
       <a
         href="/"
-        className="group relative text-xs font-mono text-white/50 hover:text-white transition-colors border border-white/10 hover:border-white/30 px-6 py-3 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+        className="group relative text-xs font-mono text-ink/50 hover:text-ink transition-colors border border-ink/10 hover:border-ink/30 px-6 py-3 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
       >
         <span className="relative z-[1]">cd /home →</span>
-        <span className="absolute inset-0 bg-white/[0.03] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+        <span className="absolute inset-0 bg-ink/[0.03] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
       </a>
 
       {/* Noise overlay */}

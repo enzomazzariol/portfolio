@@ -43,31 +43,31 @@ function MobileProjectCard({ project, index, onIntersect }) {
         transform: visible ? 'translateY(0)' : 'translateY(20px)',
         transition: 'opacity 0.5s ease, transform 0.5s ease',
       }}
-      className="border-b border-white/5 px-5 pt-6 pb-8"
+      className="border-b border-ink/5 px-5 pt-6 pb-8"
     >
       {/* Project number */}
       <p
-        className="font-mono text-white/10 leading-none mb-1 select-none"
+        className="font-mono text-ink/10 leading-none mb-1 select-none"
         style={{ fontSize: 'clamp(4rem, 20vw, 6rem)' }}
       >
         {String(index + 1).padStart(2, '0')}
       </p>
 
       {/* Title */}
-      <h2 className="font-display text-3xl font-bold text-white leading-tight mb-1">
+      <h2 className="font-display text-3xl font-bold text-ink leading-tight mb-1">
         {project.title}
       </h2>
 
       {/* Role / year */}
       {(project.role || project.year) && (
-        <p className="text-xs font-mono text-white/35 tracking-wide mb-4">
+        <p className="text-xs font-mono text-ink/35 tracking-wide mb-4">
           {[project.role, project.year].filter(Boolean).join(' · ')}
         </p>
       )}
 
       {/* Description */}
       {project.description && (
-        <p className="text-sm font-mono text-white/45 leading-relaxed mb-4">
+        <p className="text-sm font-mono text-ink/45 leading-relaxed mb-4">
           {project.description}
         </p>
       )}
@@ -76,8 +76,8 @@ function MobileProjectCard({ project, index, onIntersect }) {
       {project.highlights && project.highlights.length > 0 && (
         <ul className="flex flex-col gap-1.5 mb-4">
           {project.highlights.map((h) => (
-            <li key={h} className="text-xs font-mono text-white/50 leading-relaxed flex gap-2">
-              <span className="text-white/25 shrink-0">→</span>
+            <li key={h} className="text-xs font-mono text-ink/50 leading-relaxed flex gap-2">
+              <span className="text-ink/25 shrink-0">→</span>
               {h}
             </li>
           ))}
@@ -101,7 +101,7 @@ function MobileProjectCard({ project, index, onIntersect }) {
         {project.stack.map((tech) => (
           <span
             key={tech}
-            className="text-xs font-mono text-white/50 border border-white/10 px-2 py-0.5 rounded-full"
+            className="text-xs font-mono text-ink/50 border border-ink/10 px-2 py-0.5 rounded-full"
           >
             {tech}
           </span>
@@ -114,7 +114,7 @@ function MobileProjectCard({ project, index, onIntersect }) {
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm font-mono text-white/60 hover:text-white transition-colors"
+          className="text-sm font-mono text-ink/60 hover:text-ink transition-colors"
         >
           Ver proyecto ↗︎
         </a>
@@ -123,7 +123,7 @@ function MobileProjectCard({ project, index, onIntersect }) {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-mono text-white/40 hover:text-white/70 transition-colors"
+            className="text-sm font-mono text-ink/40 hover:text-ink/70 transition-colors"
           >
             GitHub ↗︎
           </a>
@@ -137,24 +137,24 @@ function LeftPanel({ project, panelRef, activeIndex, onSelectProject }) {
   return (
     <div ref={panelRef} className="flex flex-col flex-1 min-h-0 overflow-y-auto px-10 lg:px-16 pt-3 pb-10">
       {/* Index label */}
-      <p className="text-white/50 text-xs font-mono tracking-widest uppercase mb-4">
+      <p className="text-ink/50 text-xs font-mono tracking-widest uppercase mb-4">
         Trabajo seleccionado
       </p>
 
       {/* Title */}
-      <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight text-white mb-1">
+      <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight text-ink mb-1">
         {project.title}
       </h2>
 
       {/* Role / year */}
       {(project.role || project.year) && (
-        <p className="text-xs font-mono text-white/35 tracking-wide mb-6">
+        <p className="text-xs font-mono text-ink/35 tracking-wide mb-6">
           {[project.role, project.year].filter(Boolean).join(' · ')}
         </p>
       )}
 
       {/* Description */}
-      <p className="text-white/50 text-sm leading-relaxed max-w-sm mb-6">
+      <p className="text-ink/50 text-sm leading-relaxed max-w-sm mb-6">
         {project.description}
       </p>
 
@@ -162,8 +162,8 @@ function LeftPanel({ project, panelRef, activeIndex, onSelectProject }) {
       {project.highlights && project.highlights.length > 0 && (
         <ul className="flex flex-col gap-2 max-w-sm mb-8">
           {project.highlights.map((h) => (
-            <li key={h} className="text-xs font-mono text-white/45 leading-relaxed flex gap-2">
-              <span className="text-white/25 shrink-0">→</span>
+            <li key={h} className="text-xs font-mono text-ink/45 leading-relaxed flex gap-2">
+              <span className="text-ink/25 shrink-0">→</span>
               {h}
             </li>
           ))}
@@ -175,7 +175,7 @@ function LeftPanel({ project, panelRef, activeIndex, onSelectProject }) {
         {project.stack.map((tech) => (
           <span
             key={tech}
-            className="text-xs font-mono text-white/40 border border-white/10 px-2.5 py-1 rounded-full"
+            className="text-xs font-mono text-ink/40 border border-ink/10 px-2.5 py-1 rounded-full"
           >
             {tech}
           </span>
@@ -188,9 +188,9 @@ function LeftPanel({ project, panelRef, activeIndex, onSelectProject }) {
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-sm font-mono text-white/70 hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          className="flex items-center gap-2 text-sm font-mono text-ink/70 hover:text-ink transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
         >
-          <span className="w-4 h-px bg-white/30 group-hover:w-6 group-hover:bg-white transition-all duration-300" />
+          <span className="w-4 h-px bg-ink/30 group-hover:w-6 group-hover:bg-ink transition-all duration-300" />
           Ver proyecto ↗︎
         </a>
         {project.github && (
@@ -198,17 +198,17 @@ function LeftPanel({ project, panelRef, activeIndex, onSelectProject }) {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm font-mono text-white/40 hover:text-white/70 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="flex items-center gap-2 text-sm font-mono text-ink/40 hover:text-ink/70 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
           >
-            <span className="w-4 h-px bg-white/20 group-hover:w-6 group-hover:bg-white/40 transition-all duration-300" />
+            <span className="w-4 h-px bg-ink/20 group-hover:w-6 group-hover:bg-ink/40 transition-all duration-300" />
             GitHub ↗︎
           </a>
         )}
       </div>
 
       {/* Project index */}
-      <nav className="mt-auto pt-8 border-t border-white/5" aria-label="Índice de proyectos">
-        <p className="text-xs font-mono text-white/30 tracking-widest uppercase mb-4">
+      <nav className="mt-auto pt-8 border-t border-ink/5" aria-label="Índice de proyectos">
+        <p className="text-xs font-mono text-ink/30 tracking-widest uppercase mb-4">
           Todos los proyectos
         </p>
         <div className="flex flex-col gap-1">
@@ -216,11 +216,11 @@ function LeftPanel({ project, panelRef, activeIndex, onSelectProject }) {
             <button
               key={p.slug}
               onClick={() => onSelectProject(p.slug)}
-              className={`text-left text-xs font-mono transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
-                i === activeIndex ? 'text-white' : 'text-white/30 hover:text-white/65'
+              className={`text-left text-xs font-mono transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ink/40 ${
+                i === activeIndex ? 'text-ink' : 'text-ink/30 hover:text-ink/65'
               }`}
             >
-              <span className="text-white/20 mr-2.5">{String(i + 1).padStart(2, '0')}</span>
+              <span className="text-ink/20 mr-2.5">{String(i + 1).padStart(2, '0')}</span>
               {p.title}
             </button>
           ))}
@@ -338,7 +338,7 @@ function ImageSection({ project, onIntersect, index }) {
   const images = project.images && project.images.length > 0 ? project.images : [project.imgUrl]
 
   return (
-    <div id={project.slug} ref={sectionRef} className="w-full border-b border-white/5">
+    <div id={project.slug} ref={sectionRef} className="w-full border-b border-ink/5">
       <ImageGrid
         images={images}
         title={project.title}
@@ -406,10 +406,10 @@ export default function Projects() {
       {/* Desktop: split layout */}
       <div className="hidden md:flex">
         {/* Left: sticky info panel */}
-        <div className="w-[42%] sticky top-14 h-[calc(100vh-3.5rem)] border-r border-white/5 flex flex-col">
+        <div className="w-[42%] sticky top-14 h-[calc(100vh-3.5rem)] border-r border-ink/5 flex flex-col">
           {/* Page label */}
           <div ref={headingRef} className="px-10 lg:px-16 pt-8 pb-0">
-            <p className="anim text-white/50 text-xs font-mono tracking-[0.2em] uppercase">
+            <p className="anim text-ink/50 text-xs font-mono tracking-[0.2em] uppercase">
               Enzo Mazzariol · Proyectos
             </p>
           </div>
@@ -438,7 +438,7 @@ export default function Projects() {
       <div className="md:hidden">
         {/* Sticky horizontal index */}
         <nav
-          className="sticky top-14 z-30 bg-[#080808]/95 backdrop-blur-sm border-b border-white/5 overflow-x-auto scrollbar-none"
+          className="sticky top-14 z-30 bg-canvas/95 backdrop-blur-sm border-b border-ink/5 overflow-x-auto scrollbar-none"
           aria-label="Índice de proyectos"
         >
           <div className="flex gap-0 px-5 py-0 w-max">
@@ -448,8 +448,8 @@ export default function Projects() {
                 onClick={() => scrollToProject(project.slug)}
                 className={`text-xs font-mono px-3 py-3.5 whitespace-nowrap transition-colors duration-200 border-b-2 focus-visible:outline-none ${
                   i === activeIndex
-                    ? 'text-white border-white'
-                    : 'text-white/35 border-transparent hover:text-white/60'
+                    ? 'text-ink border-ink'
+                    : 'text-ink/35 border-transparent hover:text-ink/60'
                 }`}
               >
                 {project.title}

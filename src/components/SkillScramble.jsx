@@ -59,12 +59,12 @@ export default function SkillScramble() {
 
   return (
     <div className="flex-shrink-0 w-full md:w-[280px]">
-      <p className="text-[10px] font-mono text-white/25 tracking-[0.3em] uppercase mb-5">
+      <p className="text-[10px] font-mono text-ink/25 tracking-[0.3em] uppercase mb-5">
         // especialidad
       </p>
       <p
         ref={displayRef}
-        className="font-display font-bold text-white leading-none tracking-tight"
+        className="font-display font-bold text-ink leading-none tracking-tight"
         style={{ fontSize: 'clamp(2.2rem, 7vw, 3.5rem)' }}
         aria-live="polite"
       />
@@ -75,7 +75,7 @@ export default function SkillScramble() {
             style={{
               width: i === activeIndex ? '20px' : '6px',
               height: '2px',
-              background: i === activeIndex ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.15)',
+              background: i === activeIndex ? 'color-mix(in oklab, var(--color-ink) 80%, transparent)' : 'color-mix(in oklab, var(--color-ink) 15%, transparent)',
               transition: 'all 0.4s ease',
               display: 'inline-block',
             }}

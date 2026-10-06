@@ -101,10 +101,10 @@ export default function About() {
 
       {/* ── HERO ── */}
       <section className="px-6 md:px-10 pt-16 pb-8 max-w-6xl mx-auto">
-        <h1 className="about-hero-anim font-display text-[clamp(4rem,14vw,12rem)] font-bold leading-[0.85] tracking-tighter text-white">
+        <h1 className="about-hero-anim font-display text-[clamp(4rem,14vw,12rem)] font-bold leading-[0.85] tracking-tighter text-ink">
           Sobre mí
         </h1>
-        <p className="about-hero-anim text-xs font-mono tracking-[0.25em] uppercase text-white/30 mt-4">
+        <p className="about-hero-anim text-xs font-mono tracking-[0.25em] uppercase text-ink/30 mt-4">
           Full Stack Developer · Barcelona · 2026
         </p>
       </section>
@@ -112,8 +112,8 @@ export default function About() {
       {/* ── PHOTO STRIP (marquee) ── */}
       <section className="relative overflow-hidden my-8">
         {/* Edge fades */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #080808, transparent)' }} />
-        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #080808, transparent)' }} />
+        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, var(--color-canvas), transparent)' }} />
+        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, var(--color-canvas), transparent)' }} />
 
         <div className="marquee-track flex gap-3 w-max">
           {allImages.map((src, i) => (
@@ -133,8 +133,8 @@ export default function About() {
       </section>
 
       {/* ── TAGLINE ── */}
-      <section className="px-6 md:px-10 py-12 max-w-6xl mx-auto border-b border-white/5">
-        <p className="font-display text-[clamp(1.4rem,3.5vw,2.8rem)] font-bold leading-tight text-white max-w-4xl">
+      <section className="px-6 md:px-10 py-12 max-w-6xl mx-auto border-b border-ink/5">
+        <p className="font-display text-[clamp(1.4rem,3.5vw,2.8rem)] font-bold leading-tight text-ink max-w-4xl">
           Construyo experiencias web rápidas,<br className="hidden md:block" /> limpias y bien pensadas.
         </p>
       </section>
@@ -148,13 +148,13 @@ export default function About() {
         ].map(({ label, value }) => (
           <div key={label} className="stat-item">
             <div className="flex items-center gap-3 mb-3">
-              <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45">{label}</p>
-              <div className="flex-1 border-t border-white/[0.08]" />
+              <p className="text-xs font-mono tracking-[0.2em] uppercase text-ink/45">{label}</p>
+              <div className="flex-1 border-t border-ink/[0.08]" />
             </div>
             {value ? (
-              <p className="text-sm font-mono text-white/70">{value}</p>
+              <p className="text-sm font-mono text-ink/70">{value}</p>
             ) : (
-              <p className="text-sm font-mono text-white/70 flex items-center gap-2">
+              <p className="text-sm font-mono text-ink/70 flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
@@ -167,7 +167,7 @@ export default function About() {
       </section>
 
       {/* ── BIO + SCRAMBLE ── */}
-      <section className="bio-section px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
+      <section className="bio-section px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-ink/5">
         <div className="flex flex-col md:flex-row gap-16 items-start">
 
           {/* Terminal typer */}
@@ -175,17 +175,17 @@ export default function About() {
 
           {/* Bio text */}
           <div className="flex flex-col gap-6 max-w-lg">
-            <p className="bio-para text-sm font-mono text-white/50 leading-relaxed">
+            <p className="bio-para text-sm font-mono text-ink/50 leading-relaxed">
               Empecé a programar en 2023 y desde entonces no he parado.
               Me formé en Desarrollo de Aplicaciones Multiplataforma y ahora
               estudio Ingeniería Audiovisual Computacional en la UPF.
             </p>
-            <p className="bio-para text-sm font-mono text-white/50 leading-relaxed">
-              Trabajo como Software Developer en <a href="https://guarapomedia.com/" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white underline underline-offset-2 transition-colors">Guarapo Media</a>, donde colaboro en
+            <p className="bio-para text-sm font-mono text-ink/50 leading-relaxed">
+              Trabajo como Software Developer en <a href="https://guarapomedia.com/" target="_blank" rel="noopener noreferrer" className="text-ink/80 hover:text-ink underline underline-offset-2 transition-colors">Guarapo Media</a>, donde colaboro en
               proyectos como New Vision Sports y Hola Atelier. También hice
               prácticas en Regalexia.com mejorando SEO y frontend.
             </p>
-            <p className="bio-para text-sm font-mono text-white/50 leading-relaxed">
+            <p className="bio-para text-sm font-mono text-ink/50 leading-relaxed">
               Me interesa el cruce entre el código y el diseño: construir
               interfaces que funcionen bien y se vean todavía mejor.
             </p>
@@ -194,15 +194,15 @@ export default function About() {
       </section>
 
       {/* ── TIMELINE ── */}
-      <section className="timeline-section px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
-        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-10">Trayectoria</p>
+      <section className="timeline-section px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-ink/5">
+        <p className="text-xs font-mono tracking-[0.2em] uppercase text-ink/45 mb-10">Trayectoria</p>
         <div className="flex flex-col">
           {timelineEntries.map(({ year, label, url }) => (
             <div
               key={year + label}
-              className="timeline-entry flex items-start gap-8 py-5 border-b border-white/5"
+              className="timeline-entry flex items-start gap-8 py-5 border-b border-ink/5"
             >
-              <span className="text-xs font-mono tracking-[0.15em] text-white/45 w-28 shrink-0 pt-0.5">
+              <span className="text-xs font-mono tracking-[0.15em] text-ink/45 w-28 shrink-0 pt-0.5">
                 {year}
               </span>
               {url ? (
@@ -210,12 +210,12 @@ export default function About() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-mono text-white/60 leading-relaxed hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                  className="text-sm font-mono text-ink/60 leading-relaxed hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
                 >
                   {label} ↗︎
                 </a>
               ) : (
-                <p className="text-sm font-mono text-white/60 leading-relaxed">{label}</p>
+                <p className="text-sm font-mono text-ink/60 leading-relaxed">{label}</p>
               )}
             </div>
           ))}
@@ -223,23 +223,23 @@ export default function About() {
       </section>
 
       {/* ── ESPECIALIDADES (editorial style) ── */}
-      <section className="px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-white/5">
-        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-10">Especialidades</p>
+      <section className="px-6 md:px-10 py-16 max-w-6xl mx-auto border-t border-ink/5">
+        <p className="text-xs font-mono tracking-[0.2em] uppercase text-ink/45 mb-10">Especialidades</p>
 
         <div className="flex flex-col">
           {services.map(({ label, Icon, color, side }) => (
             <div
               key={label}
-              className={`flex items-center gap-6 py-5 border-b border-white/5 ${
+              className={`flex items-center gap-6 py-5 border-b border-ink/5 ${
                 side === 'left' ? 'flex-row-reverse' : 'flex-row'
               }`}
             >
-              <p className="service-text font-display text-[clamp(2rem,5.5vw,4.5rem)] font-bold text-white leading-none flex-1">
+              <p className="service-text font-display text-[clamp(2rem,5.5vw,4.5rem)] font-bold text-ink leading-none flex-1">
                 {label}
               </p>
-              <div className="service-pill flex-shrink-0 border border-white/10 rounded-[1.5rem] px-6 py-4 flex items-center gap-3 bg-white/[0.03]">
+              <div className="service-pill flex-shrink-0 border border-ink/10 rounded-[1.5rem] px-6 py-4 flex items-center gap-3 bg-ink/[0.03]">
                 <Icon size={28} style={{ color }} />
-                <span className="text-xs font-mono text-white/40">{label.split(' ')[0]}</span>
+                <span className="text-xs font-mono text-ink/40">{label.split(' ')[0]}</span>
               </div>
             </div>
           ))}
@@ -248,14 +248,14 @@ export default function About() {
 
       {/* ── CTA ── */}
       <section className="cta-section px-6 md:px-10 py-24 max-w-6xl mx-auto text-center">
-        <p className="text-xs font-mono tracking-[0.2em] uppercase text-white/45 mb-6">Contacto</p>
-        <h2 className="font-display text-[clamp(2rem,6vw,5rem)] font-bold text-white mb-10 leading-tight">
+        <p className="text-xs font-mono tracking-[0.2em] uppercase text-ink/45 mb-6">Contacto</p>
+        <h2 className="font-display text-[clamp(2rem,6vw,5rem)] font-bold text-ink mb-10 leading-tight">
           ¿Buscas un developer<br className="hidden md:block" /> para tu equipo?
         </h2>
-        <StarBorder color="rgba(100,180,255,0.6)" speed="6s" innerClassName="!bg-white">
+        <StarBorder color="rgba(100,180,255,0.6)" speed="6s" innerClassName="!bg-ink">
           <a
             href="/contacto"
-            className="inline-flex items-center text-black font-mono text-sm px-8 py-3 min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50"
+            className="inline-flex items-center text-canvas font-mono text-sm px-8 py-3 min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas/50"
           >
             Contactarme →
           </a>

@@ -4,8 +4,8 @@ const snippets = [
   `const Button = ({ label, onClick }) => (
   <button
     onClick={onClick}
-    className="px-4 py-2 bg-white
-      text-black font-mono">
+    className="px-4 py-2 bg-ink
+      text-canvas font-code">
     {label}
   </button>
 )`,
@@ -133,21 +133,21 @@ export default function TerminalTyper() {
   }, [])
 
   return (
-    <div className="flex-shrink-0 w-full md:w-[320px] border border-white/10 overflow-hidden bg-[#0d0d0d]">
+    <div className="flex-shrink-0 w-full md:w-[320px] border border-ink/10 overflow-hidden bg-surface">
       {/* Title bar */}
-      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-white/[0.06] bg-white/[0.02]">
+      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-ink/[0.06] bg-ink/[0.02]">
         <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-        <span className="ml-auto text-[10px] font-mono text-white/20 tracking-wider">~/portfolio</span>
+        <span className="ml-auto text-[10px] font-code text-ink/20 tracking-wider">~/portfolio</span>
       </div>
 
       {/* Code area */}
       <div className="px-4 pt-3 pb-5">
-        <p className="text-[10px] font-mono text-white/25 mb-2.5 tracking-wider">enzo@dev:~$</p>
+        <p className="text-[10px] font-code text-ink/25 mb-2.5 tracking-wider">enzo@dev:~$</p>
         <pre
           ref={codeRef}
-          className="text-[11px] font-mono text-green-400/75 leading-relaxed whitespace-pre"
+          className="text-[11px] font-code text-green-400/75 leading-relaxed whitespace-pre"
           style={{ minHeight: '140px' }}
         />
       </div>
