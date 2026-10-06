@@ -4,19 +4,19 @@ const areas = [
     n: '01',
     title: 'Desarrollo backend',
     text: 'Diseño e implementación de APIs REST con Java y Spring Boot sobre MySQL: modelado de datos, lógica de negocio e integración con servicios externos.',
-    proof: { label: 'Moodflix', href: 'https://github.com/enzomazzariol/moodflix' },
+    proof: { label: 'Moodflix', href: '/proyectos/moodflix' },
   },
   {
     n: '02',
     title: 'Desarrollo frontend',
     text: 'Interfaces con React y Astro, mobile-first y orientadas al rendimiento, con animación cuidada y atención a la accesibilidad y a las Core Web Vitals.',
-    proof: { label: 'New Vision Sports', href: 'https://playwithnewvision.com/' },
+    proof: { label: 'New Vision Sports', href: '/proyectos/new-vision-sports' },
   },
   {
     n: '03',
     title: 'Webs y e-commerce',
     text: 'Sitios corporativos y tiendas online en Shopify y WordPress para clientes de agencia: pasarelas de pago, envíos, inscripciones y SEO técnico.',
-    proof: { label: 'Abode Pets', href: 'https://abodepets.com/' },
+    proof: { label: 'Abode Pets', href: '/proyectos/abode-pets' },
   },
 ]
 
@@ -40,11 +40,9 @@ export default function WhatIDo() {
               <p className="text-sm text-ink/55 leading-relaxed flex-1">{text}</p>
               <a
                 href={proof.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-xs font-mono text-ink/60 hover:text-ink mt-8 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
               >
-                Caso: {proof.label} ↗︎
+                Caso: {proof.label} →
               </a>
             </article>
           ))}

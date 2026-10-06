@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { portfolioData } from '../../data/portfolio.js'
+
+export function getStaticPaths() {
+  return portfolioData.map((project, i) => ({
+    params: { slug: project.slug },
+    props: { project, index: i, next: portfolioData[(i + 1) % portfolioData.length] },
+  }))
+}
+
+const { project, index, next } = Astro.props
+const { title, year, role, stack, link, github, imgUrl, images = [], description, highlights = [] } = project
+
+// Meta description: the project's own context paragraph, cut at a word boundary
+const metaDescription = (() => {
+  const text = `${title}: ${description}`
+  if (text.length <= 155) return text
+  return text.slice(0, 155).replace(/\s+\S*$/, '') + '…'
+})()
+
+const gallery = images.filter((src) => src !== imgUrl)
+// First shot full width, the rest in pairs; a leftover last one also goes full width
+const wide = (i) => i === 0 || (i === gallery.length - 1 && (gallery.length - 1) % 2 === 1)
+const isVideo = link.includes('youtube.com') || link.includes('youtu.be')
+const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40'
+---
+<Layout
+  title={`${title} — Caso de estudio · Enzo Mazzariol`}
+  description={metaDescription}
+  ogImage={new URL(imgUrl, Astro.site).toString()}
+>
+  <main class="pt-32 md:pt-40">
+
+    <!-- Header -->
+    <header class="px-6 md:px-10 max-w-7xl mx-auto">
+      <nav aria-label="Migas de pan" class="hero-fade-down text-sm text-ink/50" style="animation-delay: 0.05s">
+        <a href="/proyectos" class={`hover:text-ink transition-colors ${focusRing}`}>Proyectos</a>
+        <span class="mx-2">/</span>
+        <span class="text-ink/80">{title}</span>
+      </nav>
+
+      <h1 class="hero-fade-up display text-[clamp(3.25rem,10vw,9rem)] leading-[0.9] text-ink mt-8" style="animation-delay: 0.15s">
+        {title}
+      </h1>
+
+      <dl class="hero-fade-up grid grid-cols-2 md:grid-cols-4 gap-8 mt-12 pt-8 border-t border-ink/10" style="animation-delay: 0.3s">
+        <div>
+          <dt class="text-xs font-medium tracking-[0.18em] uppercase text-ink/45">Año</dt>
+          <dd class="text-ink mt-2">{year}</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium tracking-[0.18em] uppercase text-ink/45">Rol</dt>
+          <dd class="text-ink mt-2">{role}</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium tracking-[0.18em] uppercase text-ink/45">Stack</dt>
+          <dd class="text-ink mt-2">{stack.join(', ')}</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-medium tracking-[0.18em] uppercase text-ink/45">Enlaces</dt>
+          <dd class="flex flex-col gap-1 mt-2">
+            <a href={link} target="_blank" rel="noopener noreferrer" class={`text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink transition-colors ${focusRing}`}>
+              {isVideo ? 'Ver demo en vídeo' : 'Ver sitio online'} ↗︎
+            </a>
+            {github && (
+              <a href={github} target="_blank" rel="noopener noreferrer" class={`text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink transition-colors ${focusRing}`}>
+                Código en GitHub ↗︎
+              </a>
+            )}
+          </dd>
+        </div>
+      </dl>
+    </header>
+
+    <!-- Lead image -->
+    <div class="hero-fade-up px-6 md:px-10 max-w-7xl mx-auto mt-14" style="animation-delay: 0.45s">
+      <img
+        src={imgUrl}
+        alt={`${title} — vista principal del proyecto`}
+        class="w-full rounded-tile bg-surface"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <!-- Context + what I did -->
+    <section class="px-6 md:px-10 max-w-7xl mx-auto py-24 md:py-32 grid md:grid-cols-12 gap-12">
+      <div class="reveal-view md:col-span-5">
+        <h2 class="display text-4xl md:text-5xl leading-[0.95] text-ink">El proyecto</h2>
+        <p class="text-lg text-ink/75 leading-relaxed mt-6">{description}</p>
+      </div>
+      <div class="reveal-view md:col-span-6 md:col-start-7">
+        <h2 class="display text-4xl md:text-5xl leading-[0.95] text-ink">Qué hice</h2>
+        <ol class="mt-6 border-t border-ink/10">
+          {highlights.map((h, i) => (
+            <li class="flex gap-6 py-5 border-b border-ink/10">
+              <span class="display text-2xl text-ink/35 tabular-nums w-8 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+              <span class="text-ink/80 leading-relaxed pt-1">{h}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Gallery: first image wide, then pairs -->
+    {gallery.length > 0 && (
+      <section class="px-6 md:px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-6" aria-label="Galería">
+        {gallery.map((src, i) => (
+          <img
+            src={src}
+            alt={`${title} — captura ${i + 2}`}
+            class={`reveal-view w-full rounded-tile bg-surface ${wide(i) ? 'md:col-span-2' : ''}`}
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </section>
+    )}
+
+    <!-- Next project -->
+    <section class="mt-24 md:mt-32 border-t border-ink/10">
+      <a href={`/proyectos/${next.slug}`} class={`group block px-6 md:px-10 max-w-7xl mx-auto py-20 md:py-28 ${focusRing}`}>
+        <p class="text-xs font-medium tracking-[0.18em] uppercase text-ink/45">Siguiente proyecto · {String(((index + 1) % portfolioData.length) + 1).padStart(2, '0')}</p>
+        <div class="flex items-end justify-between gap-8 mt-6">
+          <p class="display text-[clamp(2.75rem,8vw,7.5rem)] leading-[0.9] text-ink transition-transform duration-500 group-hover:translate-x-3">
+            {next.title} <span class="inline-block text-ink/40">→</span>
+          </p>
+          <img
+            src={next.imgUrl}
+            alt=""
+            class="hidden md:block w-72 aspect-[16/10] object-cover object-top rounded-tile rotate-3 transition-transform duration-500 group-hover:rotate-0 group-hover:scale-105"
+            loading="lazy"
+          />
+        </div>
+      </a>
+    </section>
+  </main>
+</Layout>

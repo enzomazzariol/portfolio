@@ -159,6 +159,23 @@ html {
   }
 }
 
+/* ── Static pages: scroll reveal without JS (native scroll-driven animation).
+   Browsers without support show the content in place. ── */
+@supports (animation-timeline: view()) {
+  .reveal-view {
+    animation: revealUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(48px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-view { animation: none; }
+}
+
 /* ── Home stack: infinite marquee on mobile, rows run in opposite directions ── */
 @media (max-width: 767px) {
   .stack-row { animation: marqueeScroll 28s linear infinite; }

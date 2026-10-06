@@ -11,6 +11,8 @@ interface Props {
 }
 
 const { title, description, ogImage } = Astro.props
+// Nav highlights the top-level section, so /proyectos/moodflix still marks "Proyectos"
+const navPath = '/' + (Astro.url.pathname.split('/')[1] ?? '')
 ---
 
 <html lang="es">
@@ -18,7 +20,7 @@ const { title, description, ogImage } = Astro.props
     <BaseHead title={title} description={description} ogImage={ogImage} />
   </head>
   <body id="top" class="bg-canvas text-ink min-h-screen font-sans antialiased">
-    <Navbar pathname={Astro.url.pathname} client:load />
+    <Navbar pathname={navPath} client:load />
     <slot />
     <Footer />
   </body>

@@ -16,12 +16,10 @@ export default function SelectedWorks() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-x-6 gap-y-16">
-        {portfolioData.slice(0, 4).map(({ title, role, year, stack, link, imgUrl, highlights }, i) => (
+        {portfolioData.slice(0, 4).map(({ title, slug, role, year, stack, imgUrl, highlights }, i) => (
           <a
             key={title}
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/proyectos/${slug}`}
             // Offset the right column so the grid reads as a staggered gallery, not a table
             className={`group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${i % 2 ? 'md:mt-24' : ''}`}
           >
@@ -38,7 +36,7 @@ export default function SelectedWorks() {
               <div className="flex items-baseline justify-between gap-4 mt-5">
                 <h3 className="display text-3xl md:text-4xl text-ink">
                   {title}
-                  <span className="inline-block ml-2 text-xl text-ink/40 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">↗︎</span>
+                  <span className="inline-block ml-2 text-xl text-ink/40 transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </h3>
                 <span className="text-sm text-ink/45 shrink-0 tabular-nums">{year}</span>
               </div>
