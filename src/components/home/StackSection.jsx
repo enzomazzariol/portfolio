@@ -44,16 +44,17 @@ export default function StackSection() {
       </div>
 
       <div className="flex flex-col gap-4">
-        {rows.map(({ label, items }) => (
+        {rows.map(({ label, items }, r) => (
           <div key={label}>
             <p className="px-6 md:px-10 max-w-7xl mx-auto text-sm text-ink/50 mb-3">{label}</p>
-            {/* Items are repeated so the scroll-driven slide never shows an empty edge */}
-            <ul className="stack-row flex gap-3 w-max px-6 md:px-10" aria-label={label}>
+            {/* Items are repeated: desktop slides on scroll without showing an edge; mobile loops it
+                as an infinite marquee (-50% = exactly one copy, so spacing is margin, not gap) */}
+            <ul className={`stack-row flex w-max md:px-10 ${r % 2 ? 'stack-row-reverse' : ''}`} aria-label={label}>
               {[...items, ...items].map(({ name, Icon, color }, i) => (
                 <li
                   key={i}
                   aria-hidden={i >= items.length || undefined}
-                  className="flex items-center gap-3 bg-surface border border-ink/10 rounded-full pl-4 pr-6 py-3 md:py-4"
+                  className="flex items-center gap-3 mr-3 bg-surface border border-ink/10 rounded-full pl-4 pr-6 py-3 md:py-4"
                 >
                   <Icon size={26} style={{ color }} />
                   <span className="display text-2xl md:text-3xl text-ink whitespace-nowrap">{name}</span>

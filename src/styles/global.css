@@ -159,6 +159,15 @@ html {
   }
 }
 
+/* ── Home stack: infinite marquee on mobile, rows run in opposite directions ── */
+@media (max-width: 767px) {
+  .stack-row { animation: marqueeScroll 28s linear infinite; }
+  .stack-row-reverse { animation-direction: reverse; }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .stack-row { animation: none; }
+}
+
 /* ── About: marquee (CSS replaces GSAP infinite tween — runs on compositor thread) ── */
 @keyframes marqueeScroll {
   from { transform: translateX(0); }
