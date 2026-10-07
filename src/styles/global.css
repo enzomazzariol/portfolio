@@ -10,10 +10,8 @@
 
   --font-display: 'Fraunces', Georgia, serif;
   --font-sans: 'Instrument Sans', system-ui, sans-serif;
-  /* `font-mono` is used for small UI labels across the site; it maps to the sans on purpose.
-     Real code (terminal on /sobre-mi) uses `font-code`. */
+  /* `font-mono` is used for small UI labels across the site; it maps to the sans on purpose. */
   --font-mono: 'Instrument Sans', system-ui, sans-serif;
-  --font-code: 'Geist Mono', ui-monospace, monospace;
 
   --radius-ui: 16px;         /* buttons, cards — use rounded-ui */
   --radius-tile: 12px;       /* images — use rounded-tile */
@@ -185,29 +183,8 @@ html {
   .stack-row { animation: none; }
 }
 
-/* ── About: marquee (CSS replaces GSAP infinite tween — runs on compositor thread) ── */
+/* Shared by the home stack marquee */
 @keyframes marqueeScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  animation: marqueeScroll 25s linear infinite;
-  will-change: transform;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation-play-state: paused; }
-}
-
-/* ── About: orbital SVG dots (CSS replaces 3 GSAP infinite tweens) ── */
-@keyframes spinCW  { to { transform: rotate(360deg); } }
-@keyframes spinCCW { to { transform: rotate(-360deg); } }
-
-@media (prefers-reduced-motion: reduce) {
-  .orbit-dot { animation: none !important; }
 }

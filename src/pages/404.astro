@@ -1,10 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import NotFound from '../components/NotFound.jsx'
+import { portfolioData } from '../data/portfolio.js'
+
+const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40'
 ---
 <Layout
   title="Página no encontrada — Enzo Mazzariol"
   description="La página que buscas no existe."
 >
-  <NotFound client:load />
+  <main class="min-h-[85svh] px-6 md:px-10 pt-36 pb-24 max-w-7xl mx-auto flex flex-col justify-center">
+    <p class="hero-fade-down text-xs font-medium tracking-[0.18em] uppercase text-ink/50" style="animation-delay: 0.1s">Error 404</p>
+    <h1 class="hero-fade-up display text-[clamp(3.5rem,11vw,10rem)] leading-[0.9] text-ink mt-6" style="animation-delay: 0.2s">
+      Esta página no existe.
+    </h1>
+    <p class="hero-fade-up text-lg text-ink/65 max-w-lg leading-relaxed mt-8" style="animation-delay: 0.35s">
+      Puede que el enlace esté roto o que la página se haya movido. Prueba con alguno de estos:
+    </p>
+    <div class="hero-fade-up flex flex-wrap gap-3 mt-10 text-sm font-medium" style="animation-delay: 0.5s">
+      <a href="/" class={`bg-ink text-canvas rounded-ui px-6 py-3.5 min-h-[44px] flex items-center hover:bg-ink/85 transition-colors ${focusRing}`}>Volver al inicio</a>
+      <a href="/proyectos" class={`bg-surface text-ink border border-ink/15 hover:border-ink/40 rounded-ui px-6 py-3.5 min-h-[44px] flex items-center transition-colors ${focusRing}`}>Ver proyectos ({portfolioData.length})</a>
+      <a href="/contacto" class={`bg-surface text-ink border border-ink/15 hover:border-ink/40 rounded-ui px-6 py-3.5 min-h-[44px] flex items-center transition-colors ${focusRing}`}>Contacto</a>
+    </div>
+  </main>
 </Layout>

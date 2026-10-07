@@ -1,28 +1,7 @@
-const experience = [
-  {
-    period: '2024 — hoy',
-    role: 'Software Developer',
-    place: 'Guarapo Media',
-    url: 'https://guarapomedia.com/',
-    text: 'Desarrollador único en los proyectos de clientes de la agencia: webs en Astro y React, tiendas Shopify y sitios WordPress, desde la maqueta hasta producción.',
-    tags: ['Astro', 'React', 'Shopify', 'WordPress'],
-  },
-  {
-    period: '2025 — hoy',
-    role: 'Ingeniería Audiovisual Computacional',
-    place: 'Universitat Pompeu Fabra',
-    text: 'Grado universitario que compagino con el trabajo en Guarapo Media.',
-  },
-  {
-    period: '2023 — 2025',
-    role: 'Desarrollo de Aplicaciones Multiplataforma',
-    place: 'Ciclo Formativo de Grado Superior (DAM)',
-    text: 'Proyecto final: Moodflix, app móvil en React Native con backend REST propio en Java + Spring Boot y MySQL.',
-    tags: ['Java', 'Spring Boot', 'React Native'],
-  },
-]
+import { experience } from '../../data/experience.js'
 
-export default function ExperienceSection() {
+// eslint-disable-next-line react/prop-types
+export default function ExperienceSection({ aboutLink = true }) {
   return (
     <section className="px-6 md:px-10 py-24 md:py-32 max-w-7xl mx-auto grid md:grid-cols-12 gap-12">
 
@@ -33,9 +12,9 @@ export default function ExperienceSection() {
           <h2 className="split-reveal display text-[clamp(2.75rem,5vw,4.5rem)] leading-[0.95] text-ink">
             Trabajo y estudio, en paralelo.
           </h2>
-          <a href="/sobre-mi" className="reveal inline-block mt-8 text-sm font-medium text-ink/60 hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40">
+          {aboutLink && <a href="/sobre-mi" className="reveal inline-block mt-8 text-sm font-medium text-ink/60 hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40">
             Más sobre mí →
-          </a>
+          </a>}
         </div>
       </div>
 
