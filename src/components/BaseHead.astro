@@ -115,11 +115,11 @@ const canonical = new URL(pathname, Astro.site)
   ],
 })} />
 
-<!-- Fonts — non-render-blocking; preconnect to CDN where font files are served -->
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=melodrama@400,500,600,700&f[]=satoshi@400,500,600,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=melodrama@400,500,600,700&f[]=satoshi@400,500,600,700&display=swap"></noscript>
+<!-- Fonts: Fraunces (display), Instrument Sans (UI/body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..500&family=Instrument+Sans:wght@400..600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..500&family=Instrument+Sans:wght@400..600&display=swap"></noscript>
 
 <!-- Google tag (gtag.js) — real page loads per route, no manual RouteTracker needed -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MR3P0H4X3"></script>

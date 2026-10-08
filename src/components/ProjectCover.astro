@@ -1,0 +1,20 @@
+---
+// Project screenshot, or a typographic cover while screenshots are pending (imgUrl: null)
+interface Props {
+  title: string
+  imgUrl?: string | null
+  alt?: string
+  class?: string
+  imgClass?: string
+  loading?: 'eager' | 'lazy'
+}
+const { title, imgUrl, alt = `${title} — captura del proyecto`, class: cls = '', imgClass = '', loading = 'lazy' } = Astro.props
+---
+{imgUrl ? (
+  <img src={imgUrl} alt={alt} class={imgClass} loading={loading} decoding="async" />
+) : (
+  <div class={`bg-ink text-canvas flex flex-col justify-between p-6 md:p-10 ${cls}`} role="img" aria-label={title}>
+    <span class="text-xs font-medium tracking-[0.18em] uppercase opacity-60">Caso de estudio</span>
+    <span class="display text-[clamp(2.5rem,6vw,5.5rem)] leading-[0.9]">{title}</span>
+  </div>
+)}

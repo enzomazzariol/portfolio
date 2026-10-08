@@ -1,9 +1,70 @@
 @import "tailwindcss";
 
+/* ── Design tokens ──
+   Every color/font in the UI goes through these — change the look here, not in components. */
 @theme {
-  --font-display: 'Melodrama', sans-serif;
-  --font-sans: 'Satoshi', sans-serif;
-  --font-mono: 'Satoshi', sans-serif;
+  --color-canvas: #f7f5f3;   /* page background */
+  --color-surface: #ffffff;  /* cards, inputs */
+  --color-ink: #0d0d0d;      /* text, borders (use /opacity for muted) */
+  --color-accent: #bc361b;   /* sparing: status dot, small highlights */
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Instrument Sans', system-ui, sans-serif;
+  /* `font-mono` is used for small UI labels across the site; it maps to the sans on purpose. */
+  --font-mono: 'Instrument Sans', system-ui, sans-serif;
+
+  --radius-ui: 16px;         /* buttons, cards — use rounded-ui */
+  --radius-tile: 12px;       /* images — use rounded-tile */
+}
+
+/* Contrast band: any subtree with .band swaps canvas/ink, so every utility inside
+   (text-ink/50, border-ink/10…) flips automatically. */
+.band {
+  --color-canvas: #ffffff;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+/* .inverted scope (footer): dark canvas, light ink — same token-swap trick as .band */
+.inverted {
+  --color-canvas: #0d0d0d;
+  --color-ink: #f7f5f3;
+  --color-surface: #1a1a1a;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+/* Footer email: underline draws in from the left on hover */
+.footer-email {
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0% 1px;
+  transition: background-size 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.footer-email:hover { background-size: 100% 1px; }
+.footer-email:hover span { transform: translate(0.08em, -0.08em); }
+
+/* Footer name rises as it enters the viewport — native scroll-driven animation,
+   browsers without support just show it in place */
+@supports (animation-timeline: view()) {
+  .footer-name {
+    animation: footerRise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+}
+@keyframes footerRise {
+  from { transform: translateY(40%); opacity: 0.2; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-name { animation: none; }
+}
+
+/* Display headings: whisper-weight serif, tight tracking */
+.display {
+  font-family: var(--font-display);
+  font-weight: 350;
+  letter-spacing: -0.035em;
+  font-variation-settings: "opsz" 144;
 }
 
 /* Force text rendering for arrow/symbol chars — prevents emoji glyph on iOS mobile */
@@ -19,12 +80,12 @@ html {
   }
 
   html {
-    font-family: 'Satoshi', sans-serif;
+    font-family: var(--font-sans);
   }
 
   h1,
   h2 {
-    font-family: 'Melodrama', sans-serif;
+    font-family: var(--font-display);
   }
 }
 
@@ -54,7 +115,7 @@ html {
   content: '';
   position: absolute;
   inset: 0;
-  background: #080808;
+  background: var(--color-canvas);
   animation: curtainUp 0.45s cubic-bezier(0.76, 0, 0.24, 1) both;
   animation-delay: var(--delay, 0s);
 }
@@ -96,29 +157,89 @@ html {
   }
 }
 
-/* ── About: marquee (CSS replaces GSAP infinite tween — runs on compositor thread) ── */
+/* ── Static pages: scroll reveal without JS (native scroll-driven animation).
+   Browsers without support show the content in place. ── */
+@supports (animation-timeline: view()) {
+  .reveal-view {
+    animation: revealUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(48px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-view { animation: none; }
+}
+
+/* ── Case study "Cómo funciona": steps light up one after another as you scroll ──
+   Cards read --flow-bg/--flow-fg (registered so they interpolate) and re-declare the
+   ink/canvas tokens from them, so every utility inside the card flips together. */
+@property --flow-bg { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --flow-fg { syntax: '<color>'; inherits: true; initial-value: #0d0d0d; }
+
+.flow-card {
+  --color-canvas: var(--flow-bg);
+  --color-ink: var(--flow-fg);
+  background: var(--flow-bg);
+  color: var(--flow-fg);
+}
+.flow-check { opacity: 0; }
+
+/* Values mirror the tokens: surface/ink at rest, ink/canvas when the step has "run" */
+@keyframes flowActivate {
+  from { --flow-bg: #ffffff; --flow-fg: #0d0d0d; }
+  to   { --flow-bg: #0d0d0d; --flow-fg: #f7f5f3; }
+}
+@keyframes flowCheck { to { opacity: 1; } }
+@keyframes flowFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@supports (animation-timeline: view()) {
+  /* Mobile: each card activates as it crosses the middle of the viewport */
+  .flow-card, .flow-card .flow-check {
+    animation: flowActivate linear both;
+    animation-timeline: view();
+    animation-range: cover 35% cover 50%;
+  }
+  .flow-card .flow-check { animation-name: flowCheck; }
+
+  /* md+: pin the section for ~2.5 screens and run the steps in order on that scroll */
+  @media (min-width: 768px) {
+    .flow-pin { height: 250vh; view-timeline-name: --flow; view-timeline-axis: block; }
+    .flow-stage { position: sticky; top: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .flow-progress {
+      animation: flowFill linear both;
+      animation-timeline: --flow;
+      animation-range: contain 5% contain 90%;
+    }
+    .flow-card, .flow-card .flow-check {
+      animation-timeline: --flow;
+      /* step i "runs" in its own slice of the pinned scroll */
+      animation-range:
+        contain calc(8% + var(--i) * (80% / var(--flow-steps)))
+        contain calc(12% + var(--i) * (80% / var(--flow-steps)));
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow-card, .flow-card .flow-check, .flow-progress { animation: none; }
+  .flow-pin { height: auto; }
+  .flow-stage { position: static; min-height: 0; }
+}
+
+/* ── Home stack: infinite marquee on mobile, rows run in opposite directions ── */
+@media (max-width: 767px) {
+  .stack-row { animation: marqueeScroll 28s linear infinite; }
+  .stack-row-reverse { animation-direction: reverse; }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .stack-row { animation: none; }
+}
+
+/* Shared by the home stack marquee */
 @keyframes marqueeScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  animation: marqueeScroll 25s linear infinite;
-  will-change: transform;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation-play-state: paused; }
-}
-
-/* ── About: orbital SVG dots (CSS replaces 3 GSAP infinite tweens) ── */
-@keyframes spinCW  { to { transform: rotate(360deg); } }
-@keyframes spinCCW { to { transform: rotate(-360deg); } }
-
-@media (prefers-reduced-motion: reduce) {
-  .orbit-dot { animation: none !important; }
 }

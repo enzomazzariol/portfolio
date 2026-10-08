@@ -1,113 +1,72 @@
-import { useState } from 'react'
 import { portfolioData } from '../../data/portfolio.js'
 
-const isTouchDevice = () =>
-  typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
-
-// eslint-disable-next-line react/prop-types
-export default function SelectedWorks({ containerRef }) {
-  const [hoveredIndex, setHoveredIndex] = useState(null)
-  const [isMobile] = useState(isTouchDevice)
-
+export default function SelectedWorks() {
   return (
-    <section className="px-6 md:px-10 py-24 max-w-6xl mx-auto border-t border-white/5">
-      <p className="section-label text-white/50 text-xs font-mono tracking-[0.2em] uppercase mb-8">Trabajos seleccionados</p>
-      <div ref={containerRef}>
-        {portfolioData.slice(0, 4).map(({ title, role, year, stack, link, images, imgUrl }, i) => {
-          const previews = (images && images.length > 0 ? images : [imgUrl]).slice(0, 3)
-          const isOpen = hoveredIndex === i
-          return (
-            <div key={title} className="border-b border-white/5">
-              <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className="work-item group flex items-center gap-6 py-6 -mx-4 px-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-              >
-                <span className="text-4xl font-bold text-white/10 font-mono w-14 shrink-0 leading-none">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span className="flex-1">
-                  <span className="font-display text-[clamp(1.5rem,4vw,3rem)] font-bold text-white block leading-tight">
-                    {title}
-                  </span>
-                  {(role || year) && (
-                    <span className="text-xs font-mono text-white/35 tracking-wide">
-                      {[role, year].filter(Boolean).join(' · ')}
-                    </span>
-                  )}
-                </span>
-                <div className="hidden md:flex flex-wrap gap-1.5 justify-end max-w-[280px]">
-                  {stack.map((tag) => (
-                    <span key={tag} className="text-xs font-mono text-white/45 border border-white/10 px-2 py-0.5">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <span className="text-white/30 group-hover:text-white transition-colors duration-200 text-xl font-mono shrink-0 ml-2">
-                  ↗︎
-                </span>
-              </a>
-
-              {/* Expandable image gallery */}
-              <div
-                className="relative"
-                style={{
-                  display: 'grid',
-                  gridTemplateRows: (isOpen || isMobile) ? '1fr' : '0fr',
-                  transition: 'grid-template-rows 1.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                }}
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="overflow-hidden">
-                  <div className="flex gap-2 pb-5">
-                    {previews.map((src, j) => (
-                      <div
-                        key={j}
-                        className="flex-1 overflow-hidden"
-                        style={{
-                          opacity: (isOpen || isMobile) ? 1 : 0,
-                          transform: (isOpen || isMobile) ? 'translateY(0)' : 'translateY(8px)',
-                          transition: `opacity 0.9s ease ${j * 150}ms, transform 0.9s ease ${j * 150}ms`,
-                        }}
-                      >
-                        <img
-                          src={src}
-                          alt={`${title} — imagen ${j + 1}`}
-                          className="w-full aspect-video object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="md:hidden pb-5">
-                    <a
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-xs font-mono text-white/60 border border-white/15 px-4 py-2 hover:text-white hover:border-white/40 transition-colors"
-                    >
-                      Ver proyecto ↗︎
-                    </a>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          )
-        })}
-      </div>
-      <div className="mt-10 flex justify-end">
-        <a
-          href="/proyectos"
-          className="text-sm font-mono text-white/60 hover:text-white/90 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-        >
-          Ver todos →
+    <section className="px-6 md:px-10 py-24 md:py-32 max-w-7xl mx-auto">
+      <div className="flex items-end justify-between gap-6 mb-14">
+        <div>
+          <p className="reveal text-xs font-medium tracking-[0.18em] uppercase text-ink/50 mb-4">Proyectos</p>
+          <h2 className="split-reveal display text-[clamp(2.75rem,7vw,6rem)] leading-[0.95] text-ink">
+            Trabajos seleccionados
+          </h2>
+        </div>
+        <a href="/proyectos" className="hidden md:inline text-sm font-medium text-ink/60 hover:text-ink transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40">
+          Ver todos ({portfolioData.length}) →
         </a>
       </div>
+
+      <div className="grid md:grid-cols-2 gap-x-6 gap-y-16">
+        {portfolioData.slice(0, 4).map(({ title, slug, role, year, stack, imgUrl, summary, highlights }, i) => (
+          <a
+            key={title}
+            href={`/proyectos/${slug}`}
+            // Offset the right column so the grid reads as a staggered gallery, not a table
+            className={`group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${i % 2 ? 'md:mt-24' : ''}`}
+          >
+            <div className="work-media overflow-hidden rounded-tile bg-surface aspect-[16/10]">
+              {imgUrl ? (
+                <img
+                  src={imgUrl}
+                  alt={`${title} — captura del proyecto`}
+                  className="w-full h-[115%] object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+              ) : (
+                // Typographic cover while screenshots are pending (mirrors ProjectCover.astro)
+                <div className="w-full h-[115%] bg-ink text-canvas flex flex-col justify-between p-6 md:p-10" role="img" aria-label={title}>
+                  <span className="text-xs font-medium tracking-[0.18em] uppercase opacity-60">Caso de estudio</span>
+                  <span className="display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.9] mb-[13%]">{title}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="reveal">
+              <div className="flex items-baseline justify-between gap-4 mt-5">
+                <h3 className="display text-3xl md:text-4xl text-ink">
+                  {title}
+                  <span className="inline-block ml-2 text-xl text-ink/40 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </h3>
+                <span className="text-sm text-ink/45 shrink-0 tabular-nums">{year}</span>
+              </div>
+              <p className="text-sm text-ink/50 mt-1">{role}</p>
+              {(summary ?? highlights?.[0]) && (
+                <p className="text-ink/75 mt-3 max-w-md leading-relaxed">{summary ?? highlights[0]}</p>
+              )}
+              <div className="flex flex-wrap gap-1.5 mt-4">
+                {stack.map((tag) => (
+                  <span key={tag} className="text-xs font-medium text-ink/60 border border-ink/15 rounded-full px-2.5 py-1">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <a href="/proyectos" className="md:hidden inline-block mt-12 text-sm font-medium text-ink/60 hover:text-ink transition-colors">
+        Ver todos ({portfolioData.length}) →
+      </a>
     </section>
   )
 }
