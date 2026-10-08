@@ -202,7 +202,7 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
           <img
             src={src}
             alt={`${title} — captura ${i + 2}`}
-            class={`reveal-view w-full rounded-tile bg-surface ${wide(i) ? 'md:col-span-2' : ''}`}
+            class={`reveal-view w-full max-h-[85vh] object-contain rounded-tile bg-surface ${wide(i) ? 'md:col-span-2' : ''}`}
             loading="lazy"
             decoding="async"
           />

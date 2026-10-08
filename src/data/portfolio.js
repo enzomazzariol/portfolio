@@ -10,9 +10,17 @@ export const portfolioData = [
     slug: "nvs-platform",
     year: "2026",
     role: "Desarrollador principal — Guarapo Media",
-    // ponytail: screenshots pending — must use demo athletes (real profiles include minors' data)
-    imgUrl: null,
-    images: [],
+    // Screenshots use the demo athlete; real athletes are blurred in the panel shot (possible minors)
+    imgUrl: "/assets/nvs-platform/nvs-platform-editor.webp",
+    images: [
+      "/assets/nvs-platform/nvs-platform-editor.webp",
+      "/assets/nvs-platform/nvs-platform-panel.webp",
+      "/assets/nvs-platform/nvs-platform-perfil-movil.webp",
+      "/assets/nvs-platform/nvs-platform-ficha-pdf.webp",
+      "/assets/nvs-platform/nvs-platform-login.webp",
+      "/assets/nvs-platform/nvs-platform-compartir.webp",
+      "/assets/nvs-platform/nvs-platform-perfil-escritorio.webp",
+    ],
     stack: ["Astro", "TypeScript", "Supabase", "PostgreSQL", "Cloudinary", "Cloudflare API", "cPanel UAPI", "Resend", "Vitest", "Vercel"],
     link: null,
     summary: "Plataforma interna para crear, revisar y publicar perfiles digitales de atletas, cada uno en su propio subdominio, con DNS, hosting y fotos automatizados.",
@@ -23,8 +31,13 @@ export const portfolioData = [
       "Roles admin, editor y atleta con Supabase Auth (acceso con código de un solo uso por email) y políticas RLS en PostgreSQL",
       "Flujo de revisión con diff de cambios desde la última publicación y solicitud de cambios por email (Resend)",
       "Migración de los perfiles existentes desde Carrd con un script que re-aloja las fotos en Cloudinary",
-      "Tracking de visitas desde los perfiles publicados, exportación CSV y ficha imprimible con QR",
+      "Tracking de visitas, exportación CSV y opciones para compartir cada perfil: QR, WhatsApp y ficha imprimible en PDF",
       "TypeScript estricto, 50 tests unitarios con Vitest y CI en GitHub Actions",
+    ],
+    results: [
+      { value: "76", label: "perfiles de atletas creados en la plataforma" },
+      { value: "27", label: "perfiles publicados, cada uno en su propio subdominio" },
+      { value: "19", label: "perfiles migrados automáticamente desde Carrd" },
     ],
     flow: [
       { title: "Builder", text: "El equipo o el atleta completa el perfil; cada cambio se autoguarda en Supabase." },
@@ -75,10 +88,13 @@ export const portfolioData = [
     imgUrl: "/assets/nvs/nvs-1.webp",
     images: [
       "/assets/nvs/nvs-1.webp",
-      "/assets/nvs/nvs-2.webp",
-      "/assets/nvs/nvs-3.webp",
       "/assets/nvs/nvs-4.webp",
+      "/assets/nvs/nvs-becas-por-deporte.webp",
+      "/assets/nvs/nvs-casos-de-exito.webp",
+      "/assets/nvs/nvs-2.webp",
       "/assets/nvs/nvs-5.webp",
+      "/assets/nvs/nvs-3.webp",
+      "/assets/nvs/nvs-inversion.webp",
     ],
     stack: ["Astro", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "PHP", "Vitest"],
     link: "https://playwithnewvision.com/",
@@ -122,7 +138,7 @@ export const portfolioData = [
     title: "Moodflix",
     slug: "moodflix",
     year: "2025",
-    role: "Proyecto final de DAM",
+    role: "Proyecto final de DAM — individual",
     imgUrl: "/assets/moodflix/moodflix-1.webp",
     images: [
       "/assets/moodflix/moodflix-1.webp",
@@ -188,7 +204,7 @@ export const portfolioData = [
   {
     title: "Boston String Academy",
     slug: "boston-string-academy",
-    year: "2023",
+    year: "2024",
     role: "Desarrollador web — Guarapo Media",
     imgUrl: "/assets/bsa/bsa-1.webp",
     images: [
@@ -205,13 +221,13 @@ export const portfolioData = [
       "Tema WordPress propio en HTML, CSS y PHP, sin constructor visual",
       "Páginas para cada programa (orquestas en Chinatown y Allston, clases particulares, masterclasses) y para el profesorado",
       "Sección «Join Us» con información de matrícula y becas, enlazada a los formularios de inscripción",
-      "Donaciones con PayPal: generales, patrocinio de alumnos y en especie",
+      "Sección de apoyo con las tres vías de colaboración: donaciones, patrocinio de alumnos y donaciones en especie",
     ],
   },
   {
     title: "Hola Atelier",
     slug: "hola-atelier",
-    year: "2023",
+    year: "2024",
     role: "Desarrollador web — Guarapo Media",
     imgUrl: "/assets/atelier/atelier-1.webp",
     images: [

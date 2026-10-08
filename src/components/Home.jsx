@@ -22,12 +22,12 @@ const heroWords = [
 // `depth` = scroll parallax (px); mouse parallax is derived from it too, so far tiles move more.
 // Images are 640px copies in /assets/hero (originals are up to 2900px).
 const tiles = [
-  { src: '/assets/hero/nvs-1.webp',           pos: 'left-[1%] top-[0%] w-[17vw]',    rot: -6, depth: -140 },
-  { src: '/assets/hero/bsa-2.webp',           pos: 'left-[10%] top-[40%] w-[12vw]',  rot: 6,  depth: -70 },
-  { src: '/assets/hero/atelier-1.webp',   pos: 'left-[0%] top-[76%] w-[15vw]',   rot: -3, depth: -200 },
-  { src: '/assets/hero/abode-1.webp',       pos: 'right-[1%] top-[2%] w-[17vw]',   rot: 5,  depth: -170 },
-  { src: '/assets/hero/moodflix-1.webp', pos: 'right-[9%] top-[40%] w-[13vw]',  rot: -5, depth: -90 },
-  { src: '/assets/hero/nvs-3.webp',           pos: 'right-[0%] top-[75%] w-[15vw]',  rot: 4,  depth: -230 },
+  { src: '/assets/hero/nvs-platform-editor.webp',           pos: 'left-[1%] top-[0%] w-[17vw]',    rot: -6, depth: -140 },
+  { src: '/assets/hero/bsa-2.webp',                         pos: 'left-[10%] top-[36%] w-[11vw]',  rot: 6,  depth: -70 },
+  { src: '/assets/hero/nvs-becas-por-deporte.webp',         pos: 'left-[1%] top-[70%] w-[12vw]',   rot: -3, depth: -200 },
+  { src: '/assets/hero/abode-1.webp',                       pos: 'right-[1%] top-[2%] w-[17vw]',   rot: 5,  depth: -170 },
+  { src: '/assets/hero/moodflix-1.webp',                    pos: 'right-[9%] top-[40%] w-[13vw]',  rot: -5, depth: -90 },
+  { src: '/assets/hero/nvs-platform-perfil-escritorio.webp', pos: 'right-[0%] top-[75%] w-[15vw]',  rot: 4,  depth: -230 },
 ]
 const mobileTiles = [tiles[0], tiles[4], tiles[3]]
 
