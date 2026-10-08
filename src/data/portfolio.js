@@ -13,7 +13,7 @@ export const portfolioData = [
     // ponytail: screenshots pending — must use demo athletes (real profiles include minors' data)
     imgUrl: null,
     images: [],
-    stack: ["Astro", "TypeScript", "Supabase", "PostgreSQL", "Cloudinary", "Cloudflare API", "cPanel UAPI", "Upstash Redis", "Resend", "Vitest", "Vercel"],
+    stack: ["Astro", "TypeScript", "Supabase", "PostgreSQL", "Cloudinary", "Cloudflare API", "cPanel UAPI", "Resend", "Vitest", "Vercel"],
     link: null,
     summary: "Plataforma interna para crear, revisar y publicar perfiles digitales de atletas, cada uno en su propio subdominio, con DNS, hosting y fotos automatizados.",
     description: "New Vision Sports conecta a atletas de Latinoamérica, Centroamérica y España con becas deportivas en universidades de EE. UU., y cada atleta necesita un perfil profesional online para enviar a entrenadores. Antes vivían en Carrd, sin datos estructurados ni un flujo común. Desarrollé una plataforma con la que el equipo crea, revisa y publica esos perfiles desde un panel, y con la que los propios atletas pueden editar el suyo y enviarlo a revisión.",
@@ -23,7 +23,7 @@ export const portfolioData = [
       "Roles admin, editor y atleta con Supabase Auth (acceso con código de un solo uso por email) y políticas RLS en PostgreSQL",
       "Flujo de revisión con diff de cambios desde la última publicación y solicitud de cambios por email (Resend)",
       "Migración de los perfiles existentes desde Carrd con un script que re-aloja las fotos en Cloudinary",
-      "Tracking de visitas con endpoint público rate-limited (Upstash Redis), exportación CSV y ficha imprimible con QR",
+      "Tracking de visitas desde los perfiles publicados, exportación CSV y ficha imprimible con QR",
       "TypeScript estricto, 50 tests unitarios con Vitest y CI en GitHub Actions",
     ],
     flow: [
