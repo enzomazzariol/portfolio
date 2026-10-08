@@ -94,6 +94,7 @@ Vercel auto-detects the Astro framework from `package.json`. Pushes to the produ
 - Prefer static Astro pages: `/proyectos`, `/proyectos/[slug]`, `/sobre-mi` and `404` ship no page-level JS. Their scroll reveals use the CSS `.reveal-view` utility (native `animation-timeline: view()`).
 - React islands only where interactivity is needed: `Home.jsx` (GSAP `useGSAP` + ScrollTrigger + SplitText, hero tile entrance/parallax), `Contact.jsx` (form), `Navbar.jsx`.
 - A React component with no interactivity can be rendered in an `.astro` page **without** a `client:*` directive to get plain HTML (see `ExperienceSection` on /sobre-mi).
+- CSS scroll-driven animations: use longhands (`animation-name`, `animation-duration: auto`, `animation-timing-function`, `animation-fill-mode`, then `animation-timeline`), never the `animation:` shorthand — Lightning CSS folds the timeline into the shorthand on `astro build`, producing invalid CSS that only fails in production. Test animations against `npm run build && npm run preview`, not just `npm run dev`.
 - GSAP gotcha: GSAP writes inline `rotate/translate/scale: none` on elements it animates, so CSS individual-transform properties (e.g. a resting tilt) must live on a wrapper GSAP doesn't touch.
 - Props are destructured in function signatures. No TypeScript in `.jsx` files; use plain JS.
 - ESLint `react/prop-types` is disabled inline (`// eslint-disable-next-line react/prop-types`) where it fires — this is intentional, do not add PropTypes.

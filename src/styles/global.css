@@ -46,7 +46,10 @@
    browsers without support just show it in place */
 @supports (animation-timeline: view()) {
   .footer-name {
-    animation: footerRise linear both;
+    animation-name: footerRise;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: view();
     animation-range: entry 0% entry 100%;
   }
@@ -157,11 +160,19 @@ html {
   }
 }
 
+/* NOTE scroll-driven animations: always write longhands (animation-name/-duration/-timing-function/
+   -fill-mode + animation-timeline). With the `animation:` shorthand, the production minifier
+   (Lightning CSS) folds animation-timeline INTO the shorthand, which is invalid CSS, so browsers drop
+   the whole declaration — it only breaks in `astro build`, never in `astro dev`. */
+
 /* ── Static pages: scroll reveal without JS (native scroll-driven animation).
    Browsers without support show the content in place. ── */
 @supports (animation-timeline: view()) {
   .reveal-view {
-    animation: revealUp linear both;
+    animation-name: revealUp;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: view();
     animation-range: entry 0% entry 55%;
   }
@@ -192,7 +203,10 @@ html {
 @supports (animation-timeline: view()) {
   /* Mobile: each card activates as it crosses the middle of the viewport */
   .flow-card, .flow-card .flow-check {
-    animation: flowActivate linear both;
+    animation-name: flowActivate;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: view();
     animation-range: cover 35% cover 50%;
   }
@@ -203,7 +217,10 @@ html {
     .flow-pin { height: 250vh; view-timeline-name: --flow; view-timeline-axis: block; }
     .flow-stage { position: sticky; top: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
     .flow-progress {
-      animation: flowFill linear both;
+      animation-name: flowFill;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
       animation-timeline: --flow;
       animation-range: contain 5% contain 90%;
     }
