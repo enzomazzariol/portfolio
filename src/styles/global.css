@@ -175,23 +175,16 @@ html {
 }
 
 /* ── Case study "Cómo funciona": steps light up one after another as you scroll ──
-   Cards read --flow-bg/--flow-fg (registered so they interpolate) and re-declare the
-   ink/canvas tokens from them, so every utility inside the card flips together. */
-@property --flow-bg { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
-@property --flow-fg { syntax: '<color>'; inherits: true; initial-value: #0d0d0d; }
-
-.flow-card {
-  --color-canvas: var(--flow-bg);
-  --color-ink: var(--flow-fg);
-  background: var(--flow-bg);
-  color: var(--flow-fg);
-}
+   Animates plain background-color/color (works in Safari too; animating registered custom
+   properties on a scroll timeline doesn't). Text inside the card inherits `color` and uses
+   opacity for muted tones. Each card's scroll slice comes precomputed in --flow-range. */
+.flow-card { background-color: #ffffff; color: #0d0d0d; }
 .flow-check { opacity: 0; }
 
-/* Values mirror the tokens: surface/ink at rest, ink/canvas when the step has "run" */
+/* Values mirror the tokens: surface/ink at rest, ink/canvas once the step has "run" */
 @keyframes flowActivate {
-  from { --flow-bg: #ffffff; --flow-fg: #0d0d0d; }
-  to   { --flow-bg: #0d0d0d; --flow-fg: #f7f5f3; }
+  from { background-color: #ffffff; color: #0d0d0d; }
+  to   { background-color: #0d0d0d; color: #f7f5f3; }
 }
 @keyframes flowCheck { to { opacity: 1; } }
 @keyframes flowFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -216,10 +209,7 @@ html {
     }
     .flow-card, .flow-card .flow-check {
       animation-timeline: --flow;
-      /* step i "runs" in its own slice of the pinned scroll */
-      animation-range:
-        contain calc(8% + var(--i) * (80% / var(--flow-steps)))
-        contain calc(12% + var(--i) * (80% / var(--flow-steps)));
+      animation-range: var(--flow-range);
     }
   }
 }

@@ -131,7 +131,7 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
          (pure CSS scroll-driven animation, see .flow-* in global.css); on mobile each card
          activates as it crosses the middle of the screen -->
     {flow.length > 0 && (
-      <section class="band flow-pin" style={`--flow-steps: ${flow.length}`}>
+      <section class="band flow-pin">
         <div class="flow-stage px-6 md:px-10 py-24 md:py-0 max-w-7xl mx-auto">
           <div class="flex flex-wrap items-end justify-between gap-6">
             <h2 class="display text-4xl md:text-5xl leading-[0.95] text-ink">Cómo funciona</h2>
@@ -144,14 +144,14 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
             {flow.map(({ title: step, text }, i) => (
               <li
                 class="flow-card rounded-ui border border-ink/10 p-6 md:p-7 transition-transform duration-300 md:hover:-translate-y-1"
-                style={`--i: ${i}`}
+                style={`--flow-range: contain ${(8 + (i * 80) / flow.length).toFixed(1)}% contain ${(12 + (i * 80) / flow.length).toFixed(1)}%`}
               >
                 <div class="flex items-center justify-between">
-                  <span class="display text-5xl text-ink/30 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
-                  <span class="flow-check text-sm font-medium text-ink/70" aria-hidden="true">✓ Hecho</span>
+                  <span class="display text-5xl opacity-30 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="flow-check text-sm font-medium" aria-hidden="true">✓ Hecho</span>
                 </div>
-                <h3 class="display text-2xl md:text-3xl text-ink mt-4">{step}</h3>
-                <p class="text-ink/70 leading-relaxed mt-3">{text}</p>
+                <h3 class="display text-2xl md:text-3xl mt-4">{step}</h3>
+                <p class="opacity-75 leading-relaxed mt-3">{text}</p>
               </li>
             ))}
           </ol>
