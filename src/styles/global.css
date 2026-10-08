@@ -174,6 +174,61 @@ html {
   .reveal-view { animation: none; }
 }
 
+/* ── Case study "Cómo funciona": steps light up one after another as you scroll ──
+   Cards read --flow-bg/--flow-fg (registered so they interpolate) and re-declare the
+   ink/canvas tokens from them, so every utility inside the card flips together. */
+@property --flow-bg { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --flow-fg { syntax: '<color>'; inherits: true; initial-value: #0d0d0d; }
+
+.flow-card {
+  --color-canvas: var(--flow-bg);
+  --color-ink: var(--flow-fg);
+  background: var(--flow-bg);
+  color: var(--flow-fg);
+}
+.flow-check { opacity: 0; }
+
+/* Values mirror the tokens: surface/ink at rest, ink/canvas when the step has "run" */
+@keyframes flowActivate {
+  from { --flow-bg: #ffffff; --flow-fg: #0d0d0d; }
+  to   { --flow-bg: #0d0d0d; --flow-fg: #f7f5f3; }
+}
+@keyframes flowCheck { to { opacity: 1; } }
+@keyframes flowFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@supports (animation-timeline: view()) {
+  /* Mobile: each card activates as it crosses the middle of the viewport */
+  .flow-card, .flow-card .flow-check {
+    animation: flowActivate linear both;
+    animation-timeline: view();
+    animation-range: cover 35% cover 50%;
+  }
+  .flow-card .flow-check { animation-name: flowCheck; }
+
+  /* md+: pin the section for ~2.5 screens and run the steps in order on that scroll */
+  @media (min-width: 768px) {
+    .flow-pin { height: 250vh; view-timeline-name: --flow; view-timeline-axis: block; }
+    .flow-stage { position: sticky; top: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .flow-progress {
+      animation: flowFill linear both;
+      animation-timeline: --flow;
+      animation-range: contain 5% contain 90%;
+    }
+    .flow-card, .flow-card .flow-check {
+      animation-timeline: --flow;
+      /* step i "runs" in its own slice of the pinned scroll */
+      animation-range:
+        contain calc(8% + var(--i) * (80% / var(--flow-steps)))
+        contain calc(12% + var(--i) * (80% / var(--flow-steps)));
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow-card, .flow-card .flow-check, .flow-progress { animation: none; }
+  .flow-pin { height: auto; }
+  .flow-stage { position: static; min-height: 0; }
+}
+
 /* ── Home stack: infinite marquee on mobile, rows run in opposite directions ── */
 @media (max-width: 767px) {
   .stack-row { animation: marqueeScroll 28s linear infinite; }

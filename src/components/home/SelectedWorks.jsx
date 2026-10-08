@@ -16,7 +16,7 @@ export default function SelectedWorks() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-x-6 gap-y-16">
-        {portfolioData.slice(0, 4).map(({ title, slug, role, year, stack, imgUrl, highlights }, i) => (
+        {portfolioData.slice(0, 4).map(({ title, slug, role, year, stack, imgUrl, summary, highlights }, i) => (
           <a
             key={title}
             href={`/proyectos/${slug}`}
@@ -24,12 +24,20 @@ export default function SelectedWorks() {
             className={`group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${i % 2 ? 'md:mt-24' : ''}`}
           >
             <div className="work-media overflow-hidden rounded-tile bg-surface aspect-[16/10]">
-              <img
-                src={imgUrl}
-                alt={`${title} — captura del proyecto`}
-                className="w-full h-[115%] object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                loading="lazy"
-              />
+              {imgUrl ? (
+                <img
+                  src={imgUrl}
+                  alt={`${title} — captura del proyecto`}
+                  className="w-full h-[115%] object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+              ) : (
+                // Typographic cover while screenshots are pending (mirrors ProjectCover.astro)
+                <div className="w-full h-[115%] bg-ink text-canvas flex flex-col justify-between p-6 md:p-10" role="img" aria-label={title}>
+                  <span className="text-xs font-medium tracking-[0.18em] uppercase opacity-60">Caso de estudio</span>
+                  <span className="display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.9] mb-[13%]">{title}</span>
+                </div>
+              )}
             </div>
 
             <div className="reveal">
@@ -41,8 +49,8 @@ export default function SelectedWorks() {
                 <span className="text-sm text-ink/45 shrink-0 tabular-nums">{year}</span>
               </div>
               <p className="text-sm text-ink/50 mt-1">{role}</p>
-              {highlights?.[0] && (
-                <p className="text-ink/75 mt-3 max-w-md leading-relaxed">{highlights[0]}</p>
+              {(summary ?? highlights?.[0]) && (
+                <p className="text-ink/75 mt-3 max-w-md leading-relaxed">{summary ?? highlights[0]}</p>
               )}
               <div className="flex flex-wrap gap-1.5 mt-4">
                 {stack.map((tag) => (

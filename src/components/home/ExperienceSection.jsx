@@ -21,7 +21,7 @@ export default function ExperienceSection({ aboutLink = true }) {
       {/* Right: timeline */}
       <ol className="timeline relative md:col-span-8 md:col-start-6">
         <span className="timeline-line absolute left-[5px] top-2 bottom-2 w-px bg-ink/20 origin-top" aria-hidden="true" />
-        {experience.map(({ period, role, place, url, text, tags }) => (
+        {experience.map(({ period, role, place, url, text, caseUrl, tags }) => (
           <li key={role} className="relative pl-10 pb-16 last:pb-0">
             <span className="timeline-dot absolute left-0 top-2 w-[11px] h-[11px] rounded-full bg-canvas border-2 border-ink" aria-hidden="true" />
             <div className="reveal">
@@ -35,6 +35,11 @@ export default function ExperienceSection({ aboutLink = true }) {
                 ) : place}
               </p>
               <p className="text-ink/75 mt-4 max-w-xl leading-relaxed">{text}</p>
+              {caseUrl && (
+                <a href={caseUrl} className="inline-block mt-3 text-sm font-medium text-ink underline decoration-ink/25 underline-offset-4 hover:decoration-ink transition-colors">
+                  Ver caso de estudio →
+                </a>
+              )}
               {tags && (
                 <div className="flex flex-wrap gap-1.5 mt-4">
                   {tags.map((t) => (

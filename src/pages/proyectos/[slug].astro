@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import { portfolioData } from '../../data/portfolio.js'
+import ProjectCover from '../../components/ProjectCover.astro'
 
 export function getStaticPaths() {
   return portfolioData.map((project, i) => ({
@@ -10,11 +11,11 @@ export function getStaticPaths() {
 }
 
 const { project, index, next } = Astro.props
-const { title, year, role, stack, link, github, imgUrl, images = [], description, highlights = [] } = project
+const { title, year, role, stack, link, github, imgUrl, images = [], summary, description, highlights = [], flow = [], decisions = [], results = [] } = project
 
-// Meta description: the project's own context paragraph, cut at a word boundary
+// Meta description: the summary if there is one, else the context paragraph, cut at a word boundary
 const metaDescription = (() => {
-  const text = `${title}: ${description}`
+  const text = `${title}: ${summary ?? description}`
   if (text.length <= 155) return text
   return text.slice(0, 155).replace(/\s+\S*$/, '') + '…'
 })()
@@ -22,13 +23,13 @@ const metaDescription = (() => {
 const gallery = images.filter((src) => src !== imgUrl)
 // First shot full width, the rest in pairs; a leftover last one also goes full width
 const wide = (i) => i === 0 || (i === gallery.length - 1 && (gallery.length - 1) % 2 === 1)
-const isVideo = link.includes('youtube.com') || link.includes('youtu.be')
+const isVideo = !!link && (link.includes('youtube.com') || link.includes('youtu.be'))
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40'
 ---
 <Layout
   title={`${title} — Caso de estudio · Enzo Mazzariol`}
   description={metaDescription}
-  ogImage={new URL(imgUrl, Astro.site).toString()}
+  ogImage={imgUrl ? new URL(imgUrl, Astro.site).toString() : undefined}
 >
   <main class="pt-32 md:pt-40">
 
@@ -43,6 +44,9 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
       <h1 class="hero-fade-up display text-[clamp(3.25rem,10vw,9rem)] leading-[0.9] text-ink mt-8" style="animation-delay: 0.15s">
         {title}
       </h1>
+      {summary && (
+        <p class="hero-fade-up text-xl md:text-2xl text-ink/70 leading-snug max-w-3xl mt-8" style="animation-delay: 0.22s">{summary}</p>
+      )}
 
       <dl class="hero-fade-up grid grid-cols-2 md:grid-cols-4 gap-8 mt-12 pt-8 border-t border-ink/10" style="animation-delay: 0.3s">
         <div>
@@ -60,14 +64,17 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
         <div>
           <dt class="text-xs font-medium tracking-[0.18em] uppercase text-ink/45">Enlaces</dt>
           <dd class="flex flex-col gap-1 mt-2">
-            <a href={link} target="_blank" rel="noopener noreferrer" class={`text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink transition-colors ${focusRing}`}>
-              {isVideo ? 'Ver demo en vídeo' : 'Ver sitio online'} ↗︎
-            </a>
+            {link && (
+              <a href={link} target="_blank" rel="noopener noreferrer" class={`text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink transition-colors ${focusRing}`}>
+                {isVideo ? 'Ver demo en vídeo' : 'Ver sitio online'} ↗︎
+              </a>
+            )}
             {github && (
               <a href={github} target="_blank" rel="noopener noreferrer" class={`text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink transition-colors ${focusRing}`}>
                 Código en GitHub ↗︎
               </a>
             )}
+            {!link && !github && <span class="text-ink/70">Herramienta interna (privada)</span>}
           </dd>
         </div>
       </dl>
@@ -75,12 +82,13 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
 
     <!-- Lead image -->
     <div class="hero-fade-up px-6 md:px-10 max-w-7xl mx-auto mt-14" style="animation-delay: 0.45s">
-      <img
-        src={imgUrl}
+      <ProjectCover
+        title={title}
+        imgUrl={imgUrl}
         alt={`${title} — vista principal del proyecto`}
-        class="w-full rounded-tile bg-surface"
+        imgClass="w-full rounded-tile bg-surface"
+        class="w-full aspect-[16/9] rounded-tile"
         loading="eager"
-        fetchpriority="high"
       />
     </div>
 
@@ -102,6 +110,90 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
         </ol>
       </div>
     </section>
+
+    <!-- Results: measurable outcomes -->
+    {results.length > 0 && (
+      <section class="px-6 md:px-10 max-w-7xl mx-auto pb-24 md:pb-32">
+        <h2 class="reveal-view font-sans text-xs font-medium tracking-[0.18em] uppercase text-ink/50">Resultados</h2>
+        <dl class="mt-8 grid md:grid-cols-3 gap-px bg-ink/10 border border-ink/10 rounded-ui overflow-hidden">
+          {results.map(({ value, label }) => (
+            <div class="reveal-view bg-canvas p-8 md:p-10">
+              <dt class="sr-only">{label}</dt>
+              <dd class="display text-6xl md:text-7xl leading-none text-ink">{value}</dd>
+              <dd class="text-ink/65 leading-relaxed mt-4">{label}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
+
+    <!-- How it works: on md+ the section pins while you scroll and each step "runs" in turn
+         (pure CSS scroll-driven animation, see .flow-* in global.css); on mobile each card
+         activates as it crosses the middle of the screen -->
+    {flow.length > 0 && (
+      <section class="band flow-pin" style={`--flow-steps: ${flow.length}`}>
+        <div class="flow-stage px-6 md:px-10 py-24 md:py-0 max-w-7xl mx-auto">
+          <div class="flex flex-wrap items-end justify-between gap-6">
+            <h2 class="display text-4xl md:text-5xl leading-[0.95] text-ink">Cómo funciona</h2>
+            <p class="text-sm text-ink/50">{flow.length} pasos</p>
+          </div>
+          <div class="hidden md:block h-px bg-ink/10 mt-8 overflow-hidden" aria-hidden="true">
+            <div class="flow-progress h-full bg-ink origin-left"></div>
+          </div>
+          <ol class={`mt-8 grid sm:grid-cols-2 gap-4 ${flow.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
+            {flow.map(({ title: step, text }, i) => (
+              <li
+                class="flow-card rounded-ui border border-ink/10 p-6 md:p-7 transition-transform duration-300 md:hover:-translate-y-1"
+                style={`--i: ${i}`}
+              >
+                <div class="flex items-center justify-between">
+                  <span class="display text-5xl text-ink/30 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="flow-check text-sm font-medium text-ink/70" aria-hidden="true">✓ Hecho</span>
+                </div>
+                <h3 class="display text-2xl md:text-3xl text-ink mt-4">{step}</h3>
+                <p class="text-ink/70 leading-relaxed mt-3">{text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )}
+
+    <!-- Technical decisions: what was chosen and what it cost -->
+    {decisions.length > 0 && (
+      <section class="px-6 md:px-10 max-w-7xl mx-auto py-24 md:py-32">
+        <div class="reveal-view grid md:grid-cols-12 gap-6 items-end">
+          <h2 class="md:col-span-7 display text-4xl md:text-6xl leading-[0.95] text-ink">Decisiones técnicas</h2>
+          <p class="md:col-span-5 text-ink/60 leading-relaxed">Las decisiones que más pesaron en la arquitectura, y lo que costó cada una.</p>
+        </div>
+        <ol class="mt-14">
+          {decisions.map(({ title: d, text, tradeoff, tags = [] }, i) => (
+            <li class="reveal-view group grid md:grid-cols-12 gap-4 md:gap-8 py-10 border-t border-ink/15 last:border-b">
+              <span class="md:col-span-1 display text-3xl text-ink/30 tabular-nums transition-colors duration-300 group-hover:text-accent">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 class="md:col-span-4 display text-3xl md:text-4xl leading-[1] text-ink transition-transform duration-500 ease-out md:group-hover:translate-x-2">
+                {d}
+              </h3>
+              <div class="md:col-span-7">
+                <p class="text-lg text-ink/75 leading-relaxed">{text}</p>
+                {tradeoff && (
+                  <div class="mt-5 bg-surface border border-ink/10 rounded-ui p-5 transition-colors duration-300 group-hover:border-ink/30">
+                    <p class="text-xs font-medium tracking-[0.18em] uppercase text-accent">Trade-off</p>
+                    <p class="text-ink/75 leading-relaxed mt-2">{tradeoff}</p>
+                  </div>
+                )}
+                {tags.length > 0 && (
+                  <ul class="flex flex-wrap gap-1.5 mt-5">
+                    {tags.map((t) => <li class="text-xs font-medium text-ink/60 border border-ink/15 rounded-full px-2.5 py-1">{t}</li>)}
+                  </ul>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
 
     <!-- Gallery: first image wide, then pairs -->
     {gallery.length > 0 && (
@@ -126,12 +218,12 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
           <p class="display text-[clamp(2.75rem,8vw,7.5rem)] leading-[0.9] text-ink transition-transform duration-500 group-hover:translate-x-3">
             {next.title} <span class="inline-block text-ink/40">→</span>
           </p>
-          <img
+          {next.imgUrl && <img
             src={next.imgUrl}
             alt=""
             class="hidden md:block w-72 aspect-[16/10] object-cover object-top rounded-tile rotate-3 transition-transform duration-500 group-hover:rotate-0 group-hover:scale-105"
             loading="lazy"
-          />
+          />}
         </div>
       </a>
     </section>

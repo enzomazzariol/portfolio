@@ -5,8 +5,9 @@ export const experience = [
     role: 'Software Developer',
     place: 'Guarapo Media',
     url: 'https://guarapomedia.com/',
-    text: 'Desarrollador único en los proyectos de clientes de la agencia: webs en Astro y React, tiendas Shopify y sitios WordPress, desde la maqueta hasta producción.',
-    tags: ['Astro', 'React', 'Shopify', 'WordPress'],
+    text: 'Desarrollador de los proyectos de clientes de la agencia: webs en Astro y React, tiendas Shopify y sitios WordPress, desde la maqueta hasta producción. Desarrollador principal de NVS Platform, una plataforma con Supabase que automatiza la publicación de perfiles de atletas (DNS, hosting e imágenes).',
+    caseUrl: '/proyectos/nvs-platform',
+    tags: ['Astro', 'React', 'TypeScript', 'Supabase', 'Shopify', 'WordPress'],
   },
   {
     period: '2025 — hoy',

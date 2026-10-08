@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { portfolioData } from '../data/portfolio.js'
+import ProjectCover from '../components/ProjectCover.astro'
 
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40'
 ---
 <Layout
   title="Proyectos — Enzo Mazzariol · Desarrollador Web en Barcelona"
-  description="Proyectos de Enzo Mazzariol, desarrollador web full stack en Barcelona: webs en producción con Astro y React, tiendas Shopify y WordPress, y una app móvil con backend en Java Spring Boot."
+  description="Proyectos de Enzo Mazzariol, desarrollador web full stack en Barcelona: una plataforma de perfiles con Astro y Supabase, webs en producción, tiendas Shopify y WordPress, y una app móvil con backend en Java Spring Boot."
   ogImage="https://enzomazzariol.com/assets/og-images/proyectos-og.png"
 >
   <main class="px-6 md:px-10 pt-36 md:pt-44 pb-24 max-w-7xl mx-auto">
@@ -20,14 +21,15 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
         Proyectos de desarrollo web y software
       </h1>
       <p class="hero-fade-up text-lg text-ink/65 max-w-2xl leading-relaxed mt-8" style="animation-delay: 0.35s">
-        Trabajos en producción para clientes de Guarapo Media y proyectos propios: webs en Astro y React,
-        tiendas online en Shopify y WordPress, y una app móvil con backend propio en Java + Spring Boot.
+        Trabajos en producción para clientes de Guarapo Media y proyectos propios: una plataforma interna
+        con Supabase para publicar perfiles de atletas, webs en Astro y React, tiendas online en Shopify y
+        WordPress, y una app móvil con backend propio en Java + Spring Boot.
       </p>
     </header>
 
     <!-- List: alternating image side, each row links to its case study -->
     <ol class="mt-24 md:mt-32 flex flex-col gap-24 md:gap-36">
-      {portfolioData.map(({ title, slug, year, role, stack, imgUrl, highlights, link }, i) => (
+      {portfolioData.map(({ title, slug, year, role, stack, imgUrl, summary, highlights, link }, i) => (
         <li class="reveal-view grid md:grid-cols-12 gap-8 md:gap-12 items-center">
           <a
             href={`/proyectos/${slug}`}
@@ -35,12 +37,12 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
             aria-label={`Caso de estudio: ${title}`}
           >
             <div class="overflow-hidden rounded-tile bg-surface aspect-[16/10]">
-              <img
-                src={imgUrl}
-                alt={`${title} — captura del proyecto`}
-                class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              <ProjectCover
+                title={title}
+                imgUrl={imgUrl}
+                imgClass="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                class="w-full h-full"
                 loading={i === 0 ? 'eager' : 'lazy'}
-                decoding="async"
               />
             </div>
           </a>
@@ -51,7 +53,7 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
               <a href={`/proyectos/${slug}`} class={`hover:text-ink/70 transition-colors ${focusRing}`}>{title}</a>
             </h2>
             <p class="text-ink/55 mt-3">{role}</p>
-            {highlights?.[0] && <p class="text-ink/75 leading-relaxed mt-5">{highlights[0]}</p>}
+            {(summary ?? highlights?.[0]) && <p class="text-ink/75 leading-relaxed mt-5">{summary ?? highlights[0]}</p>}
             <ul class="flex flex-wrap gap-1.5 mt-5">
               {stack.map((tag) => (
                 <li class="text-xs font-medium text-ink/60 border border-ink/15 rounded-full px-2.5 py-1">{tag}</li>
@@ -61,9 +63,11 @@ const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible
               <a href={`/proyectos/${slug}`} class={`bg-ink text-canvas rounded-ui px-5 py-3 min-h-[44px] flex items-center hover:bg-ink/85 transition-colors ${focusRing}`}>
                 Ver caso de estudio →
               </a>
-              <a href={link} target="_blank" rel="noopener noreferrer" class={`text-ink/60 hover:text-ink transition-colors ${focusRing}`}>
-                Ver online ↗︎
-              </a>
+              {link && (
+                <a href={link} target="_blank" rel="noopener noreferrer" class={`text-ink/60 hover:text-ink transition-colors ${focusRing}`}>
+                  Ver online ↗︎
+                </a>
+              )}
             </div>
           </div>
         </li>
