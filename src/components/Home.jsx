@@ -23,7 +23,7 @@ const heroWords = [
 // Images are 640px copies in /assets/hero (originals are up to 2900px).
 const tiles = [
   { src: '/assets/hero/nvs-platform-editor.webp',           pos: 'left-[1%] top-[0%] w-[17vw]',    rot: -6, depth: -140 },
-  { src: '/assets/hero/bsa-2.webp',                         pos: 'left-[10%] top-[36%] w-[11vw]',  rot: 6,  depth: -70 },
+  { src: '/assets/hero/herreria-1.webp',                    pos: 'left-[10%] top-[36%] w-[11vw]',  rot: 6,  depth: -70 },
   { src: '/assets/hero/nvs-becas-por-deporte.webp',         pos: 'left-[1%] top-[70%] w-[12vw]',   rot: -3, depth: -200 },
   { src: '/assets/hero/abode-1.webp',                       pos: 'right-[1%] top-[2%] w-[17vw]',   rot: 5,  depth: -170 },
   { src: '/assets/hero/moodflix-1.webp',                    pos: 'right-[9%] top-[40%] w-[13vw]',  rot: -5, depth: -90 },
